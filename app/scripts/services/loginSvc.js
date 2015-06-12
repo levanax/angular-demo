@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module("portalDemoApp")
+angular.module('portalDemoApp')
 .factory('loginSvc',function($http){
     var service = {
       login:function(loginParams){

@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-  .controller('LoginCtrl', ['$scope','loginSvc','$state', function ($scope,loginSvc,$state) {
+  .controller('LoginCtrl', ['$scope','loginSvc','$state','$translate', function ($scope,loginSvc,$state,$translate) {
     $scope.submitted = false;
     $scope.interacted = function(field) {
       return $scope.submitted || field.$dirty;
@@ -18,9 +18,13 @@ angular.module('portalDemoApp')
          if(data[0].success){
            $state.go('main');
          }else{
-           alert('login failed.')
+           //login failed.
          }
        });
       }
     };
+
+    $scope.changeLanguage = function (langKey) {
+     $translate.use(langKey);
+   };
   }]);
