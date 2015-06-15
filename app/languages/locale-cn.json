@@ -6,5 +6,8 @@
   "LOGIN":{
   	"TITLE":"用户登入",
   	"LOGIN_BTN":"登入"
-  }
+  },
+
+
+  "LOGIN_SUCCESS":"登入成功！！"
 }
