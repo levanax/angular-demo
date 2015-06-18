@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -54,19 +55,27 @@
     <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/routers/router.js"></script>
+        <script src="scripts/routers/mainRouter.js"></script>
+        <script src="scripts/routers/login/loginRouter.js"></script>
+
         <script src="scripts/config/constants.js"></script>
         <script src="scripts/config/language.js"></script>
+        <script src="scripts/config/promise.js"></script>
+
         <script src="scripts/utils/util.js" ></script>
         <script src="scripts/utils/httpInterceptor.js"></script>
+
         <script src="scripts/services/login/loginSvc.js"></script>
+
         <script src="scripts/controllers/login/loginCtrl.js"></script>
         <script src="scripts/controllers/commons/footCtrl.js"></script>
+        <script src="scripts/controllers/main/mainCtrl.js"></script>
         <!-- endbuild -->
 </body>
 </html>

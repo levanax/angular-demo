@@ -37,11 +37,13 @@ module.exports = function(config) {
       'bower_components/angular-translate-loader-url/angular-translate-loader-url.js',
       'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
       'bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js',
+      'bower_components/bootstrap-switch/dist/js/bootstrap-switch.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
+      "app/scripts/**/**/*.js",
       "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      "test/spec/**/**/*.js"
     ],
 
     // list of files / patterns to exclude
@@ -49,7 +51,7 @@ module.exports = function(config) {
     ],
 
     // web server port
-    port: 8080,
+    port: 8888,
 
     // Start these browsers, currently available:
     // - Chrome

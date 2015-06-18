@@ -16,7 +16,7 @@ angular.module('portalDemoApp')
        loginSvc.login($scope.userinfo).then(function(data){
          console.log(data);
          if(data[0].success){
-           $state.go('main');
+           $state.go('main',{},{reload:true});
          }else{
            //login failed.
          }
