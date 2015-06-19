@@ -4,14 +4,13 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.config(function ($urlRouterProvider) {
+.config(function ($urlRouterProvider,constant) {
 
   $urlRouterProvider.otherwise('/index');
 
   $urlRouterProvider.rule(function ($injector, $location) {
        //what this function returns will be set as the $location.url
        console.log('------------------in rule --------------');
-       console.log($location);
 
         var path = $location.path();
         if (path == "/main") {

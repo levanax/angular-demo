@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-  .controller('LoginCtrl', ['$scope','loginSvc','$state','$translate', function ($scope,loginSvc,$state,$translate) {
+  .controller('LoginCtrl', ['$scope','$rootScope','loginSvc','$state','$translate','constant', function ($scope,$rootScope,loginSvc,$state,$translate,constant) {
     $scope.submitted = false;
     $scope.interacted = function(field) {
       return $scope.submitted || field.$dirty;
@@ -16,7 +16,9 @@ angular.module('portalDemoApp')
        loginSvc.login($scope.userinfo).then(function(data){
          console.log(data);
          if(data[0].success){
-           $state.go('main',{},{reload:true});
+            console.log($rootScope);
+            $rootScope.session.put(constant.userinfo,data[0]);
+            $state.go('main',{},{reload:true});
          }else{
            //login failed.
          }
