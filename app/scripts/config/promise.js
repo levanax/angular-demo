@@ -4,28 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.run(['$rootScope','$urlRouter','constant','$state',function ($rootScope,$urlRouter,constant,$state) {
-
-	$rootScope.session = (function(){
-        var put = function(key, value){
-            $rootScope[key] = value;
-        },
-        remove = function(key){
-            $rootScope[key] = null;
-        },
-        get =  function(key){
-            if(key){
-                return $rootScope[key] || null;
-            }else{
-                return null;
-            }
-        };
-        return {
-            put:put,
-            remove:remove,
-            get:get
-        };
-    })();
+.run(['$rootScope','$urlRouter','constant','$state','dataStorageSvc',function ($rootScope,$urlRouter,constant,$state,dataStorageSvc) {
 
 	$rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){
@@ -34,7 +13,7 @@ angular.module('portalDemoApp')
 		    // a 'transition prevented' error
 
 			if(toState != $state.get('login')){
-				if ($rootScope.session.get(constant.userinfo)){
+				if (dataStorageSvc.session.get(constant.userinfo)){
 
 			    }else{
 			    	event.preventDefault();

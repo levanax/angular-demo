@@ -1,4 +1,4 @@
-{
+var translations_EN ={
     "INDEX_TITLE":"Test Secuiy",
     "USER_NAME": "User Name",
     "USER_PASSWORD": "password",

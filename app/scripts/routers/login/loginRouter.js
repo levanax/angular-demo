@@ -44,7 +44,6 @@ angular.module('portalDemoApp')
       onEnter:function(testObj2){
         if(testObj2){
           // can't change value
-          console.log('in onEnter... '+testObj2);
         }
       }
     };

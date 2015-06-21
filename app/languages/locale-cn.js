@@ -1,4 +1,4 @@
-{
+var translations_CN = {
   "INDEX_TITLE":"测试证券",
   "USER_NAME": "用户名",
   "USER_PASSWORD": "密码",
