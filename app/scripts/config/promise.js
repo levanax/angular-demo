@@ -5,16 +5,15 @@
 
 angular.module('portalDemoApp')
 .run(['$rootScope','constant','$state','dataStorageSvc',function ($rootScope,constant,$state,dataStorageSvc) {
-
 	$rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){
 			console.log('in $stateChangeStart...............');
 		    // transitionTo() promise will be rejected with 
 		    // a 'transition prevented' error
 
-		    console.log(toState != $state.get('login'));
 			if(toState != $state.get('login')){
 				if (dataStorageSvc.session.get(constant.userId)){
+
 			    }else{
 			    	console.log('farword login page.');
 			    	event.preventDefault();

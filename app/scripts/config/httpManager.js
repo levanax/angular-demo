@@ -9,9 +9,6 @@ angular.module('portalDemoApp')
       'request': function(config) {
         console.log('in http request : config ...');
         console.log(config);
-        if(config.headers.Accept !='text/html'){
-          config.url = server.urlPrefix_test+config.url;
-        }
         return config;
       },
       'requestError': function(rejection) {
