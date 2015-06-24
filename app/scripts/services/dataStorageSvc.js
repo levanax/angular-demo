@@ -5,17 +5,20 @@ angular.module('portalDemoApp')
     var service = {
       session:(function(){
           var put = function(key, value){
-              sessionStorage.setItem(key,value);
+              var valueTemp = angular.toJson(value,false);
+              sessionStorage.setItem(key,valueTemp);
           },
           remove = function(key){
               sessionStorage.removeItem(key);
           },
           get =  function(key){
-              if(key){
-                  return sessionStorage.getItem(key) || null;
-              }else{
-                  return null;
+              if(!angular.isUndefined(key)){
+                  var result = sessionStorage.getItem(key);
+                  if(!angular.isUndefined(result)){
+                    return angular.fromJson(result);
+                  }
               }
+              return null;
           },
           clear = function(){
             sessionStorage.clear();
@@ -29,20 +32,23 @@ angular.module('portalDemoApp')
       })(),
       local:(function(){
           var put = function(key, value){
-              localStorage.setItem(key,value);
+              var valueTemp = angular.toJson(value,false);
+              localStorage.setItem(key,valueTemp);
           },
           remove = function(key){
               localStorage.removeItem(key);
           },
           get =  function(key){
-              if(key){
-                  return localStorage.getItem(key) || null;
-              }else{
-                  return null;
+              if(!angular.isUndefined(key)){
+                  var result = localStorage.getItem(key);
+                  if(!angular.isUndefined(result)){
+                    return angular.fromJson(result);
+                  }
               }
+              return null;
           },
           clear = function(){
-            sessionStorage.clear();
+            localStorage.clear();
           };
           return {
               put:put,

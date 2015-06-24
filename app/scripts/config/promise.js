@@ -12,7 +12,7 @@ angular.module('portalDemoApp')
 		    // a 'transition prevented' error
 
 			if(toState != $state.get('login')){
-				if (dataStorageSvc.session.get(constant.userId)){
+				if (dataStorageSvc.session.get(constant.userinfo)){
 
 			    }else{
 			    	console.log('farword login page.');

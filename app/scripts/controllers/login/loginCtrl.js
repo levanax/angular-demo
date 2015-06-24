@@ -18,7 +18,7 @@ angular.module('portalDemoApp')
          console.log(data);
          var user = data.UserLoginResponse.User;
          if(!user.SysCode){
-            dataStorageSvc.session.put(constant.userId,user.UserId);
+            dataStorageSvc.session.put(constant.userinfo,user);
             $state.go('main',{});
          }else{
            //login failed.
