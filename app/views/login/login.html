@@ -13,7 +13,7 @@
                                <div class="form-group">
                                    <div class="col-sm-offset-2 col-sm-8 input-group">
                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                       <input name="username"  ng-model="userinfo.username" class="form-control" type="text" placeholder="{{'USER_NAME' | translate}}"
+                                       <input name="userName"  ng-model="userinfo.userName" class="form-control" type="text" placeholder="{{'USER_NAME' | translate}}"
                                               required />
                                    </div>
                                </div>
@@ -32,12 +32,13 @@
                                    </div>
                                </div>
                            <div class="col-sm-12 text-center errorMessage">
-                             <div ng-if="interacted(loginForm.username)" ng-messages="loginForm.username.$error" ng-messages-multiple>
+                             <div ng-if="interacted(loginForm.userName)" ng-messages="loginForm.userName.$error" ng-messages-multiple>
                                <div ng-message="required" >{{'USER_NAME_EMPTY' |translate}}</div>
                              </div>
                              <div ng-if="interacted(loginForm.password)" ng-messages="loginForm.password.$error">
                                <div ng-message="required">{{'PASSWORD_EMPTY' |translate}}</div>
                              </div>
+                             <div>{{serverError}}</div>
                            </div>
 
                        </div>

@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.controller('mainCtrl',function($scope,testObj,testObj2,greeting,$state){
+.controller('mainCtrl',['constant','$scope','testObj','testObj2','greeting','$state','dataStorageSvc',function(constant,$scope,testObj,testObj2,greeting,$state,dataStorageSvc){
 	console.log('in mainCtrl ...');
-	console.log(testObj);
-	console.log("data: "+testObj2);
-	console.log('-------greeting------------');
-	console.log(greeting);
-	
-	console.log("----$state----");
-	console.log($state);
+	console.log();
+	$scope.userid = dataStorageSvc.session.get(constant.userId);
 	$scope.$on('$viewContentLoaded', function(event){
 		console.log("view loaded !!!");
 	});
-});
+	$scope.logout = function(){
+		dataStorageSvc.session.clear();
+		dataStorageSvc.local.clear();
+		$state.go('login');
+	}
+}]);

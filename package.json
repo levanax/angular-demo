@@ -1,7 +1,9 @@
 {
   "name": "portaldemo",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "grunt-connect-proxy": "^0.2.0"
+  },
   "repository": {},
   "devDependencies": {
     "grunt": "^0.4.5",

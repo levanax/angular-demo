@@ -5,9 +5,11 @@ var translations_CN = {
   "FORGET_PASSWORD": "忘记密码?",
   "LOGIN":{
   	"TITLE":"用户登入",
-  	"LOGIN_BTN":"登入"
+  	"LOGIN_BTN":"登入",
+  	"LOGIN_FAIL":"登入失败"
   },
 
 
-  "LOGIN_SUCCESS":"登入成功！！"
+  "LOGIN_SUCCESS":"登入成功！！",
+  "WELCOME":"欢迎"
 }

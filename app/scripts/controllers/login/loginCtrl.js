@@ -4,22 +4,25 @@
 'use strict';
 
 angular.module('portalDemoApp')
-  .controller('LoginCtrl', ['$scope','$rootScope','loginSvc','$state','$translate','constant','dataStorageSvc', function ($scope,$rootScope,loginSvc,$state,$translate,constant,dataStorageSvc) {
+  .controller('LoginCtrl', ['$scope','$filter','$rootScope','loginSvc','$state','$translate','constant','dataStorageSvc', function ($scope,$filter,$rootScope,loginSvc,$state,$translate,constant,dataStorageSvc) {
     $scope.submitted = false;
     $scope.interacted = function(field) {
       return $scope.submitted || field.$dirty;
     };
 
     $scope.submit = function() {
+      $scope.serverError = '';
       $scope.submitted = true;
       if($scope.loginForm.$valid){
-       loginSvc.login($scope.userinfo).then(function(data){
+       loginSvc.login({name:$scope.userinfo.userName,password:$scope.userinfo.password}).then(function(data){
          console.log(data);
-         if(data[0].success){
-            dataStorageSvc.session.put(constant.userinfo,data[0]);
-            $state.go('main',{},{reload:true});
+         var user = data.UserLoginResponse.User;
+         if(!user.SysCode){
+            dataStorageSvc.session.put(constant.userId,user.UserId);
+            $state.go('main',{});
          }else{
            //login failed.
+           $scope.serverError= $filter('translate')('LOGIN.LOGIN_FAIL');
          }
        });
       }

@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.config(function ($urlRouterProvider,constant) {
+.config(['$urlRouterProvider','constant',function ($urlRouterProvider,constant) {
 
   $urlRouterProvider.otherwise('/index');
 
@@ -19,4 +19,4 @@ angular.module('portalDemoApp')
         }
         // because we've returned nothing, no state change occurs
     });
-});
+}]);

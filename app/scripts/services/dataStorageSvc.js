@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.factory('dataStorageSvc',function($http,$rootScope){
+.factory('dataStorageSvc',['$http','$rootScope',function($http,$rootScope){
     var service = {
       session:(function(){
           var put = function(key, value){
@@ -53,4 +53,4 @@ angular.module('portalDemoApp')
       })()
     };
     return service;
-  });
+  }]);

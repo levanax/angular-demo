@@ -84,6 +84,16 @@ module.exports = function (grunt) {
           }
         ]
       },
+      testServer: {
+        proxies: [
+          {
+            context: '/',
+            host: '192.168.7.127',
+            port: 3000,
+            https:false
+          }
+        ]
+      },
       livereload: {
         options: {
           open: true,
@@ -428,7 +438,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'configureProxies:selfServer',
+      /*'configureProxies:testServer',*/
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',

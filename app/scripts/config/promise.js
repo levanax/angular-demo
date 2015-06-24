@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.run(['$rootScope','$urlRouter','constant','$state','dataStorageSvc',function ($rootScope,$urlRouter,constant,$state,dataStorageSvc) {
+.run(['$rootScope','constant','$state','dataStorageSvc',function ($rootScope,constant,$state,dataStorageSvc) {
 
 	$rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){
@@ -12,10 +12,11 @@ angular.module('portalDemoApp')
 		    // transitionTo() promise will be rejected with 
 		    // a 'transition prevented' error
 
+		    console.log(toState != $state.get('login'));
 			if(toState != $state.get('login')){
-				if (dataStorageSvc.session.get(constant.userinfo)){
-
+				if (dataStorageSvc.session.get(constant.userId)){
 			    }else{
+			    	console.log('farword login page.');
 			    	event.preventDefault();
 			    	$state.go('login'); //redefine orientation
 				    
@@ -25,12 +26,15 @@ angular.module('portalDemoApp')
 		});
 	$rootScope.$on('$stateNotFound', 
 		function(event, unfoundState, fromState, fromParams){ 
+			console.log('in $stateNotFound...............');
 		    /*console.log(unfoundState.to); 
 		    console.log(unfoundState.toParams); 
 		    console.log(unfoundState.options); */
 		});
 	$rootScope.$on('$stateChangeError', 
 		function(event, toState, toParams, fromState, fromParams, error){
+			console.log('in $stateChangeError...............');
+			console.log(error);
 			//do something ...
 		});
 }]);

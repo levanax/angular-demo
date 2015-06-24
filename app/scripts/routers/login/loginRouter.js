@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.config(function ($stateProvider,$urlRouterProvider) {
+.config(['$stateProvider','$urlRouterProvider',function ($stateProvider,$urlRouterProvider) {
   var omnipotentState = {
       name:'info',
       url:'/info/{businessName}',
@@ -24,31 +24,32 @@ angular.module('portalDemoApp')
       templateUrl: 'views/main/main.html',
       controller: 'mainCtrl',
       resolve:{
-        testObj:function($http){
-          return $http({method: 'post', url: 'api'})
-               .then (function (data) {
-                   return data;
-               });
+        testObj:function(){
+           /*return $http({method: 'post', url: 'api'})
+-               .then (function (data) {
+-                   return data;
+-               });*/
+          return "TEST TEST TEST .";
         },
         testObj2:function(){
-          return "TEST TEST TEST ."
+          return "TEST TEST TEST .";
         },
-        greeting:function($q, $timeout){
+        greeting:['$q','$timeout',function($q, $timeout){
              var deferred = $q.defer();
              $timeout(function() {
                  deferred.resolve('Hello!');
              }, 1000);
              return deferred.promise;
-         }
-      },
-      onEnter:function(testObj2){
+      }],
+      onEnter:['testObj2',function(testObj2){
         if(testObj2){
           // can't change value
         }
-      }
-    };
+      }]
+    }
+  };
   $stateProvider
     .state(omnipotentState)
     .state(loginState)
     .state(mainState);
-});
+}]);

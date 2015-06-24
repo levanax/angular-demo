@@ -7,10 +7,12 @@ var translations_EN ={
     "PASSWORD_EMPTY":"plz  enter your password.",
 	"LOGIN":{
 	  	"TITLE":"User login",
-	  	"LOGIN_BTN":"Login"
+	  	"LOGIN_BTN":"Login",
+        "LOGIN_FAIL":"Login fail."
 	 },
 
 
 
-    "LOGIN_SUCCESS":"Login success！！"
+    "LOGIN_SUCCESS":"Login success！！",
+     "WELCOME":"welcome"
   }
