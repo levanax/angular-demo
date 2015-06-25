@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.factory('loginSvc',['$http','server',function($http,server){
+.factory('usersSvc',['$http','server','dataStorageSvc',function($http,server,dataStorageSvc){
     var service = {
       login:function(loginParams){
         return $http({
@@ -20,6 +20,11 @@ angular.module('portalDemoApp')
               }).then(function(result) {
                   return result.data;
               });
+      },
+      logout:function(){
+        dataStorageSvc.session.clear();
+        dataStorageSvc.local.clear();
+        $state.go('login');
       }
     };
     return service;

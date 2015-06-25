@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-  .controller('LoginCtrl', ['$scope','$filter','$rootScope','loginSvc','$state','$translate','constant','dataStorageSvc', function ($scope,$filter,$rootScope,loginSvc,$state,$translate,constant,dataStorageSvc) {
+  .controller('LoginCtrl', ['$scope','$filter','$rootScope','usersSvc','$state','$translate','constant','dataStorageSvc', function ($scope,$filter,$rootScope,usersSvc,$state,$translate,constant,dataStorageSvc) {
     $scope.submitted = false;
     $scope.interacted = function(field) {
       return $scope.submitted || field.$dirty;
@@ -14,7 +14,7 @@ angular.module('portalDemoApp')
       $scope.serverError = '';
       $scope.submitted = true;
       if($scope.loginForm.$valid){
-       loginSvc.login({name:$scope.userinfo.userName,password:$scope.userinfo.password}).then(function(data){
+       usersSvc.login({name:$scope.userinfo.userName,password:$scope.userinfo.password}).then(function(data){
          console.log(data);
          var user = data.UserLoginResponse.User;
          if(!user.SysCode){
