@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.factory('usersSvc',['$http','server','dataStorageSvc',function($http,server,dataStorageSvc){
+.factory('usersSvc',['$http','$state','server','dataStorageSvc',function($http,$state,server,dataStorageSvc){
     var service = {
       login:function(loginParams){
         return $http({
