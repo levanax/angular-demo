@@ -1,25 +1,29 @@
+/**
+ * must use angular-cookies 1.4.1 version. other version have problem
+ * note: max storage bytes 4096.
+ */
 'use strict';
 
 angular.module('portalDemoApp')
-.factory('dataStorageSvc',[function(){
+.factory('dataStorageSvc',['$cookieStore',function($cookieStore){
+    /*var cookieHistory = [];*/
     var service = {
       session:(function(){
           var put = function(key, value){
-              var valueTemp = angular.toJson(value,false);
-              sessionStorage.setItem(key,valueTemp);
+              $cookieStore.put(key,value);
           },
           remove = function(key){
-              sessionStorage.removeItem(key);
+              $cookieStore.remove(key);
           },
           get =  function(key){
-              var result = sessionStorage.getItem(key);
+              var result = $cookieStore.get(key);
               if(!angular.isUndefined(result)){
-                return angular.fromJson(result);
+                return result;
               }
               return null;
           },
           clear = function(){
-            sessionStorage.clear();
+            //do something ..
           };
           return {
               put:put,
@@ -30,23 +34,12 @@ angular.module('portalDemoApp')
       })(),
       local:(function(){
           var put = function(key, value){
-              var valueTemp = angular.toJson(value,false);
-              localStorage.setItem(key,valueTemp);
           },
           remove = function(key){
-              localStorage.removeItem(key);
           },
           get =  function(key){
-              if(!angular.isUndefined(key)){
-                  var result = localStorage.getItem(key);
-                  if(!angular.isUndefined(result)){
-                    return angular.fromJson(result);
-                  }
-              }
-              return null;
           },
           clear = function(){
-            localStorage.clear();
           };
           return {
               put:put,
