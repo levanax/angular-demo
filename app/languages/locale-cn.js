@@ -11,5 +11,9 @@ var translations_CN = {
 
 
   "LOGIN_SUCCESS":"登入成功！！",
-  "WELCOME":"欢迎"
+  "WELCOME":"欢迎",
+
+
+  "ACCOUNT_TYPE_CASH":"现金",
+  "ACCOUNT_TYPE_MARGIN":"孖展"
 }

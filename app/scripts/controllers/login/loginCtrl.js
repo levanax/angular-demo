@@ -19,7 +19,7 @@ angular.module('portalDemoApp')
          var user = data.UserLoginResponse.User;
          if(!user.SysCode){
             dataStorageSvc.session.put(constant.userinfo,user);
-            $state.go('main',{});
+            $state.go('trade');
          }else{
            //login failed.
            $scope.serverError= $filter('translate')('LOGIN.LOGIN_FAIL');

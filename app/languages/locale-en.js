@@ -14,5 +14,9 @@ var translations_EN ={
 
 
     "LOGIN_SUCCESS":"Login success！！",
-     "WELCOME":"welcome"
+     "WELCOME":"welcome",
+
+
+      "ACCOUNT_TYPE_CASH":"Cash",
+      "ACCOUNT_TYPE_MARGIN":"Margin"
   }

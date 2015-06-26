@@ -1,0 +1,92 @@
+.input-xl{
+    border-radius: 4px 4px 4px 4px;
+    height: 23px;
+    font-size: 12px;
+    padding: 0px 0px;
+}
+.order-panel-body{
+    background: hsla(218,100%,63%,0.2);
+    line-height: 32px;
+}
+.order-panel-radio input:nth-child(2){
+    margin-left: 35px;
+}
+.order-panel-addOrder{
+    border-radius: 4px;
+    background-color: #337ab7;
+    text-align: center;
+    color: #fff;
+}
+.panel-button button{
+    width: 75px;
+}
+.errorMessage{
+    color: red;
+}
+.panel-img img{
+    margin-bottom: 10px;
+}
+.panel-img img:nth-child(1){
+    margin-left: -23px;
+}
+.panel-date > input{
+    height: 25px;
+}
+.order-content div[class="row"]:nth-child(odd){
+    background: hsla(203, 100%, 81%, 0.20);
+}
+.modal-body{
+    line-height: 35px;
+}
+.model-top{
+    top: 100px;
+}
+.input-group-xl > .form-control,
+.input-group-xl > .input-group-addon,
+.input-group-xl > .input-group-btn > .btn {
+    height: 21px;
+    padding: 0px 6px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.orderBook-table{
+   font-size: 13px;
+}
+.orderBook-table > thead th{
+    background: -moz-linear-gradient(top, #7aedfc, #206abe);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7aedfc), to(#206abe));
+    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#7aedfc, endColorStr=#206abe); /*IE*/
+    height: 30px;
+    color: #fff;
+}
+.orderBook-table tr:nth-child(even){
+    background: hsla(203, 100%, 81%, 0.20);
+}
+
+.orderBook-table tr:hover{
+    background: hsla(203, 100%, 81%, 0.80);
+    cursor: pointer;
+}
+.modal-body-height{
+    line-height: 33px;
+}
+.orderBook-title{
+    background: -moz-linear-gradient(top, #7aedfc, #206abe);/*Firefox*/
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7aedfc), to(#206abe));/*chrome*/
+    filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#7aedfc, endColorStr=#206abe); /*IE*/
+    height: 30px;
+    color: #fff;
+    line-height: 33px;
+}
+.text-underline{
+    text-decoration:underline;
+}
+.orderBook-color div[name="spaceColor"]:nth-child(even){
+    background: hsla(203, 100%, 81%, 0.20);
+}
+
+.orderBook-color div[name="spaceColor"]:hover{
+    background: hsla(203, 100%, 81%, 0.80);
+    cursor: pointer;
+}

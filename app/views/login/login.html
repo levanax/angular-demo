@@ -3,7 +3,7 @@
 <section>
     <div class="container">
         <div class="row clearfix">
-            <div class="col-md-5 col-md-offset-3">
+            <div class="col-md-10 col-md-offset-6">
                 <form name="loginForm" class="form-horizontal" role="form" ng-submit="submit()" novalidate>
                    <div class="panel panel-default">
                        <div class="panel-heading text-center">
@@ -11,14 +11,14 @@
                        </div>
                        <div class="panel-body login-panel-body">
                                <div class="form-group">
-                                   <div class="col-sm-offset-2 col-sm-8 input-group">
+                                   <div class="col-sm-offset-4 col-sm-16 input-group">
                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                        <input name="userName"  ng-model="userinfo.userName" class="form-control" type="text" placeholder="{{'USER_NAME' | translate}}"
                                               required />
                                    </div>
                                </div>
                                <div class="form-group">
-                                   <div class="col-sm-offset-2 col-sm-8 input-group">
+                                   <div class="col-sm-offset-4 col-sm-16 input-group">
                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                        <input name="password" ng-model="userinfo.password" class="form-control" type="password" placeholder="{{'USER_PASSWORD' | translate}}"
                                          required/>
@@ -26,12 +26,12 @@
                                </div>
                                <div class="row">
                                    <div class="form-group">
-                                      <div class="col-sm-10 text-right">
+                                      <div class="col-sm-20 text-right">
                                         <b translate='FORGET_PASSWORD'></b>
                                       </div>
                                    </div>
                                </div>
-                           <div class="col-sm-12 text-center errorMessage">
+                           <div class="col-sm-24 text-center errorMessage">
                              <div ng-if="interacted(loginForm.userName)" ng-messages="loginForm.userName.$error" ng-messages-multiple>
                                <div ng-message="required" >{{'USER_NAME_EMPTY' |translate}}</div>
                              </div>

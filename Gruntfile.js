@@ -216,6 +216,9 @@ module.exports = function (grunt) {
       }
     },
 
+    /**
+    * #mark# 自动引入 bower下载 包 到index.html
+    */
     // Automatically inject Bower components into the app
     wiredep: {
       app: {
@@ -335,6 +338,7 @@ module.exports = function (grunt) {
     htmlmin: {
       dist: {
         options: {
+          removeComments:true,
           collapseWhitespace: true,
           conservativeCollapse: true,
           collapseBooleanAttributes: true,
@@ -344,7 +348,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
+          src: ['*.html', 'views/{,*/,*/*/}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -370,6 +374,10 @@ module.exports = function (grunt) {
       }
     },
 
+    /**
+    * #mark#压缩文件后，还需要copy命令 拷贝至dist目录
+    * update log：拷贝app/fonts 到dist,  注释 拷贝bower_comp...下 fonts 文件
+    */
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -382,21 +390,22 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
+            'views/{,*/,*/*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+            'fonts/*.*'
           ]
         }, {
           expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }, {
+        }/*, {
           expand: true,
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
-        }]
+        }*/]
       },
       styles: {
         expand: true,

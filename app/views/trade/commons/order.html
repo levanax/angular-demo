@@ -2,8 +2,8 @@
                 <div class="panel-heading text-center">证券订单</div>
                 <div class="panel-body order-panel-body">
                     <div class="row">
-                        <div class="col-xs-4">市场</div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-8">市场</div>
+                        <div class="col-xs-16">
                             <select class="form-control input-xl">
                                 <option>香港</option>
                                 <option>英国</option>
@@ -16,42 +16,38 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">账户</div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-8">账户</div>
+                        <div class="col-xs-16">
                             <select class="form-control input-xl">
-                                <option>10000000 CASH HKD</option>
-                                <option>10000000 CASH HKD</option>
-                                <option>10000000 CASH HKD</option>
-                                <option>10000000 CASH HKD</option>
-                                <option>10000000 CASH HKD</option>
+                                <option ng-repeat="acc in accounts"> {{acc | accFormat}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">购买力</div>
-                        <div class="col-xs-8">港币 $100,000.00</div>
+                        <div class="col-xs-8">购买力</div>
+                        <div class="col-xs-16">港币 $100,000.00</div>
                     </div>
                     <div>
                         <div class="order-panel-addOrder">新增订单</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">订单</div>
-                        <div class="col-xs-8 order-panel-radio">
+                        <div class="col-xs-8">订单</div>
+                        <div class="col-xs-16 order-panel-radio">
                             <input type="radio" name="inlineRadioOptions" value="option2"> 买入
                             <input type="radio" name="inlineRadioOptions" value="option3"> 沽出
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">证券代号</div>
-                        <div class="col-xs-8"><input type="text" class="form-control input-xl" value=""></div>
+                        <div class="col-xs-8">证券代号</div>
+                        <div class="col-xs-16"><input type="text" class="form-control input-xl" value=""></div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">证券名称</div>
-                        <div class="col-xs-8">九龙仓集团</div>
+                        <div class="col-xs-8">证券名称</div>
+                        <div class="col-xs-16">九龙仓集团</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">订单类别</div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-8">订单类别</div>
+                        <div class="col-xs-16">
                             <select class="form-control input-xl">
                                 <option>限价盘</option>
                                 <option>市价盘</option>
@@ -60,43 +56,71 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">价格</div>
-                        <div class="col-xs-5"><input type="text" class="form-control input-xl" value=""></div>
-                        <div class="col-xs-3 panel-img">
-                            <img src="../public/images/minus_disabled.png" >
-                            <img src="../public/images/add_disabled.png" >
+                        <div class="col-xs-8">价格</div>
+                        <div class="col-xs-16">
+                            <div class="form-group">
+                                <div class="input-group input-group-xl" >
+                                    <input class="form-control" size="16" type="text" value="">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">价格差距</div>
-                        <div class="col-xs-8">-0.50 / +1.00</div>
+                        <div class="col-xs-8">价格差距</div>
+                        <div class="col-xs-16">-0.50 / +1.00</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-4">数量</div>
-                        <div class="col-xs-5">
-                            <input type="text" class="form-control input-xl" value="">
+                        <div class="col-xs-8">数量</div>
+                        <div class="col-xs-16">
+                            <div class="form-group">
+                                <div class="input-group input-group-xl" >
+                                    <input class="form-control" size="16" type="text" value="">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                    <span class="input-group-addon"><span style="margin-bottom: 8px;" class="glyphicon glyphicon-chevron-up"></span><span style="position: absolute; margin-top: 9px;margin-left: -12px;" class="glyphicon glyphicon-chevron-up"></span></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-3 panel-img">
-                            <img src="../public/images/minus_disabled.png" >
-                            <img src="../public/images/add_disabled.png" >
-                            <img src="../public/images/highest_disabled.png" >
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">交易股数</div>
+                        <div class="col-xs-16">100</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">到期日</div>
+                        <div class="col-xs-16">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="">
+                                <div class="form-group">
+                                    <div class="input-group input-group-xl date form_datetime" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" value="">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                    </div>
+                                </div>
+                            </label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4">交易股数</div>
-                        <div class="col-xs-5">100</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4">到期日</div>
-                        <div class="col-xs-5 panel-date"><input type="date" /></div>
                     </div>
                     <div class="errorMessage">
-                       XXXXXXXXX错误提示！！
+                       XXXXXXXXX错误提示XXXXXXXX！！
                     </div>
                     <div class="row panel-button text-center">
-                        <div class="col-xs-4"><div class="bootstrap-switch bootstrap-switch-small"><input  type="checkbox" id="switch" checked /></div></div>
-                        <div class="col-xs-4"><button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#newPopUp">提交</button></div>
-                        <div class="col-xs-4"><button class="btn btn-sm btn-primary" type="button">清除</button></div>
+                        <div class="col-xs-8">
+                            <div class="bootstrap-switch bootstrap-switch-small">
+                                <input  type="checkbox" id="switch" checked />
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#newPopUp">提交</button>
+                        </div>
+                        <div class="col-xs-8">
+                            <button class="btn btn-sm btn-primary" type="button">清除</button>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 </div>
