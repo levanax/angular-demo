@@ -7,6 +7,8 @@ angular.module('portalDemoApp')
     url:'/trade',
     templateUrl:'views/trade/trade.html',
     controller:['$state',function($state){
+      //this one controller is not defined. 
+      //In the other routers, Can't through 'tradeController' to refer to the controller. [solution:use 'controllerAs']
       $state.go('trade.order',{},{location:false});
     }]
   }
@@ -15,9 +17,7 @@ angular.module('portalDemoApp')
     views:{
       'order@trade':{
         templateUrl:'views/trade/commons/order.html',
-        controller:['constant','$scope','dataStorageSvc',function(constant,$scope,dataStorageSvc){
-          $scope.accounts = dataStorageSvc.session.get(constant.userinfo).AccProfile.Account;
-        }]
+        controller:'tradeOrderCtrl'
       }
     }
   }

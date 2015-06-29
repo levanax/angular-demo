@@ -5,24 +5,24 @@
 
 angular.module('portalDemoApp')
 .config(['$translateProvider',function ($translateProvider) {
-	  $translateProvider.preferredLanguage('en');
+	  $translateProvider.preferredLanguage('cn');
   	  $translateProvider.useLoader('asyncLoaderLanguage');
 }])
-.factory('asyncLoaderLanguage', function ($q, $timeout) {
+.factory('asyncLoaderLanguage', ['translations_cn','translations_en','$q','$timeout',function (translations_cn,translations_en,$q, $timeout) {
   return function (options) {
     var deferred = $q.defer(),
-        translations;
- 
+        translations_current;
+
     if (options.key === 'en') {
-      translations = translations_EN;
+      translations_current = translations_en;
     } else {
-      translations = translations_CN;
+      translations_current = translations_cn;
     }
  
     $timeout(function () {
-      deferred.resolve(translations);
+      deferred.resolve(translations_current);
     }, 100);
  
     return deferred.promise;
   };
-});
+}]);
