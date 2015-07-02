@@ -1,6 +1,62 @@
 'use strict';
 
 angular.module('portalDemoApp')
-.controller('tradeOrderCtrl',['constant','$scope','dataStorageSvc',function(constant,$scope,dataStorageSvc){
-	$scope.accounts = dataStorageSvc.session.get(constant.userinfo).AccProfile.Account;
+.controller('tradeOrderCtrl',['constant','$scope','$filter','$timeout','dataStorageSvc','securitySvc','orderViewSvc',function(constant,$scope,$filter,$timeout,dataStorageSvc,securitySvc,orderViewSvc){
+	$scope.$on('$viewContentLoaded', function(event){
+		var scopePointer = $scope;
+		orderViewSvc.initialize(scopePointer);
+	});
+
+	$scope.isBuy = function(){
+		var orderSide = $scope.order.side;
+		return orderSide === "BUY";
+	}
+	$scope.isSell = function(){
+		var orderSide = $scope.order.side;
+		return orderSide === "SELL";
+	}
+
+	$scope.$watch('order.side',function(input,oldInput,childScope){
+		if(angular.isString(input)){
+			if(input === 'BUY'){
+			}else{
+
+			}
+		}
+	});
+	$scope.updateOrderSide = function(orderSide){
+		$scope.order.side = angular.uppercase(orderSide);
+	}
+	
+	$scope.enterSecurityEvent = null;
+	$scope.$watch('security.id', function(newValue, oldValue, scope) {
+		var securityId = newValue;
+		$timeout.cancel($scope.enterSecurityEvent);
+		if(util.isNotEmpty(securityId)){
+			$scope.enterSecurityEvent = $timeout(function(){
+				console.log(securityId);
+			},3000);
+		}
+	});
+	$scope.enterSecurityId = function(){
+		var queryParams = {
+			stockCode:$scope.stock,
+			accNum:$scope.accNum,
+			market:$scope.market,
+			tradeSide:$scope.tradeSide
+		}
+		securitySvc.query(queryParams).then(function(data){
+
+		});
+	}
+
+	$scope.isHiddenPriceSperad = false;
+	$scope.$watch('security.priceSperad',function(){
+		var priceSperad = $scope.security.priceSperad;
+		if(angular.isString(priceSperad)){
+			$scope.isHiddenPriceSperad = false;
+		}else{
+			$scope.isHiddenPriceSperad = true;
+		}
+	});
 }]);

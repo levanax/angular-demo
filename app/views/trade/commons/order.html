@@ -1,31 +1,29 @@
+<br/><br/>
 <div class="panel panel-primary">
                 <div class="panel-heading text-center">证券订单</div>
                 <div class="panel-body order-panel-body">
                     <div class="row">
                         <div class="col-xs-8">市场</div>
                         <div class="col-xs-16">
-                            <select class="form-control input-xl">
-                                <option>香港</option>
-                                <option>英国</option>
-                                <option>美国</option>
-                                <option>澳洲</option>
-                                <option>日本</option>
-                                <option>新加坡</option>
-                                <option>澳门</option>
+                            <select data-ng-model='order.market' class="form-control input-xl">
+                                <option ng-repeat="mk in markets"> {{mk | marketFormat}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">账户</div>
                         <div class="col-xs-16">
-                            <select class="form-control input-xl">
+                            <select data-ng-model="accNum" class="form-control input-xl">
                                 <option ng-repeat="acc in accounts"> {{acc | accFormat}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">购买力</div>
-                        <div class="col-xs-16">港币 $100,000.00</div>
+                        <div class="col-xs-16" >
+                            <span data-ng-cloak>{{ currencyType }}</span>
+                            <span data-ng-cloak>{{ buyPower }}</span>
+                        </div>
                     </div>
                     <div>
                         <div class="order-panel-addOrder">新增订单</div>
@@ -33,25 +31,23 @@
                     <div class="row">
                         <div class="col-xs-8">订单</div>
                         <div class="col-xs-16 order-panel-radio">
-                            <input type="radio" name="inlineRadioOptions" value="option2"> 买入
-                            <input type="radio" name="inlineRadioOptions" value="option3"> 沽出
+                            <input type="radio"  data-ng-model="order.side" value="BUY"/> 买入
+                            <input type="radio"  data-ng-model="order.side" value="SELL"/> 沽出
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">证券代号</div>
-                        <div class="col-xs-16"><input type="text" class="form-control input-xl" value=""></div>
+                        <div class="col-xs-16"><input data-ng-model="security.id" type="text" class="form-control input-xl" value=""></div>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">证券名称</div>
-                        <div class="col-xs-16">九龙仓集团</div>
+                        <div class="col-xs-16" data-ng-bind="security.name"></div>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">订单类别</div>
                         <div class="col-xs-16">
-                            <select class="form-control input-xl">
-                                <option>限价盘</option>
-                                <option>市价盘</option>
-                                <option>竞价盘</option>
+                            <select data-ng-model="order.type" class="form-control input-xl">
+                                <option data-ng-repat="ot in orderTypes" data-ng-value="ot.ordType+ot.GTD">{{ot | orderTypeByLocal}}</option>
                             </select>
                         </div>
                     </div>
@@ -67,12 +63,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" data-ng-class="{hiddenEle:isHiddenPriceSperad}">
                         <div class="col-xs-8">价格差距</div>
-                        <div class="col-xs-16">-0.50 / +1.00</div>
+                        <div class="col-xs-16" data-ng-bind='security.priceSperad'></div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-8">数量</div>
+                        <div class="col-xs-8">数量<span data-ng-cloak>{{security.lotSize}}</span></div>
                         <div class="col-xs-16">
                             <div class="form-group">
                                 <div class="input-group input-group-xl" >
@@ -84,9 +80,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-8">交易股数</div>
+                    <div class="row" data-ng-class="{hiddenEle:isSell()}">
+                        <div class="col-xs-8">可交易股数</div>
                         <div class="col-xs-16">100</div>
+                    </div>
+                    <div class="row" data-ng-class="{hiddenEle:isBuy()}">
+                        <div class="col-xs-8">待沽/持有量</div>
+                        <div class="col-xs-16">0 / 0</div>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">到期日</div>
@@ -104,7 +104,6 @@
                         </div>
                     </div>
                     <div class="errorMessage">
-                       XXXXXXXXX错误提示XXXXXXXX！！
                     </div>
                     <div class="row panel-button text-center">
                         <div class="col-xs-8">

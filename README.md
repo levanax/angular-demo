@@ -12,3 +12,5 @@ Run `grunt` for building and `grunt serve` for preview.
 Running `grunt test` will run the unit tests with karma.
 
 ##must use support HTML5 browser
+
+languages must use json file. only this can reduce resource usage.

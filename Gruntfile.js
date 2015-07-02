@@ -376,7 +376,7 @@ module.exports = function (grunt) {
 
     /**
     * #mark#压缩文件后，还需要copy命令 拷贝至dist目录
-    * update log：拷贝app/fonts 到dist,  注释 拷贝bower_comp...下 fonts 文件
+    * update log：拷贝app/fonts 到dist
     */
     // Copies remaining files to places other tasks can use
     copy: {
@@ -400,12 +400,7 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }/*, {
-          expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
-        }*/]
+        }]
       },
       styles: {
         expand: true,

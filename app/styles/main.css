@@ -90,3 +90,8 @@
     background: hsla(203, 100%, 81%, 0.80);
     cursor: pointer;
 }
+
+
+.hiddenEle{
+    display: none;
+}

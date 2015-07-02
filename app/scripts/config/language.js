@@ -6,7 +6,8 @@
 angular.module('portalDemoApp')
 .config(['$translateProvider',function ($translateProvider) {
 	  $translateProvider.preferredLanguage('cn');
-  	  $translateProvider.useLoader('asyncLoaderLanguage');
+	  $translateProvider.useLoader('asyncLoaderLanguage');
+    $translateProvider.useSanitizeValueStrategy(null);
 }])
 .factory('asyncLoaderLanguage', ['translations_cn','translations_en','$q','$timeout',function (translations_cn,translations_en,$q, $timeout) {
   return function (options) {
