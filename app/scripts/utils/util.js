@@ -4,18 +4,18 @@
 'use strict';
 
 var util = {};
-(function(_this){
-	_this.isEmpty = function(args){
+(function(_this) {
+	_this.isEmpty = function(args) {
 		var result = true;
 		var reg = /\s*$/;
-		if(args && reg.test(args)){
+		if (args && reg.test(args)) {
 			result = false;
 		}
 		return result;
 	},
-	_this.isNotEmpty = function(args){
+	_this.isNotEmpty = function(args) {
 		var result = true;
-		if(_this.isEmpty(args)){
+		if (_this.isEmpty(args)) {
 			result = false;
 		}
 		return result;
