@@ -4,9 +4,13 @@
     font-size: 12px;
     padding: 0px 0px;
 }
+.order-panel{
+    font-size: 13px;
+    max-width: 350px;
+}
 .order-panel-body{
     background: hsla(218,100%,63%,0.2);
-    line-height: 32px;
+    line-height: 28px;
 }
 .order-panel-radio input:nth-child(2){
     margin-left: 35px;
@@ -32,8 +36,12 @@
 .panel-date > input{
     height: 25px;
 }
-.order-content div[class="row"]:nth-child(odd){
+.order-content div[name="spaceColor"]:nth-child(odd){
     background: hsla(203, 100%, 81%, 0.20);
+}
+.order-HandlingCharge{
+    width: 240px;
+    line-height: 30px;
 }
 .modal-body{
     line-height: 35px;
@@ -90,8 +98,43 @@
     background: hsla(203, 100%, 81%, 0.80);
     cursor: pointer;
 }
+.twoUnderline{
+    border-bottom:3px double #0d69be;
+}
+.top-underline{
+    border-top:1px solid #0d69be !important;
+}
+.panel-bacRed{
+    background: hsla(358, 90%, 52%, 0.30) !important;
+    border: 1px red solid !important;
+}
+
+.panel-bacRed .panel-heading{
+    background: hsla(354, 100%, 50%, 1) !important;
+    border: 1px red solid !important;
+}
+
+.panel-bacRed .order-panel-addOrder{
+    background: hsla(354, 100%, 50%, 1)!important;
+}
+.panel-bacRed .btn-primary{
+    background: hsla(354, 100%, 50%, 1) !important;
+    border: 1px red solid !important;
+}
+.panel-bacRed .modal-header{
+    border-bottom: 1px red solid !important;
+}
+.panel-bacRed .modal-footer{
+    border-top: 1px red solid !important;
+}
+.panel-bacRed .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary {
+    color: #fff;
+    background: red !important;
+}
 
 
 .hiddenEle{
     display: none;
 }
+
+

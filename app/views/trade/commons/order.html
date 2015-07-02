@@ -1,125 +1,213 @@
-<br/><br/>
-<div class="panel panel-primary">
-                <div class="panel-heading text-center">证券订单</div>
-                <div class="panel-body order-panel-body">
-                    <div class="row">
-                        <div class="col-xs-8">市场</div>
-                        <div class="col-xs-16">
-                            <select data-ng-model='order.market' class="form-control input-xl">
-                                <option ng-repeat="mk in markets"> {{mk | marketFormat}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">账户</div>
-                        <div class="col-xs-16">
-                            <select data-ng-model="accNum" class="form-control input-xl">
-                                <option ng-repeat="acc in accounts"> {{acc | accFormat}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">购买力</div>
-                        <div class="col-xs-16" >
-                            <span data-ng-cloak>{{ currencyType }}</span>
-                            <span data-ng-cloak>{{ buyPower }}</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="order-panel-addOrder">新增订单</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">订单</div>
-                        <div class="col-xs-16 order-panel-radio">
-                            <input type="radio"  data-ng-model="order.side" value="BUY"/> 买入
-                            <input type="radio"  data-ng-model="order.side" value="SELL"/> 沽出
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">证券代号</div>
-                        <div class="col-xs-16"><input data-ng-model="security.id" type="text" class="form-control input-xl" value=""></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">证券名称</div>
-                        <div class="col-xs-16" data-ng-bind="security.name"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">订单类别</div>
-                        <div class="col-xs-16">
-                            <select data-ng-model="order.type" class="form-control input-xl">
-                                <option data-ng-repat="ot in orderTypes" data-ng-value="ot.ordType+ot.GTD">{{ot | orderTypeByLocal}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">价格</div>
-                        <div class="col-xs-16">
-                            <div class="form-group">
-                                <div class="input-group input-group-xl" >
-                                    <input class="form-control" size="16" type="text" value="">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                </div>
+<br>
+<br>
+<div class="panel panel-primary  order-panel" data-ng-class="{'panel-bacRed':isSell}">
+                    <div class="panel-heading text-center">证券订单</div>
+                    <div class="panel-body order-panel-body">
+                        <div class="row">
+                            <div class="col-xs-8">市场</div>
+                            <div class="col-xs-16">
+                                <select data-ng-model='order.market' class="form-control input-xl">
+                                    <option ng-repeat="mk in markets"> {{mk | marketFormat}}</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" data-ng-class="{hiddenEle:isHiddenPriceSperad}">
-                        <div class="col-xs-8">价格差距</div>
-                        <div class="col-xs-16" data-ng-bind='security.priceSperad'></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">数量<span data-ng-cloak>{{security.lotSize}}</span></div>
-                        <div class="col-xs-16">
-                            <div class="form-group">
-                                <div class="input-group input-group-xl" >
-                                    <input class="form-control" size="16" type="text" value="">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                    <span class="input-group-addon"><span style="margin-bottom: 8px;" class="glyphicon glyphicon-chevron-up"></span><span style="position: absolute; margin-top: 9px;margin-left: -12px;" class="glyphicon glyphicon-chevron-up"></span></span>
-                                </div>
+                        <div class="row">
+                            <div class="col-xs-8">账户</div>
+                            <div class="col-xs-16">
+                                <select data-ng-model="order.accNum" class="form-control input-xl">
+                                    <option ng-repeat="acc in accounts"> {{acc | accFormat}}</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" data-ng-class="{hiddenEle:isSell()}">
-                        <div class="col-xs-8">可交易股数</div>
-                        <div class="col-xs-16">100</div>
-                    </div>
-                    <div class="row" data-ng-class="{hiddenEle:isBuy()}">
-                        <div class="col-xs-8">待沽/持有量</div>
-                        <div class="col-xs-16">0 / 0</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">到期日</div>
-                        <div class="col-xs-16">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="">
+                        <div class="row">
+                            <div class="col-xs-8">购买力</div>
+                            <div class="col-xs-16">
+                                <span data-ng-cloak>{{ order.currencyType }}</span>
+                                <span data-ng-cloak>{{ buyPower }}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="order-panel-addOrder">新增订单</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">订单</div>
+                            <div class="col-xs-16 order-panel-radio">
+                                <input type="radio"  data-ng-model="order.side" value="BUY"/>
+                                {{'ORDER.SIDE.BUY' | translate }}
+                                <input type="radio"  data-ng-model="order.side" value="SELL"/>
+                                {{'ORDER.SIDE.SELL' | translate }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">证券代号</div>
+                            <div class="col-xs-16"><input type="text" class="form-control input-xl" value="" data-ng-model="security.id"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">证券名称</div>
+                            <div class="col-xs-16" data-ng-bind="security.name"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">订单类别</div>
+                            <div class="col-xs-16">
+                                <select data-ng-model="order.type" class="form-control input-xl">
+                                    <option data-ng-repat="ot in orderTypes" data-ng-value="ot.ordType+ot.GTD">{{ot | orderTypeByLocal}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">价格</div>
+                            <div class="col-xs-16">
                                 <div class="form-group">
-                                    <div class="input-group input-group-xl date form_datetime" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" value="">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                    <div class="input-group input-group-xl" >
+                                        <input data-ng-model="order.price" class="form-control" size="16" type="text" value="">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
                                     </div>
                                 </div>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="errorMessage">
-                    </div>
-                    <div class="row panel-button text-center">
-                        <div class="col-xs-8">
-                            <div class="bootstrap-switch bootstrap-switch-small">
-                                <input  type="checkbox" id="switch" checked />
                             </div>
                         </div>
-                        <div class="col-xs-8">
-                            <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#newPopUp">提交</button>
+                        <div class="row">
+                            <div class="col-xs-8">价格差距</div>
+                            <div class="col-xs-16" data-ng-bind='security.priceSperad'></div>
                         </div>
-                        <div class="col-xs-8">
-                            <button class="btn btn-sm btn-primary" type="button">清除</button>
+                        <div class="row">
+                            <div class="col-xs-8">数量<span data-ng-cloak>{{security.lotSize}}</span></div>
+                            <div class="col-xs-16">
+                                <div class="form-group">
+                                    <div class="input-group input-group-xl" >
+                                        <input class="form-control" size="16" data-ng-model="order.qty" type="text" value="">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                        <span class="input-group-addon"><span style="margin-bottom: 8px;" class="glyphicon glyphicon-chevron-up"></span><span style="position: absolute; margin-top: 9px;margin-left: -12px;" class="glyphicon glyphicon-chevron-up"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" data-ng-class="{hiddenEle:isSell}">
+                            <div class="col-xs-8">可交易股数</div>
+                            <div class="col-xs-16">100</div>
+                        </div>
+                        <div class="row" data-ng-class="{hiddenEle:isBuy}">
+                            <div class="col-xs-8">待沽/持有量</div>
+                            <div class="col-xs-16">0 / 0</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">到期日</div>
+                            <div class="col-xs-16">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-xl date form_datetime" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                            <input class="form-control" size="16" type="text" value="">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="errorMessage">
+                        </div>
+                        <div class="row panel-button text-center">
+                            <div class="col-xs-8">
+                                <div class="bootstrap-switch bootstrap-switch-small">
+                                    <input  type="checkbox" id="switch" checked />
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#newPopUp">提交</button>
+                            </div>
+                            <div class="col-xs-8">
+                                <button class="btn btn-sm btn-primary" type="button">清除</button>
+                            </div>
                         </div>
                     </div>
+
+
+                    <div class="modal fade model-top" id="newPopUp">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <p class="h4 modal-title">确认面板</p>
+                </div>
+                <div class="modal-body order-content">
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">账户</div>
+                        <div class="col-md-16" data-ng-bind='order.accNum'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">订单指令</div>
+                        <div class="col-md-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">证券代号</div>
+                        <div class="col-md-16" data-ng-bind='security.id'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">证券名称</div>
+                        <div class="col-md-16" data-ng-bind='security.name'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">价格</div>
+                        <div class="col-md-16">
+                            <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
+                            <span data-ng-colak>{{order.price | currency:$:3}}</span>
+                        </div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">数量</div>
+                        <div class="col-md-16" data-ng-bind='order.qty | number'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">交易金额</div>
+                        <div class="col-md-16" data-ng-bind="order.totalAmount"></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">手续费</div>
+                        <div class="col-md-16">HDK $100.00
+                            <a tabindex="0" id="detailContent1" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
+                            <div class='container order-HandlingCharge'>
+                               <div class='row' name='spaceColor'>
+                                   <div class='col-md-10'>佣金</div>
+                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                               </div>
+                               <div class='row' name='spaceColor'>
+                                   <div class='col-md-10'>印花税</div>
+                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                               </div>
+                               <div class='row' name='spaceColor'>
+                                   <div class='col-md-10'>结算费</div>
+                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                               </div>
+                               <div class='row' name='spaceColor'>
+                                   <div class='col-md-10'>交易费用</div>
+                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                               </div>
+                               <div class='row' name='spaceColor'>
+                                   <div class='col-md-10'>交易征费</div>
+                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                               </div>
+                               <div class='row top-underline'>
+                                   <div class='col-md-10'>手续费</div>
+                                   <div class='col-md-14'><b class='twoUnderline'>港币$5,695,000.00</b></div>
+                               </div>
+                            </div>
+                            ">
+                                <span class="glyphicon glyphicon-question-sign"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8">订单类别</div>
+                        <div class="col-md-16">限价盘</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确认</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+                </div>
