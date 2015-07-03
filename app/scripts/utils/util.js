@@ -8,7 +8,7 @@ var util = {};
 	_this.isEmpty = function(args) {
 		var result = true;
 		var reg = /\s*$/;
-		if (args && reg.test(args)) {
+		if (typeof args !== 'undefined'  && reg.test(args)) {
 			result = false;
 		}
 		return result;

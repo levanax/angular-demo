@@ -10,7 +10,7 @@ angular.module('portalDemoApp')
 			var result = null;
 			result = $http({
                 method:'post',
-                url:server.urlPrefix+'checkStock',
+                url:server.urlPrefix+'stock/querySecurityStaticData',
                 data:queryParams,
                 headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',

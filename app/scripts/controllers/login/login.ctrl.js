@@ -21,8 +21,8 @@ angular.module('portalDemoApp')
           }).then(function(data) {
             console.log(data);
             var user = data.UserLoginResponse.User;
-            if (!user.SysCode) {
-              dataStorageSvc.session.put(constant.userinfo, user);
+            if (!data.UserLoginResponse.User.SysCode) {
+              dataStorageSvc.session.put(constant.userinfo, data);
               $state.go('trade');
             } else {
               //login failed.

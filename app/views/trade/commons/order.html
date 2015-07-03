@@ -1,6 +1,8 @@
 <br>
 <br>
-<div class="panel panel-primary  order-panel" data-ng-class="{'panel-bacRed':isSell}">
+<div  data-ng-class="{'panel-bacRed':isSell}">
+<form name="orderForm" ng-submit="submit()" novalidate>
+<div class="panel panel-primary  order-panel">
                     <div class="panel-heading text-center">证券订单</div>
                     <div class="panel-body order-panel-body">
                         <div class="row">
@@ -14,8 +16,8 @@
                         <div class="row">
                             <div class="col-xs-8">账户</div>
                             <div class="col-xs-16">
-                                <select data-ng-model="order.accNum" class="form-control input-xl">
-                                    <option ng-repeat="acc in accounts"> {{acc | accFormat}}</option>
+                                <select data-ng-model="order.accNum" class="form-control input-xl"
+                                ng-options="acc.AccNum as acc | accFormat for  acc in accounts">
                                 </select>
                             </div>
                         </div>
@@ -40,7 +42,9 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-8">证券代号</div>
-                            <div class="col-xs-16"><input type="text" class="form-control input-xl" value="" data-ng-model="security.id"></div>
+                            <div class="col-xs-16">
+                                <input name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/" required>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-8">证券名称</div>
@@ -59,9 +63,9 @@
                             <div class="col-xs-16">
                                 <div class="form-group">
                                     <div class="input-group input-group-xl" >
-                                        <input data-ng-model="order.price" class="form-control" size="16" type="text" value="">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                        <input name="price" data-ng-model="order.price" class="form-control" size="16" type="text" value="" data-ng-pattern="/^\d+$|^\d+.\d*$/"  required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down" data-ng-click="priceDown()"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up" data-ng-click="priceUp()"></span></span>
                                     </div>
                                 </div>
                             </div>
@@ -75,10 +79,10 @@
                             <div class="col-xs-16">
                                 <div class="form-group">
                                     <div class="input-group input-group-xl" >
-                                        <input class="form-control" size="16" data-ng-model="order.qty" type="text" value="">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                        <span class="input-group-addon"><span style="margin-bottom: 8px;" class="glyphicon glyphicon-chevron-up"></span><span style="position: absolute; margin-top: 9px;margin-left: -12px;" class="glyphicon glyphicon-chevron-up"></span></span>
+                                        <input name="qty" class="form-control" size="16" data-ng-model="order.qty" type="text" value="" data-ng-pattern="/^\d+$/" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down" data-ng-click="qtyDown()"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up" data-ng-click="qtyUp()"></span></span>
+                                        <span class="input-group-addon"><span style="margin-bottom: 8px;" class="glyphicon glyphicon-chevron-up"></span><span style="position: absolute; margin-top: 9px;margin-left: -12px;" class="glyphicon glyphicon-chevron-up" data-ng-click="qtyUpTop()"></span></span>
                                     </div>
                                 </div>
                             </div>
@@ -107,6 +111,18 @@
                             </div>
                         </div>
                         <div class="errorMessage">
+                            <div data-ng-if="interacted(orderForm.securityId)" ng-messages="orderForm.securityId.$error" ng-messages-multiple>
+                                <div ng-message="required"> plz enter security id.</div>
+                                <div ng-message="pattern">security id formatting error.</div>
+                            </div>
+                            <div data-ng-if="interacted(orderForm.price)" ng-messages="orderForm.price.$error" ng-messages-multiple>
+                                <div ng-message="required"> plz enter price.</div>
+                                <div ng-message="pattern">price formatting error.</div>
+                            </div>
+                            <div data-ng-if="interacted(orderForm.qty)" ng-messages="orderForm.qty.$error" ng-messages-multiple>
+                                <div ng-message="required"> plz enter qty.</div>
+                                <div ng-message="pattern">qty  formatting error.</div>
+                            </div>
                         </div>
                         <div class="row panel-button text-center">
                             <div class="col-xs-8">
@@ -115,16 +131,17 @@
                                 </div>
                             </div>
                             <div class="col-xs-8">
-                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#newPopUp">提交</button>
+                                <button class="btn btn-sm btn-primary" type="submit" data-toggle="modal">提交</button>
                             </div>
                             <div class="col-xs-8">
                                 <button class="btn btn-sm btn-primary" type="button">清除</button>
                             </div>
                         </div>
                     </div>
+</div>
+</form>
 
-
-                    <div class="modal fade model-top" id="newPopUp">
+<div class="modal fade model-top" id="newPopUp">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -165,32 +182,32 @@
                     </div>
                     <div class="row" name="spaceColor">
                         <div class="col-md-8">手续费</div>
-                        <div class="col-md-16">HDK $100.00
+                        <div class="col-md-16">{{order.currencyType}} $0.00
                             <a tabindex="0" id="detailContent1" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
                             <div class='container order-HandlingCharge'>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>佣金</div>
-                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                                   <div class='col-md-14'>港币$0.00</div>
                                </div>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>印花税</div>
-                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                                   <div class='col-md-14'>港币$0.00</div>
                                </div>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>结算费</div>
-                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                                   <div class='col-md-14'>港币$0.00</div>
                                </div>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>交易费用</div>
-                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                                   <div class='col-md-14'>港币$0.00</div>
                                </div>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>交易征费</div>
-                                   <div class='col-md-14'>港币$5,695,000.00</div>
+                                   <div class='col-md-14'>港币$0.00</div>
                                </div>
                                <div class='row top-underline'>
                                    <div class='col-md-10'>手续费</div>
-                                   <div class='col-md-14'><b class='twoUnderline'>港币$5,695,000.00</b></div>
+                                   <div class='col-md-14'><b class='twoUnderline'>港币$0.00</b></div>
                                </div>
                             </div>
                             ">
@@ -210,4 +227,5 @@
             </div>
         </div>
     </div>
-                </div>
+
+</div>
