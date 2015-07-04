@@ -1,4 +1,5 @@
-{
+{"type":"userinfo_constant_C",
+	"value":{
 	"BrokerId": "MFTST0",
 	"Length": 5420,
 	"RefSeqNum": "SEQNO",
@@ -265,4 +266,4 @@
 			}
 		}
 	}
-}
+}}

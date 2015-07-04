@@ -1,3 +1,6 @@
+/**
+*key constant 与 object Name / staticStorage 相互关联
+*/
 'use strict';
 
 angular.module('portalDemoApp')

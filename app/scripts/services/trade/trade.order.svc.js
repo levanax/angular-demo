@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.factory('orderViewSvc', ['$filter', 'accountObjSvc','httpSvc','constant',
-		function($filter, accountObjSvc,httpSvc,constant) {
+	.factory('orderViewSvc', ['$filter', 'staticStorageSvc','httpSvc','constant','dataStorageSvc',
+		function($filter, staticStorageSvc,httpSvc,constant,dataStorageSvc) {
 			var service = {
 				initialize: function(scopePointer) {
 					scopePointer.order = {};
@@ -16,13 +16,16 @@ angular.module('portalDemoApp')
 					
 					scopePointer.updateOrderSide('buy');
 					scopePointer.order.type = null;
-					scopePointer.accounts = accountObjSvc.getAccount();
-					scopePointer.accountCurrent = accountObjSvc.getAccount()[0];
+
+					var userInfoTemp = staticStorageSvc.get(constant.userinfo);
+
+					scopePointer.accounts = userInfoTemp.getAccounts();
+					scopePointer.accountCurrent = userInfoTemp.getAccounts()[0];
 					scopePointer.order.accNum = scopePointer.accountCurrent.AccNum;
 					scopePointer.order.currencyType = $filter('currencyFormat')('HKD');
-					httpSvc.post('stock/accountCashBalance',{'sessId':accountObjSvc.getSessionId(),'accNum':scopePointer.order.accNum,'cucyCode':scopePointer.accountCurrent.CucyCode}).then(function(result){
-						console.log(result);
-					});
+					// httpSvc.post('stock/accountCashBalance',{'sessId':userInfoTemp.getSessionId(),'accNum':scopePointer.order.accNum,'cucyCode':scopePointer.accountCurrent.CucyCode}).then(function(result){
+					// 	console.log(result);
+					// });
 					scopePointer.buyPower = $filter('currency')(1000, '$', 2);
 
 

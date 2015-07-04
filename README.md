@@ -22,4 +22,14 @@ Running `grunt test` will run the unit tests with karma.
 <p>使用 partialLoader 也会遇到问题 (1)</p>
 <br/>
 <p>现在面临一个问题：现在对象都在客户端存储，拿取object property 用key，太繁琐，而且灵活性不好。<br/>必须添加 object function[似java object class]，这样灵活性会好，如果对象结构改了，也只需update object function 即可</p>
+
+<br/>
+<p>更改内存数据存储方式，<b>object /contant /dataStorage / statStorage</b> 配合 ，很大的简化了抓取数据时一些重复的操作<br/>
+object 存储 在dataStorage 里更改格式为 
+{key:
+  {
+  type:dataType,
+  value:object
+  }
+}</p>
 <p>##---------------problem end ----------------------</p>
