@@ -12,6 +12,10 @@ angular.module('portalDemoApp')
 	urlPrefix:'http://192.168.7.127:3000/'
 })
 .constant('constant',{
-	'userinfo':'userinfo_constant_C',
-	'userId':'userId_C'
+	//session value _
+	'userId':'_userId',
+	'userinfo':'_userinfo_constant',
+	'accountCashBalance':'_AccountCashBalance',
+	'markets':'_markets',
+	'orderTypes':'_orderTypes'
 });

@@ -1,17 +1,53 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('tradeOrderCtrl', ['constant', '$scope', '$filter', '$timeout', 'dataStorageSvc', 'securitySvc', 'orderViewSvc',
-		function(constant, $scope, $filter, $timeout, dataStorageSvc, securitySvc, orderViewSvc) {
+	.controller('tradeOrderCtrl', ['constant', '$scope', '$filter', '$timeout', 'staticStorageSvc', 'orderViewSvc',
+		function(constant, $scope, $filter, $timeout, staticStorageSvc, orderViewSvc) {
 			$scope.$on('$viewContentLoaded', function(event) {
 				var scopePointer = $scope;
 				orderViewSvc.initialize(scopePointer);
 			});
 
+			$scope.isEmerge = function(field) {
+				if (angular.isUndefined(field)) {
+					return false;
+				} else {
+					return true;
+				}
+			};
+
 			$scope.submitted = false;
 			$scope.interacted = function(field) {
 				return $scope.submitted || field.$dirty;
 			};
+
+			$scope.$watch('order.market',function(newValue, oldValue, scope){
+				if(angular.isDefined(newValue)){
+					var markets = $scope.markets;
+					for(var i=0;i<markets.length ;i++){
+						var valueTemp =markets[i];
+						if(valueTemp === newValue){
+							$scope.order.marketView = $filter('marketFormat')(markets[i]);
+							break;
+						}
+					}
+
+				}
+			})
+
+			$scope.$watch('order.accNum',function(newValue, oldValue, scope){
+				if(angular.isDefined(newValue)){
+					var accounts = $scope.accounts;
+					for(var i=0;i<accounts.length ;i++){
+						var valueTemp =accounts[i].AccNum;
+						if(valueTemp === newValue){
+							$scope.order.accNumView = $filter('accFormat')(accounts[i]);
+							break;
+						}
+					}
+
+				}
+			})
 
 			$scope.$watch('order.side', function(input, oldInput, childScope) {
 				if (angular.isString(input)) {
@@ -30,7 +66,7 @@ angular.module('portalDemoApp')
 
 			$scope.enterSecurityEvent = null;
 			$scope.$watch('security.id', function(newValue, oldValue, scope) {
-				if(orderForm.securityId.$error){
+				if (orderForm.securityId.$error) {
 					return false;
 				}
 				var securityId = newValue;
@@ -38,23 +74,43 @@ angular.module('portalDemoApp')
 				if (util.isNotEmpty(securityId)) {
 					$scope.enterSecurityEvent = $timeout(function() {
 						console.log(securityId);
+						$scope.enterSecurityId();
 					}, 3000);
 				}
 			});
-			$scope.enterSecurityId = function() {
-				var queryParams = {
-					stockCode: $scope.stock,
-					accNum: $scope.accNum,
-					market: $scope.market,
-					tradeSide: $scope.tradeSide
+			$scope.securityKeyDown = function(event){
+				if(event.keyCode === 13){
+					$scope.enterSecurityId();
+					event.preventDefault();
 				}
-				securitySvc.query(queryParams).then(function(data) {
-
-				});
+			}
+			$scope.enterSecurityId = function() {
+				var scopePointer = $scope;
+				orderViewSvc.enterSecurity(scopePointer);
 			}
 
-			$scope.$watch('order.price', function(newValue, oldValue, scope) {
+			$scope.$watch('order.type',function(newValue, oldValue, scope){
+				if(angular.isDefined(newValue)){
+					var types = $scope.orderTypes;
+					for(var i=0;i<types.length ;i++){
+						var valueTemp =types[i].OrdType + ',' + types[i].GTD;
+						if(valueTemp === newValue){
+							$scope.order.typeView = $filter('orderTypeByLocal')(types[i].OrdTypeName);
+							break;
+						}
+					}
 
+				}
+			})
+
+			$scope.$watch('order.price', function(newValue, oldValue, scope) {
+				if(angular.isDefined($scope.security.name) && angular.isDefined(newValue)){
+					var buyPower = util.parseNumber($scope.buyPower);
+					var price = util.parseNumber(newValue);
+					$scope.order.ableBuyQty = util.divide(buyPower,price,0);
+				}else{
+					$scope.order.ableBuyQty = undefined;
+				}
 			});
 			$scope.priceDown = function() {
 				var price = $scope.order.price;
@@ -87,16 +143,6 @@ angular.module('portalDemoApp')
 			$scope.qtyUpTop = function() {
 				$scope.order.qty = 10000;
 			}
-
-			$scope.isHiddenPriceSperad = false;
-			$scope.$watch('security.priceSperad', function() {
-				var priceSperad = $scope.security.priceSperad;
-				if (angular.isString(priceSperad)) {
-					$scope.isHiddenPriceSperad = false;
-				} else {
-					$scope.isHiddenPriceSperad = true;
-				}
-			});
 
 			$scope.submit = function() {
 				$scope.submitted = true;

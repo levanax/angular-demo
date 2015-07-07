@@ -10,6 +10,12 @@
 		"LOGIN_BTN": "登入",
 		"LOGIN_FAIL": "登入失败"
 	},
+	"BUTTON": {
+		"CONFIRM":"确认",
+		"SUBMIT":"提交",
+		"CLEAR":"清除",
+		"CANCEL":"取消"
+	},
 
 	"CURRENCYS": {
 		"HKD": "港币"
@@ -18,6 +24,21 @@
 		"HK": "香港"
 	},
 	"ORDER": {
+		"TIT": "证券",
+		"TITLE": "证券订单",
+		"MARKET": "市场",
+		"ACCOUNT": "账户",
+		"BUY_POWER": "购买力",
+		"ORDER_NEW": "新增订单",
+		"SECURITY_CODE": "证券代号",
+		"SECURITY_NAME": "证券名称",
+		"ORDER_TYPE": "订单类型",
+		"PRICE": "价格",
+		"PRICE_SPREAD": "价格差距",
+		"QUANTITY": "数量",
+		"SELL_TOTAL": "待沽 / 持有量",
+		"ABLE_TRADE_QUANTITY": "可交易股数",
+		"EXPIRY_DATE": "到期日",
 		"SIDE": {
 			"BUY": "买入",
 			"SELL": "沽出"
@@ -26,10 +47,9 @@
 
 
 	"LOGIN_SUCCESS": "登入成功！！",
-	"WELCOME": "欢迎",
+	"WELCOME": "欢迎, {{userid}}",
 
 
 	"ACCOUNT_TYPE_CASH": "现金",
 	"ACCOUNT_TYPE_MARGIN": "孖展"
-
 }

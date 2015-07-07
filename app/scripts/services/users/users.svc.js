@@ -26,7 +26,22 @@ angular.module('portalDemoApp')
           dataStorageSvc.session.clear();
           dataStorageSvc.local.clear();
           $state.go('login');
+        },
+        Security: {
+          queryBalance: function(params) {
+            return $http({
+              method: 'get',
+              url: server.urlPrefix + 'stock/queryAccountSingleSecurityBalance',
+              params: params,
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              }
+            }).then(function(result) {
+              return result.data;
+            });
+          }
         }
+
       };
       return service;
     }

@@ -3,18 +3,17 @@
 <div  data-ng-class="{'panel-bacRed':isSell}">
 <form name="orderForm" ng-submit="submit()" novalidate>
 <div class="panel panel-primary  order-panel">
-                    <div class="panel-heading text-center">证券订单</div>
+                    <div class="panel-heading text-center" translate="ORDER.TITLE"></div>
                     <div class="panel-body order-panel-body">
                         <div class="row">
-                            <div class="col-xs-8">市场</div>
+                            <div class="col-xs-8" translate="ORDER.MARKET"></div>
                             <div class="col-xs-16">
-                                <select data-ng-model='order.market' class="form-control input-xl">
-                                    <option ng-repeat="mk in markets"> {{mk | marketFormat}}</option>
+                                <select data-ng-model='order.market' class="form-control input-xl" ng-options="mk as (mk | marketFormat) for mk in markets">
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">账户</div>
+                            <div class="col-xs-8" translate="ORDER.ACCOUNT"></div>
                             <div class="col-xs-16">
                                 <select data-ng-model="order.accNum" class="form-control input-xl"
                                 ng-options="acc.AccNum as acc | accFormat for  acc in accounts">
@@ -22,17 +21,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">购买力</div>
+                            <div class="col-xs-8" translate="ORDER.BUY_POWER"></div>
                             <div class="col-xs-16">
                                 <span data-ng-cloak>{{ order.currencyType }}</span>
                                 <span data-ng-cloak>{{ buyPower }}</span>
                             </div>
                         </div>
                         <div>
-                            <div class="order-panel-addOrder">新增订单</div>
+                            <div class="order-panel-addOrder" translate="ORDER.ORDER_NEW"></div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">订单</div>
+                            <div class="col-xs-8" translate="ORDER.TIT"></div>
                             <div class="col-xs-16 order-panel-radio">
                                 <input type="radio"  data-ng-model="order.side" value="BUY"/>
                                 {{'ORDER.SIDE.BUY' | translate }}
@@ -41,25 +40,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">证券代号</div>
+                            <div class="col-xs-8" translate="ORDER.SECURITY_CODE"></div>
                             <div class="col-xs-16">
-                                <input name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/" required>
+                                <input ng-keydown="securityKeyDown($event)" name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/" required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-8">证券名称</div>
+                        <div class="row" data-ng-if="isEmerge(security.name)">
+                            <div class="col-xs-8" translate="ORDER.SECURITY_NAME"></div>
                             <div class="col-xs-16" data-ng-bind="security.name"></div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">订单类别</div>
+                            <div class="col-xs-8" translate="ORDER.ORDER_TYPE"></div>
                             <div class="col-xs-16">
-                                <select data-ng-model="order.type" class="form-control input-xl">
-                                    <option data-ng-repat="ot in orderTypes" data-ng-value="ot.ordType+ot.GTD">{{ot | orderTypeByLocal}}</option>
+                                <select data-ng-model="order.type" class="form-control input-xl" ng-options="ot.OrdType+','+ot.GTD as ot.OrdTypeName | orderTypeByLocal for ot in orderTypes">
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">价格</div>
+                            <div class="col-xs-8" translate="ORDER.PRICE"></div>
                             <div class="col-xs-16">
                                 <div class="form-group">
                                     <div class="input-group input-group-xl" >
@@ -70,12 +68,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-8">价格差距</div>
+                        <div class="row" data-ng-if="isEmerge(security.priceSperad)" >
+                            <div class="col-xs-8" translate="ORDER.PRICE_SPREAD"></div>
                             <div class="col-xs-16" data-ng-bind='security.priceSperad'></div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">数量<span data-ng-cloak>{{security.lotSize}}</span></div>
+                            <div class="col-xs-8">
+                                <span translate="ORDER.QUANTITY"></span>
+                                <span data-ng-cloak>{{security.lotSize}}</span></div>
                             <div class="col-xs-16">
                                 <div class="form-group">
                                     <div class="input-group input-group-xl" >
@@ -87,16 +87,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" data-ng-class="{hiddenEle:isSell}">
-                            <div class="col-xs-8">可交易股数</div>
-                            <div class="col-xs-16">100</div>
+                        <div class="row" data-ng-if="isEmerge(order.ableBuyQty)"  data-ng-class="{hiddenEle:isSell}">
+                            <div class="col-xs-8" translate="ORDER.ABLE_TRADE_QUANTITY"></div>
+                            <div class="col-xs-16" data-ng-bind="order.ableBuyQty"></div>
                         </div>
-                        <div class="row" data-ng-class="{hiddenEle:isBuy}">
-                            <div class="col-xs-8">待沽/持有量</div>
-                            <div class="col-xs-16">0 / 0</div>
+                        <div class="row" data-ng-if="isEmerge(order.ableSellQty)" data-ng-class="{hiddenEle:isBuy}">
+                            <div class="col-xs-8" translate="ORDER.SELL_TOTAL"></div>
+                            <div class="col-xs-16" data-ng-bind="order.ableSellQty"></div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-8">到期日</div>
+                            <div class="col-xs-8" translate="ORDER.EXPIRY_DATE"></div>
                             <div class="col-xs-16">
                                 <label class="checkbox-inline">
                                     <input type="checkbox" value="">
@@ -131,10 +131,10 @@
                                 </div>
                             </div>
                             <div class="col-xs-8">
-                                <button class="btn btn-sm btn-primary" type="submit" data-toggle="modal">提交</button>
+                                <button class="btn btn-sm btn-primary" type="submit" data-toggle="modal" translate="BUTTON.SUBMIT"></button>
                             </div>
                             <div class="col-xs-8">
-                                <button class="btn btn-sm btn-primary" type="button">清除</button>
+                                <button class="btn btn-sm btn-primary" type="button" translate="BUTTON.CLEAR"></button>
                             </div>
                         </div>
                     </div>
@@ -150,30 +150,34 @@
                 </div>
                 <div class="modal-body order-content">
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">账户</div>
-                        <div class="col-md-16" data-ng-bind='order.accNum'></div>
+                        <div class="col-md-8" translate="ORDER.MARKET"></div>
+                        <div class="col-md-16" data-ng-bind='order.marketView'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">订单指令</div>
+                        <div class="col-md-8" translate="ORDER.ACCOUNT"></div>
+                        <div class="col-md-16" data-ng-bind='order.accNumView'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-md-8" translate="ORDER.TIT"></div>
                         <div class="col-md-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">证券代号</div>
+                        <div class="col-md-8" translate="ORDER.SECURITY_CODE"></div>
                         <div class="col-md-16" data-ng-bind='security.id'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">证券名称</div>
+                        <div class="col-md-8" translate="ORDER.SECURITY_NAME"></div>
                         <div class="col-md-16" data-ng-bind='security.name'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">价格</div>
+                        <div class="col-md-8" translate="ORDER.PRICE"></div>
                         <div class="col-md-16">
                             <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
                             <span data-ng-colak>{{order.price | currency:$:3}}</span>
                         </div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">数量</div>
+                        <div class="col-md-8" translate="ORDER.QUANTITY"></div>
                         <div class="col-md-16" data-ng-bind='order.qty | number'></div>
                     </div>
                     <div class="row" name="spaceColor">
@@ -183,26 +187,10 @@
                     <div class="row" name="spaceColor">
                         <div class="col-md-8">手续费</div>
                         <div class="col-md-16">{{order.currencyType}} $0.00
-                            <a tabindex="0" id="detailContent1" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
+                            <a tabindex="0" id="detailContent1"  class="hiddenEle" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
                             <div class='container order-HandlingCharge'>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>佣金</div>
-                                   <div class='col-md-14'>港币$0.00</div>
-                               </div>
-                               <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>印花税</div>
-                                   <div class='col-md-14'>港币$0.00</div>
-                               </div>
-                               <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>结算费</div>
-                                   <div class='col-md-14'>港币$0.00</div>
-                               </div>
-                               <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>交易费用</div>
-                                   <div class='col-md-14'>港币$0.00</div>
-                               </div>
-                               <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>交易征费</div>
                                    <div class='col-md-14'>港币$0.00</div>
                                </div>
                                <div class='row top-underline'>
@@ -216,13 +204,13 @@
                         </div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">订单类别</div>
-                        <div class="col-md-16">限价盘</div>
+                        <div class="col-md-8" translate="ORDER.ORDER_TYPE"></div>
+                        <div class="col-md-16" data-ng-bind="order.typeView"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">确认</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" translate="BUTTON.CONFIRM"></button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" translate="BUTTON.CANCEL"></button>
                 </div>
             </div>
         </div>

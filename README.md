@@ -33,3 +33,27 @@ object 存储 在dataStorage 里更改格式为
   }
 }</p>
 <p>##---------------problem end ----------------------</p>
+
+```javascript
+$http({
+	method: 'post',
+	url: server.urlPrefix + urlSuffix,
+	data: params,
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+	},
+	transformRequest: function(data) {
+		return $.param(data);
+	}
+})
+
+$http({
+	method: 'get',
+	url: server.urlPrefix + urlSuffix,
+	params: params,
+	cache:optionsDefault.cache,
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+	}
+})
+```

@@ -15,6 +15,10 @@ angular.module('portalDemoApp')
         return $q.reject(rejection);
       },
       'response': function(response) {
+        var data = response.data;
+        if(typeof data.Reject !== 'undefined'){
+          console.error('response error : ' + data.Reject.SysMsg);
+        }
         return response;
       },
       'responseError': function(rejection) {

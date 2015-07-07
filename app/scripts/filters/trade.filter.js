@@ -48,19 +48,70 @@ angular.module("portalDemoApp")
 	.filter('orderTypeByLocal', ['$translate',
 		function($translate) {
 			return function(input) {
-				if (angular.isObject(input)) {
-					//Returns the language key of language that is currently loaded asynchronously.
-					var currentLanguage = $translate.proposedLanguage();
+				if (angular.isArray(input)) {
+					//Returns the current language key .
+					var currentLanguage = $translate.use();
 					var result = null;
 					switch (currentLanguage) {
 						case 'en':
-							result = input.ordTypeNameEN;
+							for (var i = 0; i < input.length; i++) {
+								if (input[i].LangCode === "EN") {
+									result = input[i].$t;
+									break;
+								}
+							}
 							break;
 						case 'cn':
-							result = input.ordTypeNameCN;
+							for (var i = 0; i < input.length; i++) {
+								if (input[i].LangCode === "CN") {
+									result = input[i].$t;
+									break;
+								}
+							}
 							break;
 						default:
-							result = input.ordTypeNameEN;
+							for (var i = 0; i < input.length; i++) {
+								if (input[i].LangCode === "ZH") {
+									result = input[i].$t;
+									break;
+								}
+							}
+							break;
+					}
+					return result;
+				}
+			}
+		}
+	]).filter('siftingSecurityName', ['$translate',
+		function($translate) {
+			return function(input) {
+				if (angular.isObject(input)) {
+					var currentLanguage = $translate.use(),
+						result = null;
+					switch (currentLanguage) {
+						case 'en':
+							for(var i = 0 ;i<input.length ;i++){
+								if(input[i].LangCode === "EN"){
+									result = input[i].$t;
+									break;
+								}
+							}
+							break;
+						case 'cn':
+							for(var i = 0 ;i<input.length ;i++){
+								if(input[i].LangCode === "CN"){
+									result = input[i].$t;
+									break;
+								}
+							}
+							break;
+						default:
+							for(var i = 0 ;i<input.length ;i++){
+								if(input[i].LangCode === "ZH"){
+									result = input[i].$t;
+									break;
+								}
+							}
 							break;
 					}
 					return result;

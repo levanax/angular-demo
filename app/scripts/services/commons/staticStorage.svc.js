@@ -1,8 +1,8 @@
 /**
-*this file and datastorage 相互配合
-*
-*
-*/
+ *this file and datastorage 相互配合
+ *
+ *
+ */
 'use strict';
 
 angular.module('portalDemoApp')
@@ -13,24 +13,34 @@ angular.module('portalDemoApp')
 					var result = null,
 						value = null;
 					var transitResult = dataStorageSvc.session.get(key);
-					var objType = transitResult.type;
-					var obj = transitResult.value;
-					switch (objType) {
-						case constant.userinfo:
-							value = new accountInfo(obj);
-							break;
-						default:
-							console.error('not found object at the staticStorage service');
-							break;
-					};
-					if (value != null) {
-						this[key] = value;
-						result = value;
+					if (angular.isObject(transitResult)) {
+						var objType = transitResult.type;
+						var obj = transitResult.value;
+						switch (objType) {
+							case constant.userinfo:
+								value = new AccountInfo(obj);
+								break;
+							case constant.accountCashBalance:
+								value = new AccountCashBalance(obj);
+								break;
+							case constant.orderTypes:
+								value = new OrderType(obj);
+								break;
+							default:
+								value = obj;
+								console.warn('may be not found object at the staticStorage service');
+								break;
+						};
+						if (value != null) {
+							this[key] = value;
+							result = value;
+						}
 					}
 					return result;
 				},
 				put: function(key, value) {
-					this[key] = value;
+					//this[key] = value;
+					dataStorageSvc.session.put(key, value);
 				},
 				get: function(key) {
 					var result = this[key];

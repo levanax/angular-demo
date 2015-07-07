@@ -13,7 +13,7 @@ angular.module('portalDemoApp')
 
 			if(toState != $state.get('login')){
 				
-				/*if (dataStorageSvc.session.get(constant.userinfo)){
+				if (dataStorageSvc.session.get(constant.userinfo)){
 
 			    }else{
 			    	console.log('farword login page.');
@@ -21,7 +21,7 @@ angular.module('portalDemoApp')
 			    	$state.go('login'); //redefine orientation
 				    
 				    //$urlRouter.sync(); // Continue with the update and state transition if logic allows
-			    }*/
+			    }
 			}
 		});
 	$rootScope.$on('$stateNotFound', 

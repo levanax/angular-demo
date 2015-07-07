@@ -10,14 +10,35 @@
 		"LOGIN_BTN": "Login",
 		"LOGIN_FAIL": "Login fail."
 	},
+	"BUTTON": {
+		"CONFIRM":"Confirm",
+		"SUBMIT":"Submit",
+		"CLEAR":"Clear",
+		"CANCEL":"Cancel"
+	},
 
 	"CURRENCYS": {
 		"HKD": "HKD"
 	},
 	"MARKETS": {
-		"HKD": "HK"
+		"HK": "HK"
 	},
 	"ORDER": {
+		"TIT":"Order",
+		"TITLE":"Security order",
+		"MARKET":"Market",
+		"ACCOUNT":"Account",
+		"BUY_POWER":"Buy power",
+		"ORDER_NEW":"new order",
+		"SECURITY_CODE":"security code",
+		"SECURITY_NAME":"security name",
+		"ORDER_TYPE":"order type",
+		"PRICE":"Price",
+		"PRICE_SPREAD":"Price spread",
+		"QUANTITY":"Quantity",
+		"SELL_TOTAL":"Selling total",
+		"ABLE_TRADE_QUANTITY":"able trade qty",
+		"EXPIRY_DATE":"Expiry date",
 		"SIDE": {
 			"BUY": "Buy",
 			"SELL": "Sell"
@@ -26,7 +47,7 @@
 
 
 	"LOGIN_SUCCESS": "Login success！！",
-	"WELCOME": "welcome",
+	"WELCOME": "welcome, {{userid}}",
 
 
 	"ACCOUNT_TYPE_CASH": "Cash",
