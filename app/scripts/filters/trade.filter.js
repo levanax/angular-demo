@@ -63,7 +63,7 @@ angular.module("portalDemoApp")
 							break;
 						case 'cn':
 							for (var i = 0; i < input.length; i++) {
-								if (input[i].LangCode === "CN") {
+								if (input[i].LangCode === "ZH" && input[i].CntyCode === "CN" ) {
 									result = input[i].$t;
 									break;
 								}
@@ -71,7 +71,7 @@ angular.module("portalDemoApp")
 							break;
 						default:
 							for (var i = 0; i < input.length; i++) {
-								if (input[i].LangCode === "ZH") {
+								if (input[i].LangCode === "ZH" && input[i].CntyCode === "HK" ) {
 									result = input[i].$t;
 									break;
 								}
@@ -99,7 +99,7 @@ angular.module("portalDemoApp")
 							break;
 						case 'cn':
 							for(var i = 0 ;i<input.length ;i++){
-								if(input[i].LangCode === "CN"){
+								if(input[i].LangCode === "ZH" && input[i].CntyCode === "CN" ){
 									result = input[i].$t;
 									break;
 								}
@@ -107,7 +107,7 @@ angular.module("portalDemoApp")
 							break;
 						default:
 							for(var i = 0 ;i<input.length ;i++){
-								if(input[i].LangCode === "ZH"){
+								if(input[i].LangCode === "ZH" && input[i].CntyCode === "HK" ){
 									result = input[i].$t;
 									break;
 								}

@@ -7,7 +7,7 @@ angular.module('portalDemoApp')
 .run(['$rootScope','constant','$state','dataStorageSvc',function ($rootScope,constant,$state,dataStorageSvc) {
 	$rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){
-			console.log('in $stateChangeStart...............');
+			//console.log('in $stateChangeStart...............');
 		    // transitionTo() promise will be rejected with 
 		    // a 'transition prevented' error
 

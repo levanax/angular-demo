@@ -6,14 +6,16 @@ angular.module('portalDemoApp')
     name:'trade',
     url:'/trade',
     templateUrl:'views/trade/trade.html',
-    controller:['$state',function($state){
+    controller:'tradeCtrl'
+    /*controller:['$state',function($state){
       //this one controller is not defined. 
       //In the other routers, Can't through 'tradeController' to refer to the controller. [solution:use 'controllerAs']
       $state.go('trade.order',{},{location:false});
-    }]
+    }]*/
   }
   var tradeOrderState = {
     name:'trade.order',
+    url:'/trade/order?market&{accNum:int}',
     views:{
       'order@trade':{
         templateUrl:'views/trade/commons/order.html',

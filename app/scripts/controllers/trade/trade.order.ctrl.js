@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('tradeOrderCtrl', ['constant', '$scope', '$filter', '$timeout', 'staticStorageSvc', 'orderViewSvc',
-		function(constant, $scope, $filter, $timeout, staticStorageSvc, orderViewSvc) {
+	.controller('tradeOrderCtrl', ['$state','$stateParams', 'constant', '$scope', '$filter', '$timeout', 'staticStorageSvc', 'orderViewSvc',
+		function($state,$stateParams, constant, $scope, $filter, $timeout, staticStorageSvc, orderViewSvc) {
 			$scope.$on('$viewContentLoaded', function(event) {
 				var scopePointer = $scope;
-				orderViewSvc.initialize(scopePointer);
+				orderViewSvc.initialize(scopePointer, $stateParams);
 			});
 
 			$scope.isEmerge = function(field) {
@@ -21,52 +21,68 @@ angular.module('portalDemoApp')
 				return $scope.submitted || field.$dirty;
 			};
 
-			$scope.$watch('order.market',function(newValue, oldValue, scope){
-				if(angular.isDefined(newValue)){
+			$scope.$watch('order.market', function(newValue, oldValue, scope) {
+				if (angular.isDefined(newValue)) {
 					var markets = $scope.markets;
-					for(var i=0;i<markets.length ;i++){
-						var valueTemp =markets[i];
-						if(valueTemp === newValue){
+					for (var i = 0; i < markets.length; i++) {
+						var valueTemp = markets[i];
+						if (valueTemp === newValue) {
 							$scope.order.marketView = $filter('marketFormat')(markets[i]);
 							break;
 						}
 					}
 
 				}
-			})
+			});
+			$scope.switchMarketEvent = function(input) {
+				var params = {
+					market: input
+				}
+				$scope.$emit('refresh.order', params);
+			}
+			$scope.switchAccountEvent = function(input) {
+				var params = {
+					market: $scope.order.market,
+					accNum: input
+				}
+				$scope.$emit('refresh.order', params);
+			}
 
-			$scope.$watch('order.accNum',function(newValue, oldValue, scope){
-				if(angular.isDefined(newValue)){
+			$scope.$watch('order.accNum', function(newValue, oldValue, scope) {
+				if (angular.isDefined(newValue)) {
 					var accounts = $scope.accounts;
-					for(var i=0;i<accounts.length ;i++){
-						var valueTemp =accounts[i].AccNum;
-						if(valueTemp === newValue){
+					for (var i = 0; i < accounts.length; i++) {
+						var valueTemp = accounts[i].AccNum;
+						if (valueTemp === newValue) {
 							$scope.order.accNumView = $filter('accFormat')(accounts[i]);
 							break;
 						}
 					}
-
 				}
 			})
 
 			$scope.$watch('order.side', function(input, oldInput, childScope) {
 				if (angular.isString(input)) {
-					if (input === 'BUY') {
-						$scope.isBuy = true;
-						$scope.isSell = false;
+					$scope.resetFormEvent();
+					var scopePointer = $scope;
+					if (input === 'B') {
+						orderViewSvc.switchBuyMode(scopePointer);
 					} else {
-						$scope.isBuy = false;
-						$scope.isSell = true;
+						orderViewSvc.switchSellMode(scopePointer);
 					}
 				}
 			});
-			$scope.updateOrderSide = function(orderSide) {
-				$scope.order.side = angular.uppercase(orderSide);
+			$scope.updateOrderSide = function(orderSideParam) {
+				var orderSide = orderSideParam.toUpperCase();
+				if ($scope.order.side !== orderSide) {
+					$scope.order.side = angular.uppercase(orderSide);
+				}
 			}
 
 			$scope.enterSecurityEvent = null;
 			$scope.$watch('security.id', function(newValue, oldValue, scope) {
-				if (orderForm.securityId.$error) {
+				var securityIdEle = orderForm.securityId;
+				if (angular.isDefined(securityIdEle) && securityIdEle.$error) {
 					return false;
 				}
 				var securityId = newValue;
@@ -78,8 +94,8 @@ angular.module('portalDemoApp')
 					}, 3000);
 				}
 			});
-			$scope.securityKeyDown = function(event){
-				if(event.keyCode === 13){
+			$scope.securityKeyDown = function(event) {
+				if (event.keyCode === 13) {
 					$scope.enterSecurityId();
 					event.preventDefault();
 				}
@@ -89,12 +105,12 @@ angular.module('portalDemoApp')
 				orderViewSvc.enterSecurity(scopePointer);
 			}
 
-			$scope.$watch('order.type',function(newValue, oldValue, scope){
-				if(angular.isDefined(newValue)){
+			$scope.$watch('order.type', function(newValue, oldValue, scope) {
+				if (angular.isDefined(newValue)) {
 					var types = $scope.orderTypes;
-					for(var i=0;i<types.length ;i++){
-						var valueTemp =types[i].OrdType + ',' + types[i].GTD;
-						if(valueTemp === newValue){
+					for (var i = 0; i < types.length; i++) {
+						var valueTemp = types[i].OrdType;
+						if (valueTemp === newValue) {
 							$scope.order.typeView = $filter('orderTypeByLocal')(types[i].OrdTypeName);
 							break;
 						}
@@ -104,14 +120,15 @@ angular.module('portalDemoApp')
 			})
 
 			$scope.$watch('order.price', function(newValue, oldValue, scope) {
-				if(angular.isDefined($scope.security.name) && angular.isDefined(newValue)){
+				if (angular.isDefined($scope.security.name) && angular.isDefined(newValue)) {
 					var buyPower = util.parseNumber($scope.buyPower);
 					var price = util.parseNumber(newValue);
-					$scope.order.ableBuyQty = util.divide(buyPower,price,0);
-				}else{
+					$scope.order.ableBuyQty = util.divide(buyPower, price, 0);
+				} else {
 					$scope.order.ableBuyQty = undefined;
 				}
 			});
+
 			$scope.priceDown = function() {
 				var price = $scope.order.price;
 				if (util.isNotEmpty(price)) {
@@ -149,6 +166,22 @@ angular.module('portalDemoApp')
 				if ($scope.orderForm.$valid) {
 					$("#newPopUp").modal('toggle');
 				}
+			}
+			$scope.resetFormEvent = function() {
+				var scopePointer = $scope;
+				orderViewSvc.resetForm(scopePointer);
+			}
+
+			$scope.signingOrderEvent = function() {
+				var scopePointer = $scope;
+				orderViewSvc.signingOrder(scopePointer);
+			}
+
+			$scope.reloadPanel = function() {
+				$("#resultPopUp").modal('toggle');
+				$timeout(function() {
+					$scope.$emit('refresh.order', {});
+				}, 1000);
 			}
 		}
 	]);

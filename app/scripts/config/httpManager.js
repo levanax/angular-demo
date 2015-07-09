@@ -17,6 +17,7 @@ angular.module('portalDemoApp')
       'response': function(response) {
         var data = response.data;
         if(typeof data.Reject !== 'undefined'){
+          console.error('----------------------RESPONSE ERROR--------------------------------');
           console.error('response error : ' + data.Reject.SysMsg);
         }
         return response;

@@ -137,4 +137,6 @@
     display: none;
 }
 
-
+#resultPopUp .modal-footer{
+    border-top: none;
+}

@@ -14,7 +14,8 @@
 		"CONFIRM":"确认",
 		"SUBMIT":"提交",
 		"CLEAR":"清除",
-		"CANCEL":"取消"
+		"CANCEL":"取消",
+		"BACK":"返回"
 	},
 
 	"CURRENCYS": {
@@ -40,9 +41,13 @@
 		"ABLE_TRADE_QUANTITY": "可交易股数",
 		"EXPIRY_DATE": "到期日",
 		"SIDE": {
+			"B": "买入",
+			"S": "沽出",
 			"BUY": "买入",
 			"SELL": "沽出"
-		}
+		},
+		"CONFIRM_ING":"确认订单",
+		"COMPLETE":"订单完成"
 	},
 
 

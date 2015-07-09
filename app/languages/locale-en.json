@@ -14,7 +14,8 @@
 		"CONFIRM":"Confirm",
 		"SUBMIT":"Submit",
 		"CLEAR":"Clear",
-		"CANCEL":"Cancel"
+		"CANCEL":"Cancel",
+		"BACK":"Back"
 	},
 
 	"CURRENCYS": {
@@ -40,9 +41,13 @@
 		"ABLE_TRADE_QUANTITY":"able trade qty",
 		"EXPIRY_DATE":"Expiry date",
 		"SIDE": {
+			"B": "Buy",
+			"S": "Sell",
 			"BUY": "Buy",
 			"SELL": "Sell"
-		}
+		},
+		"CONFIRM_ING":"Confirm order",
+		"COMPLETE":"complete"
 	},
 
 
