@@ -4,8 +4,9 @@
 'use strict';
 
 angular.module('portalDemoApp')
-  .controller('LoginCtrl', ['$scope', '$filter', '$rootScope', 'usersSvc', '$state', '$translate', 'constant', 'dataStorageSvc',
-    function($scope, $filter, $rootScope, usersSvc, $state, $translate, constant, dataStorageSvc) {
+  .controller('LoginCtrl', ['appRuleSvc', '$scope', '$filter', '$rootScope', 'usersSvc', '$state', '$translate', 'constant', 'dataStorageSvc',
+    function(appRuleSvc, $scope, $filter, $rootScope, usersSvc, $state, $translate, constant, dataStorageSvc) {
+      appRuleSvc.test('test');
       $scope.submitted = false;
       $scope.interacted = function(field) {
         return $scope.submitted || field.$dirty;
@@ -15,20 +16,12 @@ angular.module('portalDemoApp')
         $scope.serverError = '';
         $scope.submitted = true;
         if ($scope.loginForm.$valid) {
-          usersSvc.login({
+          var params = {
             name: $scope.userinfo.userName,
             password: $scope.userinfo.password
-          }).then(function(data) {
-            console.log(data);
-            var user = data.UserLoginResponse.User;
-            if (!data.UserLoginResponse.User.SysCode) {
-              dataStorageSvc.session.put(constant.userinfo, data);
-              $state.go('trade');
-            } else {
-              //login failed.
-              $scope.serverError = $filter('translate')('LOGIN.LOGIN_FAIL');
-            }
-          });
+          }
+          var scopePointer = $scope;
+          usersSvc.login(scopePointer, params);
         }
       };
 

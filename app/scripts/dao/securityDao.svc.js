@@ -78,6 +78,20 @@ angular.module('portalDemoApp')
 						return staticStorageSvc.get(constant.accountCashBalance);
 					});
 					return result;
+				},
+				queryOrderBook:function(params){
+					var result = null;
+					result = $http({
+						method: 'get',
+						url: server.urlPrefix + 'stock/accountOrderHistory',
+						params: params,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+						}
+					}).then(function(result) {
+						return result.data.Account.OrdHist;
+					});
+					return result;
 				}
 			}
 			return service;

@@ -135,6 +135,7 @@ angular.module('portalDemoApp')
 				},
 				resetForm: function(scopePointer) {
 					//orderForm.reset();
+					scopePointer.submitted = false;
 					scopePointer.security.id = undefined;
 					scopePointer.security.name = undefined;
 					scopePointer.security.lotSize = undefined;

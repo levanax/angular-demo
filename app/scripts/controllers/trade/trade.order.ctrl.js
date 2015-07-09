@@ -16,7 +16,7 @@ angular.module('portalDemoApp')
 				}
 			};
 
-			$scope.submitted = false;
+			$scope.submitted = false;// if reset form ,must set false
 			$scope.interacted = function(field) {
 				return $scope.submitted || field.$dirty;
 			};

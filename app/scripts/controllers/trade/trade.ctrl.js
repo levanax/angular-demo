@@ -11,6 +11,10 @@ angular.module('portalDemoApp')
 
 			$scope.$on('refresh.order', function(e, params) {
 				$state.go('trade.order', params,{reload:true,location: false,inherit:false});
+				$scope.$broadcast('refreshOrderBook');
+			});
+			$scope.$on('refresh.orderBook', function(e, params) {
+				$scope.$broadcast('refreshOrderBook');
 			});
 		}
 	]);

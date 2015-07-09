@@ -140,3 +140,6 @@
 #resultPopUp .modal-footer{
     border-top: none;
 }
+.orderBookMinwidth{
+    min-width: 900px;
+}

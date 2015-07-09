@@ -7,8 +7,6 @@ angular.module('portalDemoApp')
   .factory('httpInterceptor', ['$q','server',function($q,server) {
     return {
       'request': function(config) {
-        console.log('in http request : config ...');
-        console.log(config);
         return config;
       },
       'requestError': function(rejection) {

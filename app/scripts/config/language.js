@@ -10,7 +10,7 @@ angular.module('portalDemoApp')
         prefix: 'languages/locale-',
         suffix: '.json'
       });
-      $translateProvider.preferredLanguage('cn');
+      $translateProvider.preferredLanguage('en');
       $translateProvider.useSanitizeValueStrategy(null);
     }
   ]);

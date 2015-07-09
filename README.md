@@ -57,3 +57,7 @@ $http({
 	}
 })
 ```
+
+-
+**简述 :** *DAO层负责数据抓取,*
+*serivces/commons/staticStorage 负责app中 数据存储与抓取,它与 dataStorage 相互协作*

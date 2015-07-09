@@ -4,44 +4,26 @@
 'use strict';
 
 angular.module('portalDemoApp')
-  .factory('usersSvc', ['$http', '$state', 'server', 'dataStorageSvc',
-    function($http, $state, server, dataStorageSvc) {
+  .factory('usersSvc', ['$filter','constant','usersDao','$http', '$state', 'server', 'dataStorageSvc',
+    function($filter,constant,usersDao,$http, $state, server, dataStorageSvc) {
       var service = {
-        login: function(loginParams) {
-          return $http({
-            method: 'post',
-            url: server.urlPrefix + 'login/submit',
-            data: loginParams,
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            transformRequest: function(data) {
-              return $.param(data);
+        login: function(scopePointer,loginParams) {
+          usersDao.login(loginParams).then(function(data) {
+            var user = data.UserLoginResponse.User;
+            if (!data.UserLoginResponse.User.SysCode) {
+              dataStorageSvc.session.put(constant.userinfo, data);
+              $state.go('trade');
+            } else {
+              //login failed.
+              scopePointer.serverError = $filter('translate')('LOGIN.LOGIN_FAIL');
             }
-          }).then(function(result) {
-            return result.data;
           });
         },
         logout: function() {
           dataStorageSvc.session.clear();
           dataStorageSvc.local.clear();
           $state.go('login');
-        },
-        Security: {
-          queryBalance: function(params) {
-            return $http({
-              method: 'get',
-              url: server.urlPrefix + 'stock/queryAccountSingleSecurityBalance',
-              params: params,
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              }
-            }).then(function(result) {
-              return result.data;
-            });
-          }
         }
-
       };
       return service;
     }

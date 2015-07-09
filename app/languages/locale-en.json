@@ -11,43 +11,83 @@
 		"LOGIN_FAIL": "Login fail."
 	},
 	"BUTTON": {
-		"CONFIRM":"Confirm",
-		"SUBMIT":"Submit",
-		"CLEAR":"Clear",
-		"CANCEL":"Cancel",
-		"BACK":"Back"
+		"CONFIRM": "Confirm",
+		"SUBMIT": "Submit",
+		"CLEAR": "Clear",
+		"CANCEL": "Cancel",
+		"BACK": "Back"
 	},
 
 	"CURRENCYS": {
-		"HKD": "HKD"
+		"HKD": "HKD",
+		"AUD": "AUD",
+		"CAD": "CAD",
+		"CNT": "CNT",
+		"CNY": "CNY",
+		"EUR": "EUR",
+		"GBP": "GBP",
+		"HKD": "HKD",
+		"HKT": "HKT",
+		"IDR": "IDR",
+		"JPT": "JPT",
+		"JPY": "JPY",
+		"KRW": "KRW",
+		"MYR": "MYR",
+		"NTD": "NTD",
+		"NZD": "NZD",
+		"NZT": "NZT",
+		"PHP": "PHP",
+		"SGD": "SGD",
+		"SID": "SID",
+		"THB": "THB",
+		"USD": "USD",
+		"UST": "UST"
 	},
 	"MARKETS": {
-		"HK": "HK"
+		"HK": "HK",
+		"AU": "AU",
+		"HK": "HK",
+		"SS": "SS",
+		"SZ": "SZ",
+		"US": "US",
+		"GB": "GB",
+		"JP": "JP",
+		"TW": "TW",
+		"SI": "SI",
+		"SG": "SG",
+		"CA": "CA",
+		"FR": "FR",
+		"DE": "DE",
+		"NL": "NL",
+		"EU": "EU",
+		"MA": "MA"
 	},
 	"ORDER": {
-		"TIT":"Order",
-		"TITLE":"Security order",
-		"MARKET":"Market",
-		"ACCOUNT":"Account",
-		"BUY_POWER":"Buy power",
-		"ORDER_NEW":"new order",
-		"SECURITY_CODE":"security code",
-		"SECURITY_NAME":"security name",
-		"ORDER_TYPE":"order type",
-		"PRICE":"Price",
-		"PRICE_SPREAD":"Price spread",
-		"QUANTITY":"Quantity",
-		"SELL_TOTAL":"Selling total",
-		"ABLE_TRADE_QUANTITY":"able trade qty",
-		"EXPIRY_DATE":"Expiry date",
+		"TIT": "Order",
+		"TITLE": "Security order",
+		"MARKET": "Market",
+		"ACCOUNT": "Account",
+		"BUY_POWER": "Buy power",
+		"ORDER_NEW": "new order",
+		"SECURITY_CODE": "security code",
+		"SECURITY_NAME": "security name",
+		"ORDER_TYPE": "order type",
+		"PRICE": "Price",
+		"PRICE_SPREAD": "Price spread",
+		"QUANTITY": "Quantity",
+		"SELL_TOTAL": "Selling total",
+		"ABLE_TRADE_QUANTITY": "able trade qty",
+		"EXPIRY_DATE": "Expiry date",
 		"SIDE": {
 			"B": "Buy",
 			"S": "Sell",
 			"BUY": "Buy",
 			"SELL": "Sell"
 		},
-		"CONFIRM_ING":"Confirm order",
-		"COMPLETE":"complete"
+		"CONFIRM_ING": "Confirm order",
+		"COMPLETE": "complete",
+		"TRANS_AMOUNT": "Transaction Amount",
+		"CHARGES": "Charges"
 	},
 
 
@@ -56,6 +96,40 @@
 
 
 	"ACCOUNT_TYPE_CASH": "Cash",
-	"ACCOUNT_TYPE_MARGIN": "Margin"
+	"ACCOUNT_TYPE_MARGIN": "Margin",
 
+
+	"ORDERBOOK": {
+		"SECURITY": "Security",
+		"ACCOUNT": "Account",
+		"MARKET": "Market",
+		"BS": "B / S",
+		"BUY": "Buy",
+		"SELL": "Sell",
+		"STATUS": {
+			"TITLE": "Status",
+			"All": "All",
+			"Other": "Other",
+			"Open": "Outstanding",
+			"PartialFullyFilled": "Partially / Fully Filled",
+			"OpenFilledRejected": "Outstanding / Filled / Rejected",
+			"Close": "Close"
+		},
+		"DATA_RANGE": {
+			"TIT": "Data range",
+			"1": "Today",
+			"7": "Last 7 Days",
+			"30": "Last 30 Days",
+			"90": "Last 90 Days"
+		},
+		"TAB_TIT": {
+			"DATATIME": "Data time",
+			"NO": ".No",
+			"SECURITY": "Security",
+			"BUY_SELL": "B / S",
+			"Filled": "Filled",
+			"ORDER": "Order",
+			"ACTION": "Action"
+		}
+	}
 }
