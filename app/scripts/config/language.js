@@ -1,16 +1,17 @@
 /**
  * Created by Levana.Xue on 6/9/2015.
+ * languages : cn / en 
  */
 'use strict';
 
 angular.module('portalDemoApp')
-  .config(['$translateProvider',
-    function($translateProvider) {
+  .config(['server','$translateProvider',
+    function(server,$translateProvider) {
       $translateProvider.useStaticFilesLoader({
         prefix: 'languages/locale-',
         suffix: '.json'
       });
-      $translateProvider.preferredLanguage('en');
+      $translateProvider.preferredLanguage(server.preferredLanguages);
       $translateProvider.useSanitizeValueStrategy(null);
     }
   ]);
