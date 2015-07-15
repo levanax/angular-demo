@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title translate="INDEX_TITLE"></title>
+
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -53,6 +54,7 @@
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-bindonce/bindonce.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -95,12 +97,12 @@
         <!--services -->
         <script src="scripts/services/commons/dataStorage.svc.js"></script>
         <script src="scripts/services/commons/staticStorage.svc.js"></script>
-        <script src="scripts/services/commons/http.svc.js"></script>
         <script src="scripts/services/users/users.svc.js"></script>
         <script src="scripts/services/trade/trade.order.svc.js"></script>
         <script src="scripts/services/trade/trade.orderBook.svc.js"></script>
 
         <!--directives -->
+        <script src="scripts/directives/app.dict.js"></script>
         <script src="scripts/directives/validator.dict.js"></script>
 
         <!--controllers -->
@@ -110,6 +112,9 @@
         <script src="scripts/controllers/trade/trade.ctrl.js"></script>
         <script src="scripts/controllers/trade/trade.order.ctrl.js"></script>
         <script src="scripts/controllers/trade/trade.orderBook.ctrl.js"></script>
+
+
+        <script src="scripts/socket/client.js"></script>
         <!-- endbuild -->
 </body>
 </html>

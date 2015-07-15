@@ -101,7 +101,7 @@
                                 <label class="checkbox-inline">
                                     <input type="checkbox" value="">
                                     <div class="form-group">
-                                        <div class="input-group input-group-xl date form_datetime" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                        <div data-app-calendar class="input-group input-group-xl date form_datetime" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1">
                                             <input disabled class="form-control" size="16" type="text" value="">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -127,7 +127,7 @@
                         <div class="row panel-button text-center">
                             <div class="col-xs-8">
                                 <!-- <div class="bootstrap-switch bootstrap-switch-small">
-                                    <input  type="checkbox" id="switch" checked />
+                                    <input app-switch type="checkbox" id="switch" checked />
                                 </div> -->
                             </div>
                             <div class="col-xs-8">
@@ -180,14 +180,14 @@
                         <div class="col-md-8" translate="ORDER.QUANTITY"></div>
                         <div class="col-md-16" data-ng-bind='order.qty | number'></div>
                     </div>
-                    <div class="row" name="spaceColor">
+                    <!-- <div class="row" name="spaceColor">
                         <div class="col-md-8" translate="ORDER.TRANS_AMOUNT"></div>
                         <div class="col-md-16" data-ng-bind="order.totalAmount"></div>
-                    </div>
+                    </div> -->
                     <div class="row" name="spaceColor">
                         <div class="col-md-8"  translate="ORDER.CHARGES"></div>
                         <div class="col-md-16">{{order.currencyType}} $0.00
-                            <a tabindex="0" id="detailContent1"  class="hiddenEle" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
+                            <a app-popover tabindex="0" id="detailContent1"   role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
                             <div class='container order-HandlingCharge'>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>佣金</div>

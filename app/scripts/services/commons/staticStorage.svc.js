@@ -9,6 +9,7 @@ angular.module('portalDemoApp')
 	.factory('staticStorageSvc', ['constant', 'dataStorageSvc',
 		function(constant, dataStorageSvc) {
 			var service = {
+				container:{},
 				set: function(key) {
 					var result = null,
 						value = null;
@@ -32,18 +33,18 @@ angular.module('portalDemoApp')
 								break;
 						};
 						if (value != null) {
-							this[key] = value;
+							this.container[key] = value;
 							result = value;
 						}
 					}
 					return result;
 				},
 				put: function(key, value) {
-					//this[key] = value;
+					//this.container[key] = value;
 					dataStorageSvc.session.put(key, value);
 				},
 				get: function(key) {
-					var result = this[key];
+					var result = this.container[key];
 					if (typeof result === 'undefined') {
 						result = this.set(key);
 					}

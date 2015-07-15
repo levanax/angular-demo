@@ -12,7 +12,10 @@ angular.module('portalDemoApp')
 					
 					var markets = staticStorageSvc.get(constant.markets);
 					if (markets == null) {
-						securityDaoSvc.queryOrderMarkets({}).then(function(data) {
+						var params = {
+							'sessId': accountInfoTemp.getSessionId()
+						}
+						securityDaoSvc.queryOrderMarkets(params).then(function(data) {
 							scopePointer.markets = data;
 							scopePointer.market = data[0];
 						});

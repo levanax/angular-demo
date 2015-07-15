@@ -6,12 +6,22 @@ angular.module('portalDemoApp')
 			$scope.$on('refreshOrderBook', function() {
 				$scope.REFRESH_ORDER_BOOK();
 			});
+			$scope.initializeView = function() {
+				var scopePointer = $scope;
+				orderBookViewSvc.initialize(scopePointer);
+			}
+			$scope.initializeView();
+
 			$scope.REFRESH_ORDER_BOOK = function() {
 				var scopePointer = $scope;
 				orderBookViewSvc.loadOrderBook(scopePointer);
 			};
 
 			$scope.switchAccountEvent = function(input) {
+				var scopePointer = $scope;
+				orderBookViewSvc.loadOrderBook(scopePointer);
+			}
+			$scope.switchMarketEvent = function(input) {
 				var scopePointer = $scope;
 				orderBookViewSvc.loadOrderBook(scopePointer);
 			}
@@ -31,11 +41,5 @@ angular.module('portalDemoApp')
 				var scopePointer = $scope;
 				orderBookViewSvc.loadOrderBook(scopePointer);
 			}
-
-			$scope.initializeView = function() {
-				var scopePointer = $scope;
-				orderBookViewSvc.initialize(scopePointer);
-			}
-			$scope.initializeView();
 		}
 	]);

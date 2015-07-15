@@ -1,17 +1,16 @@
 angular.module('portalDemoApp')
-	.factory('securityDaoSvc', ['constant', 'server', 'httpSvc', 'staticStorageSvc', '$http',
-		function(constant, server, httpSvc, staticStorageSvc, $http) {
+	.factory('securityDaoSvc', ['constant', 'server', 'staticStorageSvc', '$http',
+		function(constant, server, staticStorageSvc, $http) {
 			var service = {
 				querySecurity: function(params) {
 					/*params keys:[sessId,sctyID,market]*/
-					//对参数作一些验证处理
 					var result = null;
 					result = $http({
-						method: 'get',
+						method: 'post',
 						url: server.urlPrefix + 'stock/querySecurityStaticData',
-						params: params,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
+						data: params,
+						transformRequest: function(data) {
+							return $.param(data);
 						}
 					}).then(function(result) {
 						console.log(result);
@@ -26,9 +25,6 @@ angular.module('portalDemoApp')
 						method: 'post',
 						url: server.urlPrefix + 'StockTrade',
 						data: queryParams,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
-						},
 						transformRequest: function(data) {
 							return $.param(data);
 						}
@@ -41,11 +37,11 @@ angular.module('portalDemoApp')
 					//下单
 					var result = null;
 					result = $http({
-						method: 'get',
+						method: 'post',
 						url: server.urlPrefix + 'stock/newOrder',
-						params: params,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
+						data: params,
+						transformRequest: function(data) {
+							return $.param(data);
 						}
 					}).then(function(result) {
 						return result.data;
@@ -56,15 +52,28 @@ angular.module('portalDemoApp')
 
 				},
 				queryOrderMarkets: function(params) {
-					var result = httpSvc.get('system/orderMarkets', params).then(function(result) {
+					return $http({
+						method: 'post',
+						url: server.urlPrefix + 'system/orderMarkets',
+						data: params,
+						transformRequest: function(data) {
+							return $.param(data);
+						}
+					}).then(function(result) {
 						var data = result.data;
 						staticStorageSvc.put(constant.markets, data);
 						return staticStorageSvc.get(constant.markets);
 					});
-					return result;
 				},
 				queryOrderType: function(params) {
-					var result = httpSvc.get('stock/availableOrderType', params).then(function(result) {
+					var result = $http({
+						method: 'post',
+						url: server.urlPrefix + 'stock/availableOrderType',
+						data: params,
+						transformRequest: function(data) {
+							return $.param(data);
+						}
+					}).then(function(result) {
 						var data = result.data;
 						staticStorageSvc.put(constant.orderTypes, data.AvailableOrderType);
 						return staticStorageSvc.get(constant.orderTypes);
@@ -72,21 +81,28 @@ angular.module('portalDemoApp')
 					return result;
 				},
 				queryAccCashBalance: function(params) {
-					var result = httpSvc.get('stock/accountCashBalance', params).then(function(result) {
+					var result = $http({
+						method: 'post',
+						url: server.urlPrefix + 'stock/accountCashBalance',
+						data: params,
+						transformRequest: function(data) {
+							return $.param(data);
+						}
+					}).then(function(result) {
 						var data = result.data;
 						staticStorageSvc.put(constant.accountCashBalance, data.Account);
 						return staticStorageSvc.get(constant.accountCashBalance);
 					});
 					return result;
 				},
-				queryOrderBook:function(params){
+				queryOrderBook: function(params) {
 					var result = null;
 					result = $http({
-						method: 'get',
+						method: 'post',
 						url: server.urlPrefix + 'stock/accountOrderHistory',
-						params: params,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
+						data: params,
+						transformRequest: function(data) {
+							return $.param(data);
 						}
 					}).then(function(result) {
 						return result.data.Account.OrdHist;

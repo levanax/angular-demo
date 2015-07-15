@@ -17,5 +17,6 @@ angular
     'ui.router',
     'ngSanitize',
     'ngTouch',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'pasvaz.bindonce'
   ]);

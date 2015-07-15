@@ -91,11 +91,13 @@ angular.module('portalDemoApp')
 					$scope.enterSecurityEvent = $timeout(function() {
 						console.log(securityId);
 						$scope.enterSecurityId();
+						$timeout.cancel($scope.enterSecurityEvent);
 					}, 3000);
 				}
 			});
 			$scope.securityKeyDown = function(event) {
 				if (event.keyCode === 13) {
+					$timeout.cancel($scope.enterSecurityEvent);
 					$scope.enterSecurityId();
 					event.preventDefault();
 				}

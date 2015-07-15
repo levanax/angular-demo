@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.factory('orderViewSvc', ['usersDao', '$translate', '$filter', 'staticStorageSvc', 'httpSvc', 'constant', 'securityDaoSvc',
-		function(usersDao, $translate, $filter, staticStorageSvc, httpSvc, constant, securityDaoSvc) {
+	.factory('orderViewSvc', ['usersDao', '$translate', '$filter', 'staticStorageSvc', 'constant', 'securityDaoSvc',
+		function(usersDao, $translate, $filter, staticStorageSvc, constant, securityDaoSvc) {
 			var service = {
 				initialize: function(scopePointer, stateParams) {
 					scopePointer.order = {};
@@ -12,16 +12,29 @@ angular.module('portalDemoApp')
 					scopePointer.isSell = false;
 					scopePointer.accountCurrent = null;
 
+					//initalize accounts and buypower
+					var accountInfoTemp = staticStorageSvc.get(constant.userinfo);
+					scopePointer.accounts = accountInfoTemp.getAccounts();
+					scopePointer.accountCurrent = accountInfoTemp.getAccounts()[0];
+					scopePointer.order.accNum = angular.isDefined(stateParams.accNum) ? stateParams.accNum : scopePointer.accountCurrent.AccNum;
+					scopePointer.order.currencyType = $filter('currencyFormat')(scopePointer.accountCurrent.CucyCode);
+
+
 					//initalize market and orderType
 					var markets = staticStorageSvc.get(constant.markets);
 					if (markets == null) {
-						securityDaoSvc.queryOrderMarkets({}).then(function(data) {
+						var securityDaoSvcBak = securityDaoSvc;
+						var params = {
+							'sessId': accountInfoTemp.getSessionId()
+						}
+						securityDaoSvc.queryOrderMarkets(params).then(function(data) {
 							scopePointer.markets = data;
 							scopePointer.order.market = angular.isDefined(stateParams.market) ? stateParams.market : data[0];
 							var params = {
+								'sessId': accountInfoTemp.getSessionId(),
 								'market': scopePointer.order.market
 							}
-							securityDaoSvc.queryOrderType(params).then(function(data) {
+							securityDaoSvcBak.queryOrderType(params).then(function(data) {
 								// fill content in the switchBuyMode/switchSellMode// udpate order side and fill order types(select element
 								scopePointer.updateOrderSide('B');
 							});
@@ -32,14 +45,6 @@ angular.module('portalDemoApp')
 						// udpate order side and fill order types(select element
 						scopePointer.updateOrderSide('B');
 					}
-
-					//initalize accounts and buypower
-					var accountInfoTemp = staticStorageSvc.get(constant.userinfo);
-					scopePointer.accounts = accountInfoTemp.getAccounts();
-					scopePointer.accountCurrent = accountInfoTemp.getAccounts()[0];
-					scopePointer.order.accNum = angular.isDefined(stateParams.accNum) ? stateParams.accNum : scopePointer.accountCurrent.AccNum;
-					scopePointer.order.currencyType = $filter('currencyFormat')(scopePointer.accountCurrent.CucyCode);
-
 					var qabParams = {
 						'sessId': accountInfoTemp.getSessionId(),
 						'accNum': scopePointer.order.accNum,
@@ -47,12 +52,6 @@ angular.module('portalDemoApp')
 					};
 					securityDaoSvc.queryAccCashBalance(qabParams).then(function(data) {
 						scopePointer.buyPower = $filter('currency')(data.getBuyPower(), '$', 2);
-					});
-
-					/*$("#switch").bootstrapSwitch();*/
-					$('[data-toggle="popover"]').popover();
-					$(".form_datetime").datetimepicker({
-						format: "yyyy-mm-dd"
 					});
 				},
 				enterSecurity: function(scopePointer) {

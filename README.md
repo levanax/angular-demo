@@ -61,3 +61,12 @@ $http({
 -
 **简述 :** *DAO层负责数据抓取,*
 *serivces/commons/staticStorage 负责app中 数据存储与抓取,它与 dataStorage 相互协作*
+
+-
+*Listening user online/offline status , use cookie resolve*
+
+.jshintrc : javascript check tool - config file
+
+区分风格 不用文件 来区分 就最好， 用区分 class 最好
+
+

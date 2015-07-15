@@ -9,13 +9,11 @@ angular.module('portalDemoApp')
 						method: 'post',
 						url: server.urlPrefix + 'login/submit',
 						data: loginParams,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
-						},
 						transformRequest: function(data) {
 							return $.param(data);
 						}
 					}).then(function(result) {
+						console.log(result)
 						return result.data;
 					});
 				},
@@ -23,11 +21,11 @@ angular.module('portalDemoApp')
 				Security: {
 					queryBalance: function(params) {
 						return $http({
-							method: 'get',
+							method: 'post',
 							url: server.urlPrefix + 'stock/queryAccountSingleSecurityBalance',
-							params: params,
-							headers: {
-								'Content-Type': 'application/x-www-form-urlencoded',
+							data: params,
+							transformRequest: function(data) {
+								return $.param(data);
 							}
 						}).then(function(result) {
 							return result.data;
