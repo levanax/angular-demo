@@ -121,8 +121,8 @@ angular.module('portalDemoApp')
 						market: scopePointer.order.market,
 						ordSide: scopePointer.order.side,
 						ordType: scopePointer.order.type,
-						ordQty: scopePointer.order.qty,
-						price: scopePointer.order.price,
+						ordQty: util.parseNumber(scopePointer.order.qty,0),
+						price: util.parseNumber(scopePointer.order.price,2),
 						accNum: scopePointer.order.accNum,
 						cucyCode: scopePointer.accountCurrent.CucyCode
 					}

@@ -1,6 +1,30 @@
 'use strict';
 
 angular.module("portalDemoApp")
+	.filter('figure', ['$filter',
+		function($filter) {
+			return function(input, fractionSize) {
+				/**
+				 * @param input = [ '1000.','1000.0']
+				 * @param fractionSize 最大保留几位小数
+				 */
+				var nums = input.toString().split('.');
+				var numPre = nums[0];
+
+				var result = $filter('number')(numPre);
+				if (nums.length > 1) {
+					var numEnd = nums[1];
+					if (angular.isDefined(fractionSize)) {
+						if (fractionSize < numEnd.length) {
+							numEnd = numEnd.substring(0,fractionSize);
+						}
+					}
+					result = result.concat('.' + numEnd);
+				}
+				return result;
+			}
+		}
+	])
 	.filter('accFormat', ['$filter',
 		function($filter) {
 			return function(input) {
@@ -63,7 +87,7 @@ angular.module("portalDemoApp")
 							break;
 						case 'cn':
 							for (var i = 0; i < input.length; i++) {
-								if (input[i].LangCode === "ZH" && input[i].CntyCode === "CN" ) {
+								if (input[i].LangCode === "ZH" && input[i].CntyCode === "CN") {
 									result = input[i].$t;
 									break;
 								}
@@ -71,7 +95,7 @@ angular.module("portalDemoApp")
 							break;
 						default:
 							for (var i = 0; i < input.length; i++) {
-								if (input[i].LangCode === "ZH" && input[i].CntyCode === "HK" ) {
+								if (input[i].LangCode === "ZH" && input[i].CntyCode === "HK") {
 									result = input[i].$t;
 									break;
 								}
@@ -90,24 +114,24 @@ angular.module("portalDemoApp")
 						result = null;
 					switch (currentLanguage) {
 						case 'en':
-							for(var i = 0 ;i<input.length ;i++){
-								if(input[i].LangCode === "EN"){
+							for (var i = 0; i < input.length; i++) {
+								if (input[i].LangCode === "EN") {
 									result = input[i].$t;
 									break;
 								}
 							}
 							break;
 						case 'cn':
-							for(var i = 0 ;i<input.length ;i++){
-								if(input[i].LangCode === "ZH" && input[i].CntyCode === "CN" ){
+							for (var i = 0; i < input.length; i++) {
+								if (input[i].LangCode === "ZH" && input[i].CntyCode === "CN") {
 									result = input[i].$t;
 									break;
 								}
 							}
 							break;
 						default:
-							for(var i = 0 ;i<input.length ;i++){
-								if(input[i].LangCode === "ZH" && input[i].CntyCode === "HK" ){
+							for (var i = 0; i < input.length; i++) {
+								if (input[i].LangCode === "ZH" && input[i].CntyCode === "HK") {
 									result = input[i].$t;
 									break;
 								}

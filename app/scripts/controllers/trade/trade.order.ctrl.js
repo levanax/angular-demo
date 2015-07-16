@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('tradeOrderCtrl', ['$state','$stateParams', 'constant', '$scope', '$filter', '$timeout', 'staticStorageSvc', 'orderViewSvc',
-		function($state,$stateParams, constant, $scope, $filter, $timeout, staticStorageSvc, orderViewSvc) {
+	.controller('tradeOrderCtrl', ['$state', '$stateParams', 'constant', '$scope', '$filter', '$timeout', 'staticStorageSvc', 'orderViewSvc',
+		function($state, $stateParams, constant, $scope, $filter, $timeout, staticStorageSvc, orderViewSvc) {
 			$scope.$on('$viewContentLoaded', function(event) {
 				var scopePointer = $scope;
 				orderViewSvc.initialize(scopePointer, $stateParams);
@@ -16,7 +16,7 @@ angular.module('portalDemoApp')
 				}
 			};
 
-			$scope.submitted = false;// if reset form ,must set false
+			$scope.submitted = false; // if reset form ,must set false
 			$scope.interacted = function(field) {
 				return $scope.submitted || field.$dirty;
 			};
@@ -126,21 +126,39 @@ angular.module('portalDemoApp')
 					var buyPower = util.parseNumber($scope.buyPower);
 					var price = util.parseNumber(newValue);
 					$scope.order.ableBuyQty = util.divide(buyPower, price, 0);
+					$scope.order.priceView = $filter('currency')(price)
 				} else {
 					$scope.order.ableBuyQty = undefined;
 				}
-			});
+			},true);
 
 			$scope.priceDown = function() {
 				var price = $scope.order.price;
 				if (util.isNotEmpty(price)) {
-					$scope.order.price = parseFloat(price) - 0.5;
+					var price = parseFloat(util.parseNumber(price,2)) - 0.5;
+					$scope.order.price = $filter('figure')(price);
 				}
 			}
 			$scope.priceUp = function() {
 				var price = $scope.order.price;
 				if (util.isNotEmpty(price)) {
-					$scope.order.price = (parseFloat(price) + 0.5);
+					var price = parseFloat(util.parseNumber(price,2)) + 0.5;
+					$scope.order.price = $filter('figure')(price);
+				}
+			}
+
+			$scope.formatPrice = function(input) {
+				if (angular.isDefined(input)) {
+					var value = util.parseNumber(input);
+					$scope.order.price = $filter('figure')(value);
+				}
+			}
+
+			//code 更新 Model ，不会触发 ngChange
+			$scope.formatQty = function(input) {
+				if (angular.isDefined(input)) {
+					var value = util.parseNumber(input);
+					$scope.order.qty = $filter('figure')(value);
 				}
 			}
 
@@ -150,17 +168,20 @@ angular.module('portalDemoApp')
 			$scope.qtyDown = function() {
 				var qty = $scope.order.qty;
 				if (util.isNotEmpty(qty)) {
-					$scope.order.qty = (parseInt(qty) - 1000);
+					var qty = parseInt(util.parseNumber(qty,0)) - 1000;
+					$scope.order.qty = $filter('figure')(qty);
 				}
 			}
 			$scope.qtyUp = function() {
 				var qty = $scope.order.qty;
 				if (util.isNotEmpty(qty)) {
-					$scope.order.qty = (parseInt(qty) + 1000);
+					var qty = parseInt(util.parseNumber(qty,0)) + 1000;
+					$scope.order.qty = $filter('figure')(qty);
 				}
 			}
 			$scope.qtyUpTop = function() {
-				$scope.order.qty = 10000;
+				var qty = 10000;
+				$scope.order.qty = $filter('figure')(qty);
 			}
 
 			$scope.submit = function() {

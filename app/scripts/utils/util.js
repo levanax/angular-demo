@@ -5,10 +5,40 @@
 
 var util = {};
 (function(_this) {
-	_this.parseNumber = function(args){
+	_this.toString = function(args) {
+		if (typeof args !== 'string') {
+			return new String(args);
+		} else {
+			return args;
+		}
+	},
+	_this.parseNumber = function(args, fractionSize) {
+		/** util.parseNumber('1000.',0) return '1000'
+		 *  util.parseNumber('1000.') return '1000.'
+		 * @param fractionSize 最大保留几位小数
+		 * @returns {String}
+		 */
 		var result = null;
-		if(typeof args === "string"){
-			result = args.replace(/[^.0-9]/g,"");
+		if (typeof args !== 'undefined') {
+			var temp = _this.toString(args);
+			result = temp.replace(/[^.0-9]/g, "");
+			if (typeof fractionSize === 'number') {
+				var res = result.split('.');
+				var resPre = res[0];
+				if (res.length > 1 && fractionSize !== 0) {
+					var resEnd = res[1];
+					if (resEnd.length !== 0) {
+						if (fractionSize < resEnd.length) {
+							resEnd = resEnd.substring(0, fractionSize);
+						}
+						result = resPre + '.' + resEnd;
+					} else {
+						result = resPre;
+					}
+				} else {
+					result = resPre;
+				}
+			}
 		}
 		return result;
 	},
@@ -70,6 +100,7 @@ var util = {};
 		 * [ROUND_HALF_UP,ROUND_UNNECESSARY,ROUND_CEILING,ROUND_DOWN,ROUND_FLOOR,ROUND_HALF_DOWN,ROUND_HALF_EVEN,ROUND_UP]
 		 * @returns {Number}
 		 */
+		//console.log(arguments)
 		var result = null;
 		try {
 			var a = new BigDecimal(arg1.toString());
