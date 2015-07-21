@@ -13,8 +13,6 @@ angular.module("portalDemoApp")
 				link: function(scope, ele, attrs, ngModel) {
 					var model = ngModel[0];
 					scope.$watch(attrs.ngModel, function(newValue, oldValue, scope) {
-						console.log(' in $watch() ....');
-						console.log(newValue)
 						if(angular.isDefined(newValue) && !angular.equals(newValue, oldValue) ){
 							var valT = newValue.toString().trim();
 							if(util.isNotEmpty(valT)){

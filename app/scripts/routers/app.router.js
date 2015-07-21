@@ -9,7 +9,6 @@ angular.module('portalDemoApp')
       var text = 'see me ,';
       this.setText = function(input) {
         text = input;
-        console.log($httpProvider);
       }
       this.$get = function() {
         return {

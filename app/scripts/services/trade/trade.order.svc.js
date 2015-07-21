@@ -22,29 +22,18 @@ angular.module('portalDemoApp')
 
 					//initalize market and orderType
 					var markets = staticStorageSvc.get(constant.markets);
-					if (markets == null) {
-						var securityDaoSvcBak = securityDaoSvc;
-						var params = {
-							'sessId': accountInfoTemp.getSessionId()
-						}
-						securityDaoSvc.queryOrderMarkets(params).then(function(data) {
-							scopePointer.markets = data;
-							scopePointer.order.market = angular.isDefined(stateParams.market) ? stateParams.market : data[0];
-							var params = {
-								'sessId': accountInfoTemp.getSessionId(),
-								'market': scopePointer.order.market
-							}
-							securityDaoSvcBak.queryOrderType(params).then(function(data) {
-								// fill content in the switchBuyMode/switchSellMode// udpate order side and fill order types(select element
-								scopePointer.updateOrderSide('B');
-							});
-						});
-					} else {
-						scopePointer.markets = markets;
-						scopePointer.order.market = angular.isDefined(stateParams.market) ? stateParams.market : markets[0];
-						// udpate order side and fill order types(select element
-						scopePointer.updateOrderSide('B');
+					scopePointer.markets = markets;
+					scopePointer.order.market = angular.isDefined(stateParams.market) ? stateParams.market : markets[0];
+					var params = {
+						'sessId': accountInfoTemp.getSessionId(),
+						'market': scopePointer.order.market
 					}
+					securityDaoSvc.queryOrderType(params).then(function(data) {
+						// fill content in the switchBuyMode/switchSellMode// udpate order side and fill order types(select element
+						scopePointer.updateOrderSide('B');
+					});
+
+
 					var qabParams = {
 						'sessId': accountInfoTemp.getSessionId(),
 						'accNum': scopePointer.order.accNum,
@@ -97,7 +86,7 @@ angular.module('portalDemoApp')
 					scopePointer.isBuy = true;
 					scopePointer.isSell = false;
 
-					var orderTypesTempObj = staticStorageSvc.get(constant.orderTypes);
+					var orderTypesTempObj = staticStorageSvc.get(constant.orderType);
 					if (angular.isDefined(orderTypesTempObj)) {
 						scopePointer.orderTypes = orderTypesTempObj.getTypes(scopePointer.order.side);
 						scopePointer.order.type = scopePointer.orderTypes[0].OrdType;
@@ -107,7 +96,7 @@ angular.module('portalDemoApp')
 					scopePointer.isBuy = false;
 					scopePointer.isSell = true;
 
-					var orderTypesTempObj = staticStorageSvc.get(constant.orderTypes);
+					var orderTypesTempObj = staticStorageSvc.get(constant.orderType);
 					if (angular.isDefined(orderTypesTempObj)) {
 						scopePointer.orderTypes = orderTypesTempObj.getTypes(scopePointer.order.side);
 						scopePointer.order.type = scopePointer.orderTypes[0].OrdType;
@@ -121,13 +110,18 @@ angular.module('portalDemoApp')
 						market: scopePointer.order.market,
 						ordSide: scopePointer.order.side,
 						ordType: scopePointer.order.type,
-						ordQty: util.parseNumber(scopePointer.order.qty,0),
-						price: util.parseNumber(scopePointer.order.price,2),
+						ordQty: util.parseNumber(scopePointer.order.qty, 0),
+						price: util.parseNumber(scopePointer.order.price, 2),
 						accNum: scopePointer.order.accNum,
 						cucyCode: scopePointer.accountCurrent.CucyCode
 					}
 					securityDaoSvc.signingOrder(params).then(function(data) {
-						scopePointer.systemMsg = data.OrderExecution.Order.SysCode + ' - ' + data.OrderExecution.Order.SysMsg;
+						if (angular.isDefined(data.OrderExecution.Order.SysCode)) {
+							scopePointer.systemMsg = data.OrderExecution.Order.SysCode + ' - ' + data.OrderExecution.Order.SysMsg;
+						} else {
+							//success
+							scopePointer.systemMsg = $filter('translate')('ORDER.ORDER_SUCCESS') + ' ' + data.OrderExecution.Order.OrdID;
+						}
 						$("#newPopUp").modal('toggle');
 						$("#resultPopUp").modal('toggle');
 					});
@@ -135,7 +129,7 @@ angular.module('portalDemoApp')
 				resetForm: function(scopePointer) {
 					//orderForm.reset();
 					scopePointer.submitted = false;
-					scopePointer.security.id = undefined;
+					delete scopePointer.security.id;
 					scopePointer.security.name = undefined;
 					scopePointer.security.lotSize = undefined;
 					scopePointer.order.price = undefined;

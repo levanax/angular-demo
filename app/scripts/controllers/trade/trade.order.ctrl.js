@@ -187,7 +187,7 @@ angular.module('portalDemoApp')
 			$scope.submit = function() {
 				$scope.submitted = true;
 				if ($scope.orderForm.$valid) {
-					$("#newPopUp").modal('toggle');
+					$("#newPopUp").modal('toggle');//use directives
 				}
 			}
 			$scope.resetFormEvent = function() {

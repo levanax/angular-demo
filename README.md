@@ -70,3 +70,6 @@ $http({
 区分风格 不用文件 来区分 就最好， 用区分 class 最好
 
 
+old version Opera browser 会存在闪（出现源码在页面，因渲染过慢）的问题
+
+

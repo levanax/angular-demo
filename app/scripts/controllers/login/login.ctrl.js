@@ -7,6 +7,7 @@ angular.module('portalDemoApp')
   .controller('LoginCtrl', ['appRuleSvc', '$scope', '$filter', '$rootScope', 'usersSvc', '$state', '$translate', 'constant', 'dataStorageSvc',
     function(appRuleSvc, $scope, $filter, $rootScope, usersSvc, $state, $translate, constant, dataStorageSvc) {
       appRuleSvc.test('test');
+      $scope.userinfo = {};
       $scope.submitted = false;
       $scope.interacted = function(field) {
         return $scope.submitted || field.$dirty;

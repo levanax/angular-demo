@@ -11,14 +11,10 @@ angular.module('portalDemoApp')
         prefix: 'languages/locale-',
         suffix: '.json'
       });
-      var preferredLanguage = (navigator.language || navigator.browserLanguage).toLowerCase();
-      switch (preferredLanguage) {
-        case 'zh-cn':
-        case 'en-us':
-          break;
-        default:
-          preferredLanguage = server.languages;
-          break;
+      var language = navigator.language || navigator.browserLanguage || server.languages;
+      var preferredLanguage = language.toLowerCase();
+      if ( ! util.isIntheArray(server.supportLanguages, preferredLanguage)) {
+        preferredLanguage = server.languages;
       }
       $translateProvider.preferredLanguage(preferredLanguage);
       $translateProvider.useSanitizeValueStrategy(null);

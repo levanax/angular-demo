@@ -54,7 +54,6 @@ angular.module("portalDemoApp")
 				if (angular.isString(input)) {
 					var localKey = "CURRENCYS." + input;
 					var $filterMarket = $filter('translate');
-					//here is have problem.
 					return $filterMarket(localKey);
 				}
 			}
@@ -77,7 +76,7 @@ angular.module("portalDemoApp")
 					var currentLanguage = $translate.use();
 					var result = null;
 					switch (currentLanguage) {
-						case 'en':
+						case 'en-us':
 							for (var i = 0; i < input.length; i++) {
 								if (input[i].LangCode === "EN") {
 									result = input[i].$t;
@@ -85,7 +84,7 @@ angular.module("portalDemoApp")
 								}
 							}
 							break;
-						case 'cn':
+						case 'zh-cn':
 							for (var i = 0; i < input.length; i++) {
 								if (input[i].LangCode === "ZH" && input[i].CntyCode === "CN") {
 									result = input[i].$t;
@@ -113,7 +112,7 @@ angular.module("portalDemoApp")
 					var currentLanguage = $translate.use(),
 						result = null;
 					switch (currentLanguage) {
-						case 'en':
+						case 'en-us':
 							for (var i = 0; i < input.length; i++) {
 								if (input[i].LangCode === "EN") {
 									result = input[i].$t;
@@ -121,7 +120,7 @@ angular.module("portalDemoApp")
 								}
 							}
 							break;
-						case 'cn':
+						case 'zh-cn':
 							for (var i = 0; i < input.length; i++) {
 								if (input[i].LangCode === "ZH" && input[i].CntyCode === "CN") {
 									result = input[i].$t;

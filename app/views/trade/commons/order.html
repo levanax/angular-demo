@@ -131,7 +131,7 @@
                                 </div> -->
                             </div>
                             <div class="col-xs-8">
-                                <button class="btn btn-sm btn-primary" type="submit" data-toggle="modal" translate="BUTTON.SUBMIT"></button>
+                                <button class="btn btn-sm btn-primary" type="submit" data-toggle="modal"  translate="BUTTON.SUBMIT"></button>
                             </div>
                             <div class="col-xs-8">
                                 <button ng-click="resetFormEvent()" class="btn btn-sm btn-primary"  type="button" translate="BUTTON.CLEAR"></button>
@@ -187,7 +187,7 @@
                     <div class="row" name="spaceColor">
                         <div class="col-md-8"  translate="ORDER.CHARGES"></div>
                         <div class="col-md-16">{{order.currencyType}} $0.00
-                            <a app-popover tabindex="0" id="detailContent1"   role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
+                            <a app-popover class="hiddenEle" tabindex="0" id="detailContent1"   role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
                             <div class='container order-HandlingCharge'>
                                <div class='row' name='spaceColor'>
                                    <div class='col-md-10'>佣金</div>
@@ -225,7 +225,7 @@
                 </div>
                 <div class="modal-body order-content">
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" >system msg</div>
+                        <div class="col-md-8" translate="ORDER.SYSTEM_TIP"></div>
                         <div class="col-md-16" data-ng-bind='systemMsg'></div>
                     </div>
                     <div class="row" name="spaceColor">

@@ -1,6 +1,6 @@
 /**
- *this file and datastorage 相互配合
- *
+ * this file and datastorage 相互配合
+ * 需要考虑 mobile app 内存占用问题
  *
  */
 'use strict';
@@ -9,7 +9,7 @@ angular.module('portalDemoApp')
 	.factory('staticStorageSvc', ['constant', 'dataStorageSvc',
 		function(constant, dataStorageSvc) {
 			var service = {
-				container:{},
+				container: {},
 				set: function(key) {
 					var result = null,
 						value = null;
@@ -17,7 +17,19 @@ angular.module('portalDemoApp')
 					if (angular.isObject(transitResult)) {
 						var objType = transitResult.type;
 						var obj = transitResult.value;
-						switch (objType) {
+
+						//set value
+						var functionName = objType.substring(1),
+							functionNameTypeof = null;
+						eval("functionNameTypeof = typeof " + functionName);
+						if (functionNameTypeof === "function") {
+							eval("value = new " + functionName + "(obj)");
+						} else {
+							value = obj;
+						}
+
+						//set value 
+						/*switch (objType) {
 							case constant.userinfo:
 								value = new AccountInfo(obj);
 								break;
@@ -29,18 +41,18 @@ angular.module('portalDemoApp')
 								break;
 							default:
 								value = obj;
-								console.warn('may be not found object at the staticStorage service');
 								break;
-						};
+						};*/
+
+
 						if (value != null) {
-							this.container[key] = value;
+							//this.container[key] = value;
 							result = value;
 						}
 					}
 					return result;
 				},
 				put: function(key, value) {
-					//this.container[key] = value;
 					dataStorageSvc.session.put(key, value);
 				},
 				get: function(key) {
@@ -49,6 +61,11 @@ angular.module('portalDemoApp')
 						result = this.set(key);
 					}
 					return result;
+				},
+				clear: function() {
+					this.container = {};
+					dataStorageSvc.session.clear();
+					dataStorageSvc.local.clear();
 				}
 			}
 			return service;

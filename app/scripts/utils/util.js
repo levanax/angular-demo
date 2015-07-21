@@ -5,6 +5,10 @@
 
 var util = {};
 (function(_this) {
+	_this.isIntheArray = function(arrays, val) {
+		var temp = ',' + arrays.join(",") + ",";
+		return temp.indexOf("," + val + ",") != -1;
+	},
 	_this.toString = function(args) {
 		if (typeof args !== 'string') {
 			return new String(args);
@@ -41,6 +45,12 @@ var util = {};
 			}
 		}
 		return result;
+	},
+	_this.isNull = function(args){
+		return args === null;
+	},
+	_this.isNotNull = function(args){
+		return args !== null;
 	},
 	_this.isEmpty = function(args) {
 		var result = true;
@@ -117,3 +127,19 @@ var util = {};
 		return result;
 	}
 })(util);
+
+
+//timeFactory.start();
+//console.log(timeFactory.end());
+var timeFactory = {};
+(function(_this) {
+	var startTime, execTime;
+	_this.start = function() {
+		startTime = new Date().getTime();
+		return startTime;
+	};
+	_this.end = function() {
+		execTime = new Date().getTime() - startTime;
+		return execTime;
+	};
+})(timeFactory);

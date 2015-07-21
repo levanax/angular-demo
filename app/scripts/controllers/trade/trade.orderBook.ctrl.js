@@ -19,14 +19,17 @@ angular.module('portalDemoApp')
 
 			$scope.switchAccountEvent = function(input) {
 				var scopePointer = $scope;
+				scopePointer.accNum = input;//mark
 				orderBookViewSvc.loadOrderBook(scopePointer);
 			}
 			$scope.switchMarketEvent = function(input) {
 				var scopePointer = $scope;
+				scopePointer.market = input;
 				orderBookViewSvc.loadOrderBook(scopePointer);
 			}
 			$scope.switchBSEvent = function(input) {
 				var scopePointer = $scope;
+				scopePointer.BS = input;
 				orderBookViewSvc.loadOrderBook(scopePointer);
 			}
 			$scope.switchStatusEvent = function(input) {

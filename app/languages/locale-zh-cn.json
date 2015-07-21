@@ -87,7 +87,9 @@
 		"CONFIRM_ING": "确认订单",
 		"COMPLETE": "订单完成",
 		"TRANS_AMOUNT": "交易金额",
-		"CHARGES": "手续费"
+		"CHARGES": "手续费",
+		"SYSTEM_TIP":"系统提示",
+		"ORDER_SUCCESS":"成功下单，订单编号为："
 	},
 
 

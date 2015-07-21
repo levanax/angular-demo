@@ -11,6 +11,8 @@ angular.module('portalDemoApp')
           usersDao.login(loginParams).then(function(data) {
             var user = data.UserLoginResponse.User;
             if (!data.UserLoginResponse.User.SysCode) {
+              dataStorageSvc.session.clear();
+              dataStorageSvc.local.clear();
               dataStorageSvc.session.put(constant.userinfo, data);
               $state.go('trade');
             } else {

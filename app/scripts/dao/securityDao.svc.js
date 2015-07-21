@@ -1,6 +1,6 @@
 angular.module('portalDemoApp')
-	.factory('securityDaoSvc', ['constant', 'server', 'staticStorageSvc', '$http',
-		function(constant, server, staticStorageSvc, $http) {
+	.factory('securityDaoSvc', ['$q', 'constant', 'server', 'staticStorageSvc', '$http',
+		function($q, constant, server, staticStorageSvc, $http) {
 			var service = {
 				querySecurity: function(params) {
 					/*params keys:[sessId,sctyID,market]*/
@@ -52,32 +52,49 @@ angular.module('portalDemoApp')
 
 				},
 				queryOrderMarkets: function(params) {
-					return $http({
-						method: 'post',
-						url: server.urlPrefix + 'system/orderMarkets',
-						data: params,
-						transformRequest: function(data) {
-							return $.param(data);
-						}
-					}).then(function(result) {
-						var data = result.data;
-						staticStorageSvc.put(constant.markets, data);
-						return staticStorageSvc.get(constant.markets);
-					});
+					var result = null;
+					var markets = staticStorageSvc.get(constant.markets);
+					if (util.isNotNull(markets)) {
+						var deferred = $q.defer();
+						deferred.resolve(markets);
+						result = deferred.promise;
+					} else {
+						result = $http({
+							method: 'post',
+							url: server.urlPrefix + 'system/orderMarkets',
+							data: params,
+							transformRequest: function(data) {
+								return $.param(data);
+							}
+						}).then(function(result) {
+							var data = result.data;
+							staticStorageSvc.put(constant.markets, data);
+							return staticStorageSvc.get(constant.markets);
+						});
+					}
+					return result;
 				},
 				queryOrderType: function(params) {
-					var result = $http({
-						method: 'post',
-						url: server.urlPrefix + 'stock/availableOrderType',
-						data: params,
-						transformRequest: function(data) {
-							return $.param(data);
-						}
-					}).then(function(result) {
-						var data = result.data;
-						staticStorageSvc.put(constant.orderTypes, data.AvailableOrderType);
-						return staticStorageSvc.get(constant.orderTypes);
-					});
+					var result = null;
+					var orderType = staticStorageSvc.get(constant.orderType);
+					if (util.isNotNull(orderType)) {
+						var deferred = $q.defer();
+						deferred.resolve(orderType);
+						result = deferred.promise;
+					} else {
+						result = $http({
+							method: 'post',
+							url: server.urlPrefix + 'stock/availableOrderType',
+							data: params,
+							transformRequest: function(data) {
+								return $.param(data);
+							}
+						}).then(function(result) {
+							var data = result.data;
+							staticStorageSvc.put(constant.orderType, data.AvailableOrderType);
+							return staticStorageSvc.get(constant.orderType);
+						});
+					}
 					return result;
 				},
 				queryAccCashBalance: function(params) {

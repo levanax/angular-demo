@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('tradeCtrl', ['$scope', '$state',
-		function($scope, $state) {
+	.controller('tradeCtrl', ['staticStorageSvc','$scope', '$state',
+		function(staticStorageSvc,$scope, $state) {
 			$scope.$on('$viewContentLoaded', function(event) {
 				$state.go('trade.order', {}, {
 					location: false
@@ -16,5 +16,10 @@ angular.module('portalDemoApp')
 			$scope.$on('refresh.orderBook', function(e, params) {
 				$scope.$broadcast('refreshOrderBook');
 			});
+
+			$scope.exit = function(){
+				staticStorageSvc.clear();
+				$state.go('login');
+			}
 		}
 	]);

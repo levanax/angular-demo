@@ -87,7 +87,9 @@
 		"CONFIRM_ING": "Confirm order",
 		"COMPLETE": "complete",
 		"TRANS_AMOUNT": "Transaction Amount",
-		"CHARGES": "Charges"
+		"CHARGES": "Charges",
+		"SYSTEM_TIP":"System msg",
+		"ORDER_SUCCESS":"Order success，order id："
 	},
 
 

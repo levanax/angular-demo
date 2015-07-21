@@ -6,9 +6,10 @@
 angular.module('portalDemoApp')
 	.constant('constant', {
 		//session value _
-		'userId': '_userId',
-		'userinfo': '_userinfo_constant',
-		'accountCashBalance': '_AccountCashBalance',
-		'markets': '_markets',
-		'orderTypes': '_orderTypes'
+		'constantName':'$FunctionName',
+		'userId': '$userId',
+		'userinfo': '$AccountInfo',
+		'accountCashBalance': '$AccountCashBalance',
+		'markets': '$markets',
+		'orderType': '$OrderType'
 	});
