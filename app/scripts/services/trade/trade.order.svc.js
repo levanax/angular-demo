@@ -122,17 +122,17 @@ angular.module('portalDemoApp')
 							//success
 							scopePointer.systemMsg = $filter('translate')('ORDER.ORDER_SUCCESS') + ' ' + data.OrderExecution.Order.OrdID;
 						}
-						$("#newPopUp").modal('toggle');
-						$("#resultPopUp").modal('toggle');
+						scopePointer.toggleModalOrderStep1();
+						scopePointer.toggleModalOrderStep2();
 					});
 				},
 				resetForm: function(scopePointer) {
 					//orderForm.reset();
 					scopePointer.submitted = false;
 					delete scopePointer.security.id;
-					scopePointer.security.name = undefined;
-					scopePointer.security.lotSize = undefined;
-					scopePointer.order.price = undefined;
+					delete scopePointer.security.name;
+					delete scopePointer.security.lotSize;
+					delete scopePointer.order.price;
 					scopePointer.order.qty = undefined;
 					scopePointer.orderForm.$setPristine(); // clear from validator message
 				}

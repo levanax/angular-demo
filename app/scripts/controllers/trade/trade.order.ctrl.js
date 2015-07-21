@@ -16,6 +16,15 @@ angular.module('portalDemoApp')
 				}
 			};
 
+			$scope.showOrderStep1 = false;
+			$scope.toggleModalOrderStep1 = function() {
+				$scope.showOrderStep1 = !$scope.showOrderStep1;
+			};
+			$scope.showOrderStep2 = false;
+			$scope.toggleModalOrderStep2 = function() {
+				$scope.showOrderStep2 = !$scope.showOrderStep2;
+			};
+
 			$scope.submitted = false; // if reset form ,must set false
 			$scope.interacted = function(field) {
 				return $scope.submitted || field.$dirty;
@@ -89,7 +98,6 @@ angular.module('portalDemoApp')
 				$timeout.cancel($scope.enterSecurityEvent);
 				if (util.isNotEmpty(securityId)) {
 					$scope.enterSecurityEvent = $timeout(function() {
-						console.log(securityId);
 						$scope.enterSecurityId();
 						$timeout.cancel($scope.enterSecurityEvent);
 					}, 3000);
@@ -130,19 +138,19 @@ angular.module('portalDemoApp')
 				} else {
 					$scope.order.ableBuyQty = undefined;
 				}
-			},true);
+			}, true);
 
 			$scope.priceDown = function() {
 				var price = $scope.order.price;
 				if (util.isNotEmpty(price)) {
-					var price = parseFloat(util.parseNumber(price,2)) - 0.5;
+					var price = parseFloat(util.parseNumber(price, 2)) - 0.5;
 					$scope.order.price = $filter('figure')(price);
 				}
 			}
 			$scope.priceUp = function() {
 				var price = $scope.order.price;
 				if (util.isNotEmpty(price)) {
-					var price = parseFloat(util.parseNumber(price,2)) + 0.5;
+					var price = parseFloat(util.parseNumber(price, 2)) + 0.5;
 					$scope.order.price = $filter('figure')(price);
 				}
 			}
@@ -168,14 +176,14 @@ angular.module('portalDemoApp')
 			$scope.qtyDown = function() {
 				var qty = $scope.order.qty;
 				if (util.isNotEmpty(qty)) {
-					var qty = parseInt(util.parseNumber(qty,0)) - 1000;
+					var qty = parseInt(util.parseNumber(qty, 0)) - 1000;
 					$scope.order.qty = $filter('figure')(qty);
 				}
 			}
 			$scope.qtyUp = function() {
 				var qty = $scope.order.qty;
 				if (util.isNotEmpty(qty)) {
-					var qty = parseInt(util.parseNumber(qty,0)) + 1000;
+					var qty = parseInt(util.parseNumber(qty, 0)) + 1000;
 					$scope.order.qty = $filter('figure')(qty);
 				}
 			}
@@ -187,7 +195,7 @@ angular.module('portalDemoApp')
 			$scope.submit = function() {
 				$scope.submitted = true;
 				if ($scope.orderForm.$valid) {
-					$("#newPopUp").modal('toggle');//use directives
+					$scope.toggleModalOrderStep1();
 				}
 			}
 			$scope.resetFormEvent = function() {
@@ -201,7 +209,7 @@ angular.module('portalDemoApp')
 			}
 
 			$scope.reloadPanel = function() {
-				$("#resultPopUp").modal('toggle');
+				$scope.toggleModalOrderStep2();
 				$timeout(function() {
 					$scope.$emit('refresh.order', {});
 				}, 1000);
