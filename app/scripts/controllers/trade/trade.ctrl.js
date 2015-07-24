@@ -1,21 +1,28 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('tradeCtrl', ['$stateParams','staticStorageSvc','$scope', '$state',
-		function($stateParams,staticStorageSvc,$scope, $state) {
+	.controller('tradeCtrl', ['$stateParams', 'staticStorageSvc', '$scope', '$state',
+		function($stateParams, staticStorageSvc, $scope, $state) {
 			$scope.$on('$viewContentLoaded', function(event) {
 				//page loaded and page ui-view refresh exec
+				$state.go('trade.' + $stateParams.target, {}, {
+					inherit: true,
+					location: false
+				});
 			});
 
 			$scope.$on('refresh.order', function(e, params) {
 				params['target'] = 'order';
-				$state.go('trade.order', params,{reload:true,location: false,inherit:false});
+				$state.go('trade.order', params, {
+					reload: true,
+					location: false,
+					inherit: false
+				});
 			});
 
-			$scope.$on('go.page', function(e, stateName,params) {
+			$scope.$on('go.page', function(e, stateName, params) {
 				$state.go(stateName, params, {
-					reload:true,
-					location: false,
+					reload: true,
 					inherit: false
 				});
 			});
@@ -23,11 +30,6 @@ angular.module('portalDemoApp')
 			$scope.$on('system.exit', function(e, params) {
 				staticStorageSvc.clear();
 				$state.go('login');
-			});
-
-			$state.go('trade.'+$stateParams.target, {}, {
-				inherit:true,
-				location: false
 			});
 		}
 	]);

@@ -106,4 +106,20 @@ angular.module("portalDemoApp")
 			}
 			return directive;
 		}
+	])
+	.directive('appStockInput', [
+
+		function() {
+			var directive = {
+				restrict: 'EAC',
+				link: function(scope, ele, attrs) {
+					/*$(ele).keydown(function(event) {
+						if (event.keyCode == "13") {
+							this.blur();
+						}
+					})*/
+				}
+			}
+			return directive;
+		}
 	]);

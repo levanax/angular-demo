@@ -9,6 +9,7 @@ angular.module('portalDemoApp')
 
 			$scope.stockCodeKeydown = function(event) {
 				if (event.keyCode === 13) {
+					$("#stockCodeInput").blur();//temp
 					marketQuoteViewSvc.subscribeStock(scopePointer);
 				}
 			}

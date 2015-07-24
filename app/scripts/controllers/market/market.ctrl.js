@@ -1,17 +1,19 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('marketCtrl', ['marketQuoteViewSvc','staticStorageSvc', '$scope', '$state',
-		function(marketQuoteViewSvc,staticStorageSvc, $scope, $state) {
+	.controller('marketCtrl', ['marketQuoteViewSvc', 'staticStorageSvc', '$scope', '$state',
+		function(marketQuoteViewSvc, staticStorageSvc, $scope, $state) {
 			$scope.$on('$viewContentLoaded', function(event) {
 				//page loaded and page ui-view refresh exec
+				$state.go('market.quote', {}, {
+					location: false
+				});
 			});
 
-			$scope.$on('go.page', function(e, stateName,params) {
+			$scope.$on('go.page', function(e, stateName, params) {
 				marketQuoteViewSvc.closeConnection();
 				$state.go(stateName, params, {
-					reload:true,
-					location: false,
+					reload: true,
 					inherit: false
 				});
 			});
@@ -20,10 +22,6 @@ angular.module('portalDemoApp')
 				marketQuoteViewSvc.closeConnection();
 				staticStorageSvc.clear();
 				$state.go('login');
-			});
-
-			$state.go('market.quote', {}, {
-				location: false
 			});
 		}
 	]);
