@@ -70,7 +70,7 @@ angular.module('portalDemoApp')
 				}
 			})
 
-			$scope.$watch('order.side', function(input, oldInput, childScope) {
+			$scope.$watch('orderSide', function(input, oldInput, childScope) {
 				if (angular.isString(input)) {
 					$scope.resetFormEvent();
 					var scopePointer = $scope;
@@ -83,8 +83,8 @@ angular.module('portalDemoApp')
 			});
 			$scope.updateOrderSide = function(orderSideParam) {
 				var orderSide = orderSideParam.toUpperCase();
-				if ($scope.order.side !== orderSide) {
-					$scope.order.side = angular.uppercase(orderSide);
+				if ($scope.orderSide !== orderSide) {
+					$scope.orderSide = angular.uppercase(orderSide);
 				}
 			}
 
@@ -195,7 +195,9 @@ angular.module('portalDemoApp')
 			$scope.submit = function() {
 				$scope.submitted = true;
 				if ($scope.orderForm.$valid) {
-					$scope.toggleModalOrderStep1();
+					var scopePointer = $scope;
+					orderViewSvc.signingOrder(scopePointer);
+					//$scope.toggleModalOrderStep1();
 				}
 			}
 			$scope.resetFormEvent = function() {

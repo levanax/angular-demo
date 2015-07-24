@@ -5,7 +5,7 @@ angular.module('portalDemoApp')
     function($stateProvider, $urlRouterProvider) {
       var tradeState = {
         name: 'trade',
-        url: '/trade',
+        url: '/trade/{target}',
         templateUrl: 'views/trade/trade.html',
         controller: 'tradeCtrl'
         /*controller:['$state',function($state){
@@ -18,7 +18,7 @@ angular.module('portalDemoApp')
         name: 'trade.order',
         url: '/trade/order?market&{accNum:int}',
         views: {
-          'order@trade': {
+          'content@trade': {
             templateUrl: 'views/trade/commons/order.html',
             controller: 'tradeOrderCtrl'
           }
@@ -37,8 +37,20 @@ angular.module('portalDemoApp')
           ]
         }
       }
+      var tradeOrderBookState = {
+        name: 'trade.orderBook',
+        url: '/trade/orderBook',
+        views: {
+          'content@trade': {
+            templateUrl: 'views/trade/commons/orderBook.html',
+            controller: 'tradeOrderBookCtrl'
+          }
+        }
+      }
+
       $stateProvider
         .state(tradeState)
-        .state(tradeOrderState);
+        .state(tradeOrderState)
+        .state(tradeOrderBookState);
     }
   ]);

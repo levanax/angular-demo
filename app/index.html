@@ -1,23 +1,21 @@
 <!doctype html>
-<html ng-app="portalDemoApp" manifest="demo.manifest" class="no-js">
+<html ng-app="portalDemoApp" class="no-js">
   <head>
     <meta charset="utf-8">
     <title translate="INDEX_TITLE"></title>
 
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width"> -->
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/bootstrap.min.css" />
-    <link rel="stylesheet" href="styles/bootstrap-datetimepicker.min.css" />
-    <link rel="stylesheet" href="styles/bootstrap-switch.min.css" />
+    <link rel="stylesheet" href="styles/bootstrap.css" />
     
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild -->
   </head>
   <body>
@@ -60,13 +58,19 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         
         <!--style commons -->
-        <script src="scripts/commons/bootstrap.min.js" ></script>
-        <script src="scripts/commons/bootstrap-switch.min.js" ></script>
-        <script src="scripts/commons/bootstrap-datetimepicker.min.js"></script>
+        <script src="scripts/commons/bootstrap.js" ></script>
 
         <!--tools -->
         <script src="scripts/commons/BigDecimal-all-last.min.js" ></script>
         <script src="scripts/utils/util.js" ></script>
+
+        <!-- cometed -->
+        <script src="scripts/commons/org/cometd.js" ></script>
+        <script src="scripts/commons/org/cometd/AckExtension.js" ></script>
+        <script src="scripts/commons/org/cometd/ReloadExtension.js" ></script>
+        <script src="scripts/commons/jquery.cometd.js" ></script>
+        <script src="scripts/commons/jquery.cometd-reload.js" ></script>
+        <script src="scripts/commons/client.js" ></script>
 
         <script src="scripts/app.js"></script>
         <script src="scripts/config/setting.js"></script>
@@ -74,8 +78,9 @@
         
         <!--router -->
         <script src="scripts/routers/app.router.js"></script>
-        <script src="scripts/routers/login/login.router.js"></script>
-        <script src="scripts/routers/trade/trade.router.js"></script>
+        <script src="scripts/routers/login.router.js"></script>
+        <script src="scripts/routers/trade.router.js"></script>
+        <script src="scripts/routers/market.router.js"></script>
 
         <!--config -->
         <script src="scripts/config/language.js"></script>
@@ -100,18 +105,20 @@
         <script src="scripts/services/users/users.svc.js"></script>
         <script src="scripts/services/trade/trade.order.svc.js"></script>
         <script src="scripts/services/trade/trade.orderBook.svc.js"></script>
+        <script src="scripts/services/market/market.quote.svc.js"></script>
 
         <!--directives -->
         <script src="scripts/directives/app.dict.js"></script>
         <script src="scripts/directives/validator.dict.js"></script>
 
         <!--controllers -->
+        <script src="scripts/controllers/menus.ctrl.js"></script>
         <script src="scripts/controllers/login/login.ctrl.js"></script>
-        <script src="scripts/controllers/commons/foot.ctrl.js"></script>
-        <script src="scripts/controllers/main/main.ctrl.js"></script>
         <script src="scripts/controllers/trade/trade.ctrl.js"></script>
         <script src="scripts/controllers/trade/trade.order.ctrl.js"></script>
         <script src="scripts/controllers/trade/trade.orderBook.ctrl.js"></script>
+        <script src="scripts/controllers/market/market.ctrl.js"></script>
+        <script src="scripts/controllers/market/market.quote.ctrl.js"></script>
 
 
         <script src="scripts/socket/client.js"></script>

@@ -1,0 +1,69 @@
+<div class="panel panel-primary">
+        <div class="panel-heading text-center buyAndsell">
+          <div class="col-xs-24">
+            <span translate="QUOTE.TITLE"></span>
+            <span ng-if="isEmerge(clientState)" ng-cloak>({{clientState}})</span>
+          </div>
+        </div>
+      </div>
+      <div class="row space-height">
+        <div class="col-xs-18 col-xs-offset-3">
+          <input ng-model="stockCode" ng-keydown="stockCodeKeydown($event)" type="text" class="form-control input-xl" placeholder="{{'ORDER.SECURITY_CODE' | translate}}">
+        </div>
+      </div>
+      <div class="row space-height securityName-font">
+        <div class="col-xs-18 col-xs-offset-3" ng-bind="name"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 quote-headFirst">
+           <div ng-bind="nom"></div>
+        </div>
+        <div class="col-xs-6 quote-headSecond">
+          <div ng-bind="change"></div>
+        </div>
+        <div class="col-xs-6 quote-headSecond">
+          <div ng-bind="changeRate"></div>
+        </div>
+      </div>
+      <div class="row quote-body">
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.OPEN"></div>
+          <div class="col-xs-24" ng-bind="open"></div>
+        </div>
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.CLOSE"></div>
+          <div class="col-xs-24" ng-bind="close"></div>
+        </div>
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.Turnover"></div>
+          <div class="col-xs-24" ng-bind="turnover"></div>
+        </div>
+      </div>
+      <div class="row quote-body">
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.DayHigh"></div>
+          <div class="col-xs-24" ng-bind="hp"></div>
+        </div>
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.DayLow"></div>
+          <div class="col-xs-24" ng-bind="lp"></div>
+        </div>
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.Volume"></div>
+          <div class="col-xs-24" ng-bind="volume"></div>
+        </div>
+      </div>
+      <div class="row quote-body">
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.52WeekHig"></div>
+          <div class="col-xs-24" ng-bind="wl52"></div>
+        </div>
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.52WeekLow"></div>
+          <div class="col-xs-24" ng-bind="wh52"></div>
+        </div>
+        <div class="col-xs-8 quote-right">
+          <div class="col-xs-24" translate="QUOTE.LotSize"></div>
+          <div class="col-xs-24" ng-bind="lotSize"></div>
+        </div>
+      </div>

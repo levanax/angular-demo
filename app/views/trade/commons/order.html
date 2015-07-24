@@ -1,117 +1,93 @@
-<br>
-<br>
-<div  data-ng-class="{'panel-bacRed':isSell}">
 <form name="orderForm" ng-submit="submit()" novalidate>
-<div class="panel panel-primary  order-panel">
-                    <div class="panel-heading text-center" translate="ORDER.TITLE"></div>
-                    <div class="panel-body order-panel-body">
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.MARKET"></div>
-                            <div class="col-xs-16">
-                                <select data-ng-model='order.market' ng-change="switchMarketEvent(order.market)" class="form-control input-xl" ng-options="mk as (mk | marketFormat) for mk in markets">
+<div class="row clearfix">
+      <div class="panel panel-primary">
+        <div app-order-side variable="orderSide" class="panel-heading text-center buyAndsell">
+             <div class="buySide col-xs-12" translate="ORDER.SIDE.BUY"></div>
+             <div class="sellSide col-xs-12" translate="ORDER.SIDE.SELL"></div>
+             <div class="hiddenEle">
+              <input type="radio" data-ng-model="orderSide" value="B"/>
+              <input type="radio" data-ng-model="orderSide" value="S"/>
+             </div>
+             
+          </div>
+      </div>
+        <div class="row buyPowerAndqty" >
+          <div class="col-xs-12">
+            <span translate="ORDER.BUY_POWER"></span>
+            <span data-ng-cloak>{{ order.currencyType }}{{ buyPower }}</span>
+          </div>
+          <div class="col-xs-12" data-ng-if="isEmerge(order.ableBuyQty)" data-ng-class="{hiddenEle:isSell}">
+            <span translate="ORDER.ABLE_TRADE_QUANTITY"></span>:
+            <span data-ng-bind="order.ableBuyQty"></span>
+          </div>
+          <div class="col-xs-12" data-ng-if="isEmerge(order.ableSellQty)" data-ng-class="{hiddenEle:isBuy}">
+            <span translate="ORDER.SELL_TOTAL"></span>:
+            <span data-ng-bind="order.ableSellQty"></span>
+          </div>
+        </div>
+        <div class="overfloat-Y">
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3">
+             <select data-ng-model='order.market' ng-change="switchMarketEvent(order.market)" class="form-control input-xl" ng-options="mk as (mk | marketFormat) for mk in markets">
                                 </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.ACCOUNT"></div>
-                            <div class="col-xs-16">
-                                <select data-ng-model="order.accNum" ng-change="switchAccountEvent(order.accNum)" class="form-control input-xl"
+          </div>
+        </div>
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3">
+            <select data-ng-model="order.accNum" ng-change="switchAccountEvent(order.accNum)" class="form-control input-xl"
                                 ng-options="acc.AccNum as acc | accFormat for  acc in accounts">
                                 </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.BUY_POWER"></div>
-                            <div class="col-xs-16">
-                                <span data-ng-cloak>{{ order.currencyType }}</span>
-                                <span data-ng-cloak>{{ buyPower }}</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="order-panel-addOrder" translate="ORDER.ORDER_NEW"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.TIT"></div>
-                            <div class="col-xs-16 order-panel-radio">
-                                <input type="radio"  data-ng-model="order.side" value="B"/>
-                                {{'ORDER.SIDE.BUY' | translate }}
-                                <input type="radio"  data-ng-model="order.side" value="S"/>
-                                {{'ORDER.SIDE.SELL' | translate }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.SECURITY_CODE"></div>
-                            <div class="col-xs-16">
-                                <input ng-keydown="securityKeyDown($event)" name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/" required>
-                            </div>
-                        </div>
-                        <div class="row" data-ng-if="isEmerge(security.name)">
-                            <div class="col-xs-8" translate="ORDER.SECURITY_NAME"></div>
-                            <div class="col-xs-16" data-ng-bind="security.name"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.ORDER_TYPE"></div>
-                            <div class="col-xs-16">
-                                <select data-ng-model="order.type" class="form-control input-xl" ng-options="ot.OrdType as ot.OrdTypeName | orderTypeByLocal for ot in orderTypes">
+          </div>
+        </div>
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3">
+            <input ng-keydown="securityKeyDown($event)" name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/"placeholder="{{'ORDER.SECURITY_CODE' | translate}}" required>
+          </div>
+        </div>
+        <div data-ng-if="isEmerge(security.name)" class="row space-height securityName-font">
+          <div class="col-xs-18 col-xs-offset-3">
+            <span data-ng-bind="security.name"></span>
+          </div>
+        </div>
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3">
+            <select data-ng-model="order.type" class="form-control input-xl" ng-options="ot.OrdType as ot.OrdTypeName | orderTypeByLocal for ot in orderTypes">
                                 </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.PRICE"></div>
-                            <div class="col-xs-16">
-                                <div class="form-group">
-                                    <div class="input-group input-group-xl" >
-                                        <input name="price" ng-change="formatPrice(order.price)" data-ng-model="order.price" class="form-control" size="16" type="text" value="" data-app-pattern="/^\d+$|^\d+\.\d*$/"  required>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down" data-ng-click="priceDown()"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up" data-ng-click="priceUp()"></span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" data-ng-if="isEmerge(security.priceSperad)" >
-                            <div class="col-xs-8" translate="ORDER.PRICE_SPREAD"></div>
-                            <div class="col-xs-16" data-ng-bind='security.priceSperad'></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8">
-                                <span translate="ORDER.QUANTITY"></span>
-                                <span ng-if="isEmerge(security.lotSize)" data-ng-cloak>({{security.lotSize}}/lot)</span></div>
-                            <div class="col-xs-16">
-                                <div class="form-group">
-                                    <div class="input-group input-group-xl" >
-                                        <input name="qty" class="form-control" size="16" ng-change="formatQty(order.qty)" data-ng-model="order.qty" type="text" value="" data-app-pattern="/^\d+$/" required>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down" data-ng-click="qtyDown()"></span></span>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up" data-ng-click="qtyUp()"></span></span>
-                                        <span class="input-group-addon"><span style="margin-bottom: 8px;" class="glyphicon glyphicon-chevron-up"></span><span style="position: absolute; margin-top: 9px;margin-left: -12px;" class="glyphicon glyphicon-chevron-up" data-ng-click="qtyUpTop()"></span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" data-ng-if="isEmerge(order.ableBuyQty)"  data-ng-class="{hiddenEle:isSell}">
-                            <div class="col-xs-8" translate="ORDER.ABLE_TRADE_QUANTITY"></div>
-                            <div class="col-xs-16" data-ng-bind="order.ableBuyQty"></div>
-                        </div>
-                        <div class="row" data-ng-if="isEmerge(order.ableSellQty)" data-ng-class="{hiddenEle:isBuy}">
-                            <div class="col-xs-8" translate="ORDER.SELL_TOTAL"></div>
-                            <div class="col-xs-16" data-ng-bind="order.ableSellQty"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8" translate="ORDER.EXPIRY_DATE"></div>
-                            <div class="col-xs-16">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="">
-                                    <div class="form-group">
-                                        <div data-app-calendar class="input-group input-group-xl date form_datetime" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1">
-                                            <input disabled class="form-control" size="16" type="text" value="">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                        </div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="errorMessage">
-                            <div data-ng-if="interacted(orderForm.securityId)" ng-messages="orderForm.securityId.$error" ng-messages-multiple>
+          </div>
+        </div>
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3">
+            <div class="form-group">
+              <div class="input-group input-group-xl" >
+                <span class="input-group-addon" data-ng-click="priceDown()"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                <input name="price" ng-change="formatPrice(order.price)" data-ng-model="order.price" class="form-control input-xl" size="16" type="text" value="" data-app-pattern="/^\d+$|^\d+\.\d*$/"  placeholder="{{'ORDER.PRICE' | translate}}" required/>
+                <span class="input-group-addon" data-ng-click="priceUp()"><span class="glyphicon glyphicon-chevron-up"></span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3">
+            <input name="qty" class="form-control input-xl" size="16" ng-change="formatQty(order.qty)" data-ng-model="order.qty" type="text" value="" data-app-pattern="/^\d+$/" placeholder="{{'ORDER.QUANTITY' | translate}}" required>
+          </div>
+        </div>
+        <div class="row space-height securityName-font">
+          <div class="col-xs-18 col-xs-offset-3">
+            <span ng-if="isEmerge(security.lotSize)" data-ng-cloak>({{security.lotSize}}/lot)</span>
+          </div>
+        </div>
+        <div class="row space-height" ng-class="{'red-background':isSell}">
+          <div class="col-xs-9 col-xs-offset-3">
+            <button class="btn btn-large btn-primary" type="submit" data-toggle="modal"  translate="BUTTON.SUBMIT"></button>
+
+          </div>
+          <div class="col-xs-9 text-right">
+            <button ng-click="resetFormEvent()" class="btn btn-large btn-primary"  type="button" translate="BUTTON.CLEAR"></button>
+          </div>
+        </div>
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3 errorMessage">
+            <div data-ng-if="interacted(orderForm.securityId)" ng-messages="orderForm.securityId.$error" ng-messages-multiple>
                                 <div ng-message="required"> plz enter security id.</div>
                                 <div ng-message="pattern">security id formatting error.</div>
                             </div>
@@ -123,174 +99,9 @@
                                 <div ng-message="required"> plz enter qty.</div>
                                 <div ng-message="pattern">qty  formatting error.</div>
                             </div>
-                        </div>
-                        <div class="row panel-button text-center">
-                            <div class="col-xs-8">
-                                <!-- <div class="bootstrap-switch bootstrap-switch-small">
-                                    <input app-switch type="checkbox" id="switch" checked />
-                                </div> -->
-                            </div>
-                            <div class="col-xs-8">
-                                <button class="btn btn-sm btn-primary" type="submit" data-toggle="modal"  translate="BUTTON.SUBMIT"></button>
-                            </div>
-                            <div class="col-xs-8">
-                                <button ng-click="resetFormEvent()" class="btn btn-sm btn-primary"  type="button" translate="BUTTON.CLEAR"></button>
-                            </div>
-                        </div>
-                    </div>
-</div>
-</form>
-
-<div app-modal visible="showOrderStep1" class="modal fade model-top" id="newPopUp">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    <p class="h4 modal-title" translate="ORDER.CONFIRM_ING"></p>
-                </div>
-                <div class="modal-body order-content">
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.MARKET"></div>
-                        <div class="col-md-16" data-ng-bind='order.marketView'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ACCOUNT"></div>
-                        <div class="col-md-16" data-ng-bind='order.accNumView'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.TIT"></div>
-                        <div class="col-md-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_CODE"></div>
-                        <div class="col-md-16" data-ng-bind='security.id'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_NAME"></div>
-                        <div class="col-md-16" data-ng-bind='security.name'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.PRICE"></div>
-                        <div class="col-md-16">
-                            <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
-                            <span data-ng-bind="order.priceView"></span>
-                        </div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.QUANTITY"></div>
-                        <div class="col-md-16" data-ng-bind='order.qty'></div>
-                    </div>
-                    <!-- <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.TRANS_AMOUNT"></div>
-                        <div class="col-md-16" data-ng-bind="order.totalAmount"></div>
-                    </div> -->
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8"  translate="ORDER.CHARGES"></div>
-                        <div class="col-md-16">{{order.currencyType}} $0.00
-                            <a app-popover class="hiddenEle" tabindex="0" id="detailContent1"   role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
-                            <div class='container order-HandlingCharge'>
-                               <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>佣金</div>
-                                   <div class='col-md-14'>港币$0.00</div>
-                               </div>
-                               <div class='row top-underline'>
-                                   <div class='col-md-10'>手续费</div>
-                                   <div class='col-md-14'><b class='twoUnderline'>港币$0.00</b></div>
-                               </div>
-                            </div>
-                            ">
-                                <span class="glyphicon glyphicon-question-sign"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ORDER_TYPE"></div>
-                        <div class="col-md-16" data-ng-bind="order.typeView"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-ng-click="signingOrderEvent()" class="btn btn-primary" translate="BUTTON.CONFIRM"></button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" translate="BUTTON.CANCEL"></button>
-                </div>
-            </div>
+                <div data-ng-bind='systemMsg'></div>
+          </div>
         </div>
     </div>
-
-    <div app-modal visible="showOrderStep2" class="modal fade model-top" id="resultPopUp">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    <p class="h4 modal-title" translate="ORDER.COMPLETE"></p>
-                </div>
-                <div class="modal-body order-content">
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SYSTEM_TIP"></div>
-                        <div class="col-md-16" data-ng-bind='systemMsg'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.MARKET"></div>
-                        <div class="col-md-16" data-ng-bind='order.marketView'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ACCOUNT"></div>
-                        <div class="col-md-16" data-ng-bind='order.accNumView'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.TIT"></div>
-                        <div class="col-md-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_CODE"></div>
-                        <div class="col-md-16" data-ng-bind='security.id'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_NAME"></div>
-                        <div class="col-md-16" data-ng-bind='security.name'></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.PRICE"></div>
-                        <div class="col-md-16">
-                            <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
-                            <span data-ng-colak>{{order.price | currency:$:3}}</span>
-                        </div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.QUANTITY"></div>
-                        <div class="col-md-16" data-ng-bind='order.qty'></div>
-                    </div>
-                    <div class="row hiddenEle" name="spaceColor">
-                        <div class="col-md-8">交易金额</div>
-                        <div class="col-md-16" data-ng-bind="order.totalAmount"></div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8">手续费</div>
-                        <div class="col-md-16">{{order.currencyType}} $0.00
-                            <a tabindex="0" id="detailContent1"  class="hiddenEle" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
-                            <div class='container order-HandlingCharge'>
-                               <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>佣金</div>
-                                   <div class='col-md-14'>港币$0.00</div>
-                               </div>
-                               <div class='row top-underline'>
-                                   <div class='col-md-10'>手续费</div>
-                                   <div class='col-md-14'><b class='twoUnderline'>港币$0.00</b></div>
-                               </div>
-                            </div>
-                            ">
-                                <span class="glyphicon glyphicon-question-sign"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ORDER_TYPE"></div>
-                        <div class="col-md-16" data-ng-bind="order.typeView"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-ng-click="reloadPanel()" class="btn btn-primary" translate="BUTTON.BACK"></button>
-                </div>
-            </div>
         </div>
-    </div>
-</div>
+  </form>

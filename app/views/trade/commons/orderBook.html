@@ -1,115 +1,78 @@
-<br/><br/>
-<div class="col-md-16 orderBookMinwidth">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <div class="input-group input-group-xl">
-                                    <span class="input-group-addon" translate="ORDERBOOK.ACCOUNT"></span>
-                                    <select data-ng-model="accNum" ng-change="switchAccountEvent(accNum)" class="form-control input-xl" ng-options="acc.AccNum as acc | accFormat for  acc in accounts">
+<div class="panel panel-primary">
+        <div class="panel-heading text-center buyAndsell">
+          <div class="col-xs-24" translate="ORDERBOOK.TITLE"></div>
+        </div>
+      </div>
+      <div class="row space-height">
+        <div class="col-xs-11 col-xs-offset-1">
+          <select data-ng-model="accNum" ng-change="switchAccountEvent(accNum)"  class="form-control input-xl" ng-options="acc.AccNum as acc | accFormat for  acc in accounts">
                                 </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-offset-2 col-xs-6">
-                            <div class="form-group">
-                                <div class="input-group input-group-xl">
-                                    <span class="input-group-addon" translate="ORDERBOOK.MARKET"></span>
-                                    <select data-ng-model='market' ng-change="switchMarketEvent(market)" class="form-control input-xl" ng-options="mk as (mk | marketFormat) for mk in markets">
+        </div>
+        <div class="col-xs-11">
+          <select data-ng-model='market' ng-change="switchMarketEvent(market)" class="form-control input-xl" ng-options="mk as (mk | marketFormat) for mk in markets">
                                 </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-offset-2 col-xs-6">
-                            <div class="form-group form-group-xl">
-                                <div class="input-group input-group-xl" >
-                                    <span class="input-group-addon" translate="ORDERBOOK.BS"></span>
-                                    <select data-ng-model="BS" ng-change="switchBSEvent(BS)" class="form-control input-xl">
+        </div>
+      </div>
+      <div class="row space-height">
+        <div class="col-xs-11 col-xs-offset-1">
+          <select data-ng-model="BS" ng-change="switchBSEvent(BS)" class="form-control input-xl">
                                         <option selected value="B/S" translate="ORDERBOOK.BS"></option>
                                         <option value="B" translate="ORDERBOOK.BUY"></option>
                                         <option value="S" translate="ORDERBOOK.SELL"></option>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <div class="input-group input-group-xl" >
-                                    <span class="input-group-addon" translate="ORDERBOOK.STATUS.TITLE"></span>
-                                    <select data-ng-model="status" data-ng-change="switchStatusEvent(status)" class="form-control input-xl">
+        </div>
+        <div class="col-xs-11">
+         <select data-ng-model="status" data-ng-change="switchStatusEvent(status)" class="form-control input-xl">
                                         <option value="All" selected translate="ORDERBOOK.STATUS.All"></option>
                                         <option value="Open" translate="ORDERBOOK.STATUS.Open"></option>
                                         <option value="PartialFullyFilled" translate="ORDERBOOK.STATUS.PartialFullyFilled"></option>
                                         <option value="Close" translate="ORDERBOOK.STATUS.Close"></option>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-offset-2 col-xs-6">
-                            <div class="form-group">
-                                <div class="input-group input-group-xl" >
-                                    <span class="input-group-addon"  translate="ORDERBOOK.DATA_RANGE.TIT"></span>
-                                    <select class="form-control input-xl">
+        </div>
+      </div>
+      <div class="row space-height">
+        <div class="col-xs-11 col-xs-offset-1">
+          <select class="form-control input-xl">
                                         <option data-ng-model="DataRange" data-ng-change="switchDataRangeEvent(DataRange)"  value="1" selected translate="ORDERBOOK.DATA_RANGE.1"></option>
                                         <option value="7" translate="ORDERBOOK.DATA_RANGE.7"></option>
                                         <option value="30" translate="ORDERBOOK.DATA_RANGE.30"></option>
                                         <option value="90" translate="ORDERBOOK.DATA_RANGE.90"></option>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-offset-2 col-xs-6">
-                            <div class="form-group">
-                                <div class="input-group input-group-xl" >
-                                    <span class="input-group-addon" translate="ORDERBOOK.SECURITY"></span>
-                                    <input ng-keydown="enterSecurityEvent($event)" type="text" class="form-control input-xl" value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-2 text-center">
-                            <span class="glyphicon glyphicon-refresh"></span>
-                        </div>
-                    </div>
-                    <div class="row orderBook-title">
-                        <div class="col-xs-3" translate="ORDERBOOK.TAB_TIT.DATATIME"></div>
-                        <div class="col-xs-2" translate="ORDERBOOK.TAB_TIT.NO"></div>
-                        <div class="col-xs-4" translate="ORDERBOOK.TAB_TIT.SECURITY"></div>
-                        <div class="col-xs-2" translate="ORDERBOOK.TAB_TIT.BUY_SELL"></div>
-                        <div class="col-xs-2" translate="ORDERBOOK.STATUS.TITLE"></div>
-                        <div class="col-xs-4" translate="ORDERBOOK.TAB_TIT.ORDER"></div>
-                        <div class="col-xs-4" translate="ORDERBOOK.TAB_TIT.Filled"></div>
-                        <div class="col-xs-3" translate="ORDERBOOK.TAB_TIT.ACTION"></div>
-                    </div>
-                    <div class="orderBook-color">
-                        <div class="row" data-ng-repeat="ob in  ordHists track by ob.OrdID" name="spaceColor" data-toggle="modal" data-target="#orderBookDetail">
-                            <div class="col-xs-3">{{ob.LastExecTime}}</div>
-                            <div class="col-xs-2">{{ob.OrdID}}</div>
-                            <div class="col-xs-4">{{ob.Security.SctyID+' - '+ob.Security.MktCode}}</div>
-                            <div class="col-xs-2">{{ob.OrdSide}}</div>
-                            <div class="col-xs-2">{{ob.OrdStatus}}</div>
-                            <div class="col-xs-4">{{ob.OrdQty+'@'+ob.Price}}</div>
-                            <div class="col-xs-4"></div>
-                            <div class="col-xs-3">&nbsp;</div>
-                        </div>
-
-                    </div>
-                    <div data-ng-if="noRecords" class="text-center" style="text-align: center;float: center">
-                        No records
-                    </div>
-                    <!-- <div class="text-center">
-                        <ul class="pagination">
-                            <li class="disabled"><span>prev</span></li>
-                            <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li class="disabled"><span>......</span></li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
-                    </div> -->
-                </div>
-            </div>
         </div>
+        <div class="col-xs-11">
+          <input ng-keydown="enterSecurityEvent($event)" type="text" class="form-control input-xl" value="">
+        </div>
+      </div>
+      <div class="orderBook-inline">
+        <table class="table-bordered orderBook-fixedTable">
+          <thead><th translate="ORDERBOOK.TAB_TIT.DATATIME"></th></thead>
+          <tr  data-ng-repeat="ob in  ordHists track by ob.OrdID">
+            <td>{{ob.LastExecTime}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="orderBook-Scroll">
+        <table width="100%" class="orderBook-table table-bordered">
+          <thead>
+            <th class="text-center" translate="ORDERBOOK.TAB_TIT.NO"></th>
+            <th translate="ORDERBOOK.TAB_TIT.SECURITY"></th>
+            <th translate="ORDERBOOK.TAB_TIT.BUY_SELL"></th>
+            <th translate="ORDERBOOK.STATUS.TITLE"></th>
+            <th translate="ORDERBOOK.TAB_TIT.ORDER"></th>
+            <th translate="ORDERBOOK.TAB_TIT.Filled"></th>
+            <th translate="ORDERBOOK.TAB_TIT.ACTION"></th>
+          </thead>
+          <tr  data-ng-repeat="ob in  ordHists track by ob.OrdID">
+            <td class="text-center">{{ob.OrdID}}</td>
+            <td>{{ob.Security.SctyID+' - '+ob.Security.MktCode}}</td>
+            <td>{{ob.OrdSide}}</td>
+            <td>{{ob.OrdStatus}}</td>
+            <td>{{ob.OrdQty+'@'+ob.Price}}</td>
+            <td></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr data-ng-if="noRecords">
+              <td clospan="7">No records</td>
+          </tr>
+        </table>
+      </div>

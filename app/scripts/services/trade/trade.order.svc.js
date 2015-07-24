@@ -15,8 +15,13 @@ angular.module('portalDemoApp')
 					//initalize accounts and buypower
 					var accountInfoTemp = staticStorageSvc.get(constant.userinfo);
 					scopePointer.accounts = accountInfoTemp.getAccounts();
-					scopePointer.accountCurrent = accountInfoTemp.getAccounts()[0];
-					scopePointer.order.accNum = angular.isDefined(stateParams.accNum) ? stateParams.accNum : scopePointer.accountCurrent.AccNum;
+					scopePointer.order.accNum = angular.isDefined(stateParams.accNum) ? stateParams.accNum : scopePointer.accounts[0].AccNum;
+					scopePointer.accountCurrent = null;
+					for(var i = 0 ;i<scopePointer.accounts.length ;i++){
+						if(scopePointer.order.accNum == scopePointer.accounts[i].AccNum){
+							scopePointer.accountCurrent = scopePointer.accounts[i];
+						}
+					}
 					scopePointer.order.currencyType = $filter('currencyFormat')(scopePointer.accountCurrent.CucyCode);
 
 
@@ -29,7 +34,7 @@ angular.module('portalDemoApp')
 						'market': scopePointer.order.market
 					}
 					securityDaoSvc.queryOrderType(params).then(function(data) {
-						// fill content in the switchBuyMode/switchSellMode// udpate order side and fill order types(select element
+						// fill content in the switchBuyMode/switchSellMode// udpate orderSide and fill order types(select element
 						scopePointer.updateOrderSide('B');
 					});
 
@@ -88,7 +93,7 @@ angular.module('portalDemoApp')
 
 					var orderTypesTempObj = staticStorageSvc.get(constant.orderType);
 					if (angular.isDefined(orderTypesTempObj)) {
-						scopePointer.orderTypes = orderTypesTempObj.getTypes(scopePointer.order.side);
+						scopePointer.orderTypes = orderTypesTempObj.getTypes(scopePointer.orderSide);
 						scopePointer.order.type = scopePointer.orderTypes[0].OrdType;
 					}
 				},
@@ -98,7 +103,7 @@ angular.module('portalDemoApp')
 
 					var orderTypesTempObj = staticStorageSvc.get(constant.orderType);
 					if (angular.isDefined(orderTypesTempObj)) {
-						scopePointer.orderTypes = orderTypesTempObj.getTypes(scopePointer.order.side);
+						scopePointer.orderTypes = orderTypesTempObj.getTypes(scopePointer.orderSide);
 						scopePointer.order.type = scopePointer.orderTypes[0].OrdType;
 					}
 				},
@@ -108,7 +113,7 @@ angular.module('portalDemoApp')
 						sessId: accountInfoTemp.getSessionId(),
 						sctyID: scopePointer.security.id,
 						market: scopePointer.order.market,
-						ordSide: scopePointer.order.side,
+						ordSide: scopePointer.orderSide,
 						ordType: scopePointer.order.type,
 						ordQty: util.parseNumber(scopePointer.order.qty, 0),
 						price: util.parseNumber(scopePointer.order.price, 2),
@@ -122,8 +127,8 @@ angular.module('portalDemoApp')
 							//success
 							scopePointer.systemMsg = $filter('translate')('ORDER.ORDER_SUCCESS') + ' ' + data.OrderExecution.Order.OrdID;
 						}
-						scopePointer.toggleModalOrderStep1();
-						scopePointer.toggleModalOrderStep2();
+						//scopePointer.toggleModalOrderStep1();
+						//scopePointer.toggleModalOrderStep2();
 					});
 				},
 				resetForm: function(scopePointer) {
@@ -133,6 +138,7 @@ angular.module('portalDemoApp')
 					delete scopePointer.security.name;
 					delete scopePointer.security.lotSize;
 					delete scopePointer.order.price;
+					delete scopePointer.systemMsg;
 					scopePointer.order.qty = undefined;
 					scopePointer.orderForm.$setPristine(); // clear from validator message
 				}

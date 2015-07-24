@@ -1,0 +1,142 @@
+
+.buyAndsell{
+  background: red;
+  font-size: 20px;
+  text-align: center;
+  height: 50px;
+}
+.buyPowerAndqty{
+  background: hsla(224, 100%, 89%, 0.50);
+  height: 40px;
+  font-size: 15px;
+  text-align: center;
+  margin-top: -19px;
+}
+.buyPowerAndqty div{
+   padding-top: 10px;
+}
+.input-xl{
+  border-radius: 4px 4px 4px 4px;
+  height: 30px;
+  font-size: 15px;
+  padding: 0px 0px;
+}
+.space-height{
+  padding-top: 17px;
+}
+.btn-large{
+  padding: 4px 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.panelFooter div{
+  background: hsla(217, 100%, 62%, 0.80);
+  height: 50px;
+  font-size: 18px;
+  text-align: center;
+  padding-top: 10px;
+  color: #fff;
+}
+.panelFooter a{
+   color: #fff;
+   text-decoration: none;
+}
+.red-line{
+  border-bottom: 5px solid red;
+  padding-bottom: 7px;
+}
+.red-background button{
+  background-color: #ff0000 !important;
+}
+.red-background button:hover,.red-background button:active,.red-background button:focus{
+  background-color: #ff0000 !important;
+}
+.orderBook-table{
+   font-size: 15px;
+   line-height: 40px;
+   width: 1500px !important;
+   margin-top: 30px !important;
+}
+.orderBook-Scroll{
+  overflow:scroll;
+}
+.orderBook-inline{
+  display: inline;
+}
+.orderBook-fixedTable{
+  margin-top: 30px !important;
+  float: left;
+  line-height: 40px;
+  font-size: 15px;
+}
+.forgetPwd-font{
+  font-size: 15px;
+  text-align: right;
+}
+.loginBtn{
+  padding: 3px 120px;
+  font-size: 15px;
+  line-height: 2;
+  border-radius: 3px;
+}
+.loginPanel-height{
+  line-height: 30px;
+  padding-top: 10px;
+}
+.securityName-font{
+  font-size: 15px;
+}
+.errorMessage{
+  color: red;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 10px;
+}
+.quote-headFirst{
+  background: hsla(212, 100%, 66%, 0.60);
+  height: 40px;
+  font-size: 25px;
+  color: #ff0000;
+  margin-top: 15px;
+  text-align: center;
+}
+.quote-headSecond{
+  background: hsla(212, 100%, 66%, 0.60);
+  height: 40px;
+  font-size: 15px;
+  color: #ff0000;
+  margin-top: 15px;
+  padding-top:15px;
+  text-align: center;
+}
+.quote-body{
+  font-size: 15px;
+  padding-top: 20px;
+  text-align: center;
+  border-right: 2px solid #ff0000;
+}
+
+.quote-right{
+  border-right: 2px solid #95dfff;
+}
+
+.orderBook-fixed div{
+  border:1px solid #7ae4ff;
+  font-size: 30px;
+  float: left;
+  line-height: 80px;
+}
+
+.orderBook-fixedBor{
+  border:1px solid #7ae4ff;
+}
+.overfloat-Y{
+  overflow-y:scroll;
+  overflow-x:hidden;
+  min-height: 500px; 
+}
+
+.hiddenEle{
+display: none;
+}

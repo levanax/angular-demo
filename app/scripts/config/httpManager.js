@@ -31,7 +31,6 @@ angular.module('portalDemoApp')
 angular.module('portalDemoApp')
   .config(['$httpProvider',
     function($httpProvider) {
-      console.log($httpProvider)
       $httpProvider.defaults.useXDomain = true;
       $httpProvider.defaults.withCredentials = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];

@@ -15,7 +15,8 @@
 		"SUBMIT": "提交",
 		"CLEAR": "清除",
 		"CANCEL": "取消",
-		"BACK": "返回"
+		"BACK": "返回",
+		"EXIT": "退出"
 	},
 
 	"CURRENCYS": {
@@ -88,8 +89,8 @@
 		"COMPLETE": "订单完成",
 		"TRANS_AMOUNT": "交易金额",
 		"CHARGES": "手续费",
-		"SYSTEM_TIP":"系统提示",
-		"ORDER_SUCCESS":"成功下单，订单编号为："
+		"SYSTEM_TIP": "系统提示",
+		"ORDER_SUCCESS": "成功下单，订单编号为："
 	},
 
 
@@ -101,6 +102,7 @@
 	"ACCOUNT_TYPE_MARGIN": "孖展",
 
 	"ORDERBOOK": {
+		"TITLE": "订单记录",
 		"SECURITY": "证券",
 		"MARKET": "市场",
 		"ACCOUNT": "账户",
@@ -114,7 +116,7 @@
 			"Open": "未完成",
 			"PartialFullyFilled": "部分 / 全成交",
 			"OpenFilledRejected": "未完成 / 已成交 / 被拒绝",
-			"Close":"已完成"
+			"Close": "已完成"
 		},
 		"DATA_RANGE": {
 			"TIT": "日期范围",
@@ -128,9 +130,31 @@
 			"NO": "参考编号",
 			"SECURITY": "证券",
 			"BUY_SELL": "买 / 沽",
-			"Filled":"成交",
-			"ORDER":"下单",
+			"Filled": "成交",
+			"ORDER": "下单",
 			"ACTION": "指令"
+		}
+	},
+
+	"QUOTE": {
+		"TITLE": "股票行情",
+		"OPEN": "开市价",
+		"CLOSE": "收市价",
+		"Turnover": "成交额",
+		"DayHigh": "当日最高",
+		"DayLow": "当日最低",
+		"Volume": "成交量",
+		"52WeekHig": "52 周最高",
+		"52WeekLow": "52 周最低",
+		"LotSize": "每股手数",
+		"STATUS": {
+			"CONNECT": "正在连接...",
+			"SUCCESS": "成功连接",
+			"FAIL": "连接失败!",
+			"STE01": "连接已过期",
+			"STE02": "连接错误",
+			"STE03": "不正确连接",
+			"SCE01": "未能连接伺服器"
 		}
 	}
 }

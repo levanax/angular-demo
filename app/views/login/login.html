@@ -1,53 +1,44 @@
-<br>
-<br>
 <section>
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-10 col-md-offset-6">
-                <form name="loginForm" class="form-horizontal" role="form" ng-submit="submit()" novalidate>
-                   <div class="panel panel-default">
-                       <div class="panel-heading text-center">
-                           <h3 TRANSLATE="LOGIN.TITLE"></h3>
-                       </div>
-                       <div class="panel-body login-panel-body">
-                               <div class="form-group">
-                                   <div class="col-sm-offset-4 col-sm-16 input-group">
-                                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                       <input name="userName"  ng-model="userinfo.userName" class="form-control" type="text" placeholder="{{'USER_NAME' | translate}}"
+    <div class="row clearfix">
+      <div class="panel panel-primary">
+        <div class="panel-heading buyAndsell">
+          <div class="col-xs-24" TRANSLATE="LOGIN.TITLE"></div>
+        </div>
+      </div>
+      <form name="loginForm" ng-submit="submit()" class="form-horizontal loginPanel-height" role="form" novalidate>
+        <div class="form-group">
+          <div class="col-xs-18 col-xs-offset-3 input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="userName"  ng-model="userinfo.userName" class="form-control input-xl" type="text" placeholder="{{'USER_NAME' | translate}}"
                                               required />
-                                   </div>
-                               </div>
-                               <div class="form-group">
-                                   <div class="col-sm-offset-4 col-sm-16 input-group">
-                                       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                       <input name="password" ng-model="userinfo.password" class="form-control" type="password" placeholder="{{'USER_PASSWORD' | translate}}"
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-18 col-xs-offset-3 input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input name="password" ng-model="userinfo.password" class="form-control input-xl" type="password" placeholder="{{'USER_PASSWORD' | translate}}"
                                          required/>
-                                   </div>
-                               </div>
-                               <div class="row">
-                                   <div class="form-group">
-                                      <div class="col-sm-20 text-right">
-                                        <b translate='FORGET_PASSWORD'></b>
-                                      </div>
-                                   </div>
-                               </div>
-                           <div class="col-sm-24 text-center errorMessage">
-                             <div ng-if="interacted(loginForm.userName)" ng-messages="loginForm.userName.$error" ng-messages-multiple>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-xs-21 forgetPwd-font">
+              <b translate='FORGET_PASSWORD'></b>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-18 col-xs-offset-3">
+          <button type="submit" class="btn btn-primary loginBtn active"><b translate="LOGIN.LOGIN_BTN"></b></button>
+        </div>
+      </form>
+      <div class="col-xs-18 col-xs-offset-3 errorMessage">
+          <div ng-if="interacted(loginForm.userName)" ng-messages="loginForm.userName.$error" ng-messages-multiple>
                                <div ng-message="required" >{{'USER_NAME_EMPTY' |translate}}</div>
                              </div>
                              <div ng-if="interacted(loginForm.password)" ng-messages="loginForm.password.$error">
                                <div ng-message="required">{{'PASSWORD_EMPTY' |translate}}</div>
                              </div>
                              <div>{{serverError}}</div>
-                           </div>
-
-                       </div>
-                       <div class="panel-footer text-center" >
-                           <button type="submit" class="btn btn-default active"><b translate="LOGIN.LOGIN_BTN"></b></button>
-                       </div>
-                   </div>
-                </form>
-            </div>
-        </div>
+      </div>
     </div>
 </section>

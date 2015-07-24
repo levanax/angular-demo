@@ -66,4 +66,44 @@ angular.module("portalDemoApp")
 			}
 			return directive;
 		}
+	])
+	.directive('appOrderSide', [
+
+		function() {
+			var directive = {
+				restrict: 'EAC',
+				scope: true,
+				link: function(scope, ele, attrs) {
+					scope.$watch(attrs.variable, function(newValue, oldValue, scope) {
+						if (typeof newValue === 'string') {
+							switch (newValue) {
+								case 'B':
+									$(ele).find('div.sellSide').removeClass("red-line");
+									$(ele).find('div.buySide').addClass("red-line");
+									break;
+								case 'S':
+									$(ele).find('div.buySide').removeClass("red-line");
+									$(ele).find('div.sellSide').addClass("red-line");
+									break;
+								default:
+									console.info('not found value');
+									break;
+							}
+						}
+					});
+
+					$(ele).find('div.buySide').on('click', function() {
+						scope.$apply(function() {
+							scope.$parent[attrs.variable] = "B";
+						})
+					})
+					$(ele).find('div.sellSide').on('click', function() {
+						scope.$apply(function() {
+							scope.$parent[attrs.variable] = "S";
+						})
+					})
+				}
+			}
+			return directive;
+		}
 	]);

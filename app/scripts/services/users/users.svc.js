@@ -14,7 +14,7 @@ angular.module('portalDemoApp')
               dataStorageSvc.session.clear();
               dataStorageSvc.local.clear();
               dataStorageSvc.session.put(constant.userinfo, data);
-              $state.go('trade');
+              $state.go('trade',{target:'order'});
             } else {
               //login failed.
               scopePointer.serverError = $filter('translate')('LOGIN.LOGIN_FAIL');

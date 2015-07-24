@@ -13,7 +13,6 @@ angular.module('portalDemoApp')
 							return $.param(data);
 						}
 					}).then(function(result) {
-						console.log(result);
 						return result.data.Security;
 					});
 					return result;

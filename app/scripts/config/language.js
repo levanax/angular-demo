@@ -17,6 +17,6 @@ angular.module('portalDemoApp')
         preferredLanguage = server.languages;
       }
       $translateProvider.preferredLanguage(preferredLanguage);
-      $translateProvider.useSanitizeValueStrategy(null);
+      $translateProvider.useSanitizeValueStrategy("escape");
     }
   ]);
