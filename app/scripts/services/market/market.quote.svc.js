@@ -12,10 +12,14 @@ angular.module('portalDemoApp')
 					priceClient = client;
 					client.connect();
 				},
-				closeConnection:function(){
+				closeConnection: function() {
 					var client = priceClient;
-					if (client.isConnected()) {
-						client.leave();
+					try {
+						if (client.isConnected()) {
+							client.leave();
+						}
+					} catch (e) {
+						$log.warn('close connention error.');
 					}
 				},
 				subscribeStock: function(scopePointer) {

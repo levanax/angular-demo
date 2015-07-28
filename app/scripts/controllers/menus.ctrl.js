@@ -19,9 +19,17 @@ angular.module('portalDemoApp')
 							target: 'orderBook'
 						};
 						break;
-					case 'market':
+					case 'market.quote':
 						stateName = "market";
-						params = {};
+						params = {
+							target: 'quote'
+						};
+						break;
+					case 'market.chart':
+						stateName = "market";
+						params = {
+							target: 'chart'
+						};
 						break;
 				}
 				$scope.$emit('go.page', stateName, params);

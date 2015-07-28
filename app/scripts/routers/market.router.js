@@ -6,7 +6,7 @@ angular.module('portalDemoApp')
 
       var marketState = {
         name: 'market',
-        url: '/market',
+        url: '/market/{target}',
         templateUrl: 'views/market/market.html',
         controller: 'marketCtrl'
       };
@@ -22,8 +22,20 @@ angular.module('portalDemoApp')
         }
       };
 
+      var marketChartState = {
+        name: 'market.chart',
+        url: '/market/chart',
+        views: {
+          'content@market': {
+            templateUrl: 'views/market/commons/chart.html',
+            controller: 'marketChartCtrl'
+          }
+        }
+      };
+
       $stateProvider
         .state(marketState)
-        .state(marketQuoteState);
+        .state(marketQuoteState)
+        .state(marketChartState);
     }
   ]);

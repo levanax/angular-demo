@@ -64,8 +64,8 @@
 		"MA": "MA"
 	},
 	"ORDER": {
-		"TIT": "Order",
-		"TITLE": "Security order",
+		"TIT": "Trade",
+		"TITLE": "Trade",
 		"MARKET": "Market",
 		"ACCOUNT": "Account",
 		"BUY_POWER": "Buy power",
@@ -111,7 +111,7 @@
 
 
 	"ORDERBOOK": {
-		"TITLE": "Order book",
+		"TITLE": "Order",
 		"SECURITY": "Security",
 		"ACCOUNT": "Account",
 		"MARKET": "Market",
@@ -145,7 +145,7 @@
 		}
 	},
 	"QUOTE": {
-		"TITLE": " Stock Quotes",
+		"TITLE": "Quotes",
 		"OPEN": "Open",
 		"CLOSE": "Close",
 		"Turnover": "T'over",
@@ -164,5 +164,9 @@
 			"STE03": "Incorrect Connection",
 			"SCE01": "Cannot connect to Server"
 		}
+	},
+
+	"CHART":{
+		"TITLE":"Chart"
 	}
 }

@@ -65,7 +65,7 @@
 	},
 	"ORDER": {
 		"TIT": "证券",
-		"TITLE": "证券订单",
+		"TITLE": "交易",
 		"MARKET": "市场",
 		"ACCOUNT": "账户",
 		"BUY_POWER": "购买力",
@@ -110,7 +110,7 @@
 	"ACCOUNT_TYPE_MARGIN": "孖展",
 
 	"ORDERBOOK": {
-		"TITLE": "订单记录",
+		"TITLE": "订单",
 		"SECURITY": "证券",
 		"MARKET": "市场",
 		"ACCOUNT": "账户",
@@ -145,7 +145,7 @@
 	},
 
 	"QUOTE": {
-		"TITLE": "股票行情",
+		"TITLE": "行情",
 		"OPEN": "开市价",
 		"CLOSE": "收市价",
 		"Turnover": "成交额",
@@ -164,5 +164,9 @@
 			"STE03": "不正确连接",
 			"SCE01": "未能连接伺服器"
 		}
+	},
+
+	"CHART":{
+		"TITLE":"走势"
 	}
 }
