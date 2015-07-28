@@ -8,7 +8,7 @@
 	"LOGIN": {
 		"TITLE": "用户登入",
 		"LOGIN_BTN": "登入",
-		"LOGIN_FAIL": "登入失败"
+		"LOGIN_FAIL": "登入帐号或密码错误，请重新输入"
 	},
 	"BUTTON": {
 		"CONFIRM": "确认",
@@ -90,7 +90,15 @@
 		"TRANS_AMOUNT": "交易金额",
 		"CHARGES": "手续费",
 		"SYSTEM_TIP": "系统提示",
-		"ORDER_SUCCESS": "成功下单，订单编号为："
+		"ORDER_SUCCESS": "成功下单，订单编号为：",
+		"ERROR": {
+			"Security_null": "请输入证券代号",
+			"Security_formatting": "证券代号输入有误",
+			"Price_null": "请输入价格",
+			"Qty_null": "请输入数量",
+			"Price_formatting": "价格输入有误",
+			"Qty_formatting": "数量必须是整手股数"
+		}
 	},
 
 

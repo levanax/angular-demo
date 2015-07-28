@@ -72,4 +72,20 @@ $http({
 
 old version Opera browser 会存在闪（出现源码在页面，因渲染过慢）的问题
 
+-
+builded mobile app load缓慢，可使用三个View，预加载当前View左右两个View，这样还可以为左右拖出View提供支持
+
+browser: 系统自带浏览器
+1.*使用jquery focus()在手机上获得焦点 不能自动调出 键盘
+2.获取焦点元素会保持在原有位置，不会浮现在屏幕中央
+
+-
+**页面布局设计**
+body分为 head / content / foot (10%/80%/10%) 另加最小高度，content内容较长时，content添加滚动条，foot/head 不建议使用绝对定位
+*当用户选择input 弹出键盘时 ，菜单是次要的，不需要突出显示
+
+**字体设计**
+跟随系统默认字体大小（建议使用 em ）
+
+
 

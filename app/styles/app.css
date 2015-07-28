@@ -1,16 +1,21 @@
 
 .buyAndsell{
-  background: red;
-  font-size: 20px;
+  background: hsla(221, 100%, 63%, 0.80);
+  font-size: 1.5em;
   text-align: center;
   height: 50px;
+  color: #fff;
+  padding-top: 10px;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .buyPowerAndqty{
   background: hsla(224, 100%, 89%, 0.50);
   height: 40px;
-  font-size: 15px;
+  font-size: 1em;
   text-align: center;
-  margin-top: -19px;
 }
 .buyPowerAndqty div{
    padding-top: 10px;
@@ -18,7 +23,7 @@
 .input-xl{
   border-radius: 4px 4px 4px 4px;
   height: 30px;
-  font-size: 15px;
+  font-size: 1em;
   padding: 0px 0px;
 }
 .space-height{
@@ -26,25 +31,30 @@
 }
 .btn-large{
   padding: 4px 20px;
-  font-size: 15px;
+  font-size: 1em;
   line-height: 1.5;
   border-radius: 3px;
 }
-.panelFooter div{
+.panelFooter{
+  height: 10%;
+  min-height: 50px;
   background: hsla(217, 100%, 62%, 0.80);
-  height: 50px;
-  font-size: 18px;
+  font-size: 1.3em;
   text-align: center;
-  padding-top: 10px;
   color: #fff;
+  padding-top: 15px;
 }
 .panelFooter a{
    color: #fff;
    text-decoration: none;
+   display:block;
+   white-space:nowrap;
+   overflow:hidden;
+   text-overflow:ellipsis;
 }
 .red-line{
   border-bottom: 5px solid red;
-  padding-bottom: 7px;
+  padding-bottom: 5px;
 }
 .red-background button{
   background-color: #ff0000 !important;
@@ -53,7 +63,7 @@
   background-color: #ff0000 !important;
 }
 .orderBook-table{
-   font-size: 15px;
+   font-size: 1em;
    line-height: 40px;
    width: 1500px !important;
    margin-top: 30px !important;
@@ -68,15 +78,15 @@
   margin-top: 30px !important;
   float: left;
   line-height: 40px;
-  font-size: 15px;
+  font-size: 1em;
 }
 .forgetPwd-font{
-  font-size: 15px;
+  font-size: 1em;
   text-align: right;
 }
 .loginBtn{
   padding: 3px 120px;
-  font-size: 15px;
+  font-size: 1em;
   line-height: 2;
   border-radius: 3px;
 }
@@ -85,18 +95,18 @@
   padding-top: 10px;
 }
 .securityName-font{
-  font-size: 15px;
+  font-size: 1em;
 }
 .errorMessage{
   color: red;
-  font-size: 20px;
-  text-align: center;
+  font-size: 1em;
+  text-align: left;
   padding-top: 10px;
 }
 .quote-headFirst{
   background: hsla(212, 100%, 66%, 0.60);
   height: 40px;
-  font-size: 25px;
+  font-size: 1.5em;
   color: #ff0000;
   margin-top: 15px;
   text-align: center;
@@ -104,14 +114,14 @@
 .quote-headSecond{
   background: hsla(212, 100%, 66%, 0.60);
   height: 40px;
-  font-size: 15px;
+  font-size: 1em;
   color: #ff0000;
   margin-top: 15px;
   padding-top:15px;
   text-align: center;
 }
 .quote-body{
-  font-size: 15px;
+  font-size: 1em;
   padding-top: 20px;
   text-align: center;
   border-right: 2px solid #ff0000;
@@ -123,20 +133,31 @@
 
 .orderBook-fixed div{
   border:1px solid #7ae4ff;
-  font-size: 30px;
+  font-size: 1em;
   float: left;
   line-height: 80px;
 }
-
 .orderBook-fixedBor{
   border:1px solid #7ae4ff;
 }
 .overfloat-Y{
-  overflow-y:scroll;
-  overflow-x:hidden;
-  min-height: 500px; 
+  height:90% !important;
+  min-height: 460px;
+  overflow-y: scroll;
+  overflow-x: hidden
+}
+.hiddenEle{
+  display: none;
 }
 
-.hiddenEle{
-display: none;
+.htmlHeight{
+  height: 100%;
 }
+.bodyHeight{
+  height: 100%;
+}
+.containerHeight{
+  height: 100%;
+}
+
+

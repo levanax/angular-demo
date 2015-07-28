@@ -1,5 +1,5 @@
-var cometdURL = "";
-var tokenText = "";
+var cometdURL = "https://ps01.2go-app.com/cometd";
+var tokenText = "C8A22D4D863AF1DEBF9D40CB0C2A1578B753A469F395924415913AC5384D1597A31CDF3B4352888761BE4AA1118FF04AA7D9888996EC0543537B69DA75D7E194";
 var priceClient = null;
 
 function PriceClient(state) {

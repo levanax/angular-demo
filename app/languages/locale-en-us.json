@@ -8,7 +8,7 @@
 	"LOGIN": {
 		"TITLE": "User login",
 		"LOGIN_BTN": "Login",
-		"LOGIN_FAIL": "Login fail."
+		"LOGIN_FAIL": "Invalid Username or Password. Please try again."
 	},
 	"BUTTON": {
 		"CONFIRM": "Confirm",
@@ -16,7 +16,7 @@
 		"CLEAR": "Clear",
 		"CANCEL": "Cancel",
 		"BACK": "Back",
-		"EXIT":"Exit"
+		"EXIT": "Exit"
 	},
 
 	"CURRENCYS": {
@@ -90,7 +90,15 @@
 		"TRANS_AMOUNT": "Transaction Amount",
 		"CHARGES": "Charges",
 		"SYSTEM_TIP": "System msg",
-		"ORDER_SUCCESS": "Order success，order id："
+		"ORDER_SUCCESS": "Order success，order id：",
+		"ERROR": {
+			"Security_null": "Please enter a Securities code",
+			"Security_formatting": "Security code formatting error.",
+			"Price_null": "Plz enter price.",
+			"Qty_null": "Please enter a quantity",
+			"Price_formatting": "Not Price Invalid",
+			"Qty_formatting": "Quantity must be in board lot"
+		}
 	},
 
 
@@ -137,7 +145,7 @@
 		}
 	},
 	"QUOTE": {
-		"TITLE":" Stock Quotes",
+		"TITLE": " Stock Quotes",
 		"OPEN": "Open",
 		"CLOSE": "Close",
 		"Turnover": "T'over",

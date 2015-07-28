@@ -7,11 +7,9 @@ angular.module('portalDemoApp')
 			var scopePointer = $scope;
 			marketQuoteViewSvc.openConnection(scopePointer);
 
-			$scope.stockCodeKeydown = function(event) {
-				if (event.keyCode === 13) {
-					$("#stockCodeInput").blur();//temp
-					marketQuoteViewSvc.subscribeStock(scopePointer);
-				}
+			$scope.enterStockCode = function() {
+				//blur event
+				marketQuoteViewSvc.subscribeStock(scopePointer);
 			}
 			$scope.isEmerge = function(field) {
 				if (angular.isUndefined(field)) {

@@ -8,7 +8,7 @@
       </div>
       <div class="row space-height">
         <div class="col-xs-18 col-xs-offset-3">
-          <input id="stockCodeInput" ng-model="stockCode" ng-keydown="stockCodeKeydown($event)" type="text" class="form-control input-xl" placeholder="{{'ORDER.SECURITY_CODE' | translate}}">
+          <input app-stock-input ng-blur="enterStockCode()" ng-model="stockCode"  type="text" class="form-control input-xl" placeholder="{{'ORDER.SECURITY_CODE' | translate}}">
         </div>
       </div>
       <div class="row space-height securityName-font">
