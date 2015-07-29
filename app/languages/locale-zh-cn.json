@@ -132,5 +132,26 @@
 			"ORDER":"下单",
 			"ACTION": "指令"
 		}
+	},
+	"QUOTE": {
+		"TITLE": "行情",
+		"OPEN": "开市价",
+		"CLOSE": "收市价",
+		"Turnover": "成交额",
+		"DayHigh": "当日最高",
+		"DayLow": "当日最低",
+		"Volume": "成交量",
+		"52WeekHig": "52 周最高",
+		"52WeekLow": "52 周最低",
+		"LotSize": "每股手数",
+		"STATUS": {
+			"CONNECT": "正在连接...",
+			"SUCCESS": "成功连接",
+			"FAIL": "连接失败!",
+			"STE01": "连接已过期",
+			"STE02": "连接错误",
+			"STE03": "不正确连接",
+			"SCE01": "未能连接伺服器"
+		}
 	}
 }

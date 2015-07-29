@@ -133,5 +133,26 @@
 			"ORDER": "Order",
 			"ACTION": "Action"
 		}
+	},
+	"QUOTE": {
+		"TITLE": "Quotes",
+		"OPEN": "Open",
+		"CLOSE": "Close",
+		"Turnover": "T'over",
+		"DayHigh": "Day High",
+		"DayLow": "Day Low",
+		"Volume": "Volume",
+		"52WeekHig": "52 Wk High",
+		"52WeekLow": "52 Wk Low",
+		"LotSize": "Lot size",
+		"STATUS": {
+			"CONNECT": "Connecting ...",
+			"SUCCESS": "Connected",
+			"FAIL": "Disconnect!",
+			"STE01": "Connection Expired",
+			"STE02": "Connection Error",
+			"STE03": "Incorrect Connection",
+			"SCE01": "Cannot connect to Server"
+		}
 	}
 }

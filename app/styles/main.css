@@ -143,3 +143,30 @@
 .orderBookMinwidth{
     min-width: 900px;
 }
+
+
+
+
+.quote-right{
+    border-right: 2px solid #95dfff;
+    text-align: center;
+}
+.quote-space{
+    padding-top: 20px;
+}
+.quoteHeading{
+    height:50px;
+    background: hsla(224, 100%, 89%, 0.50);
+    padding-top: 15px;
+    color: red
+}
+.quoteHeading-first{
+    font-size: 1.8em;
+    margin-top: -10px !important;
+}
+.quotePrice{
+    min-width: 900px;
+}
+.containerWidth{
+    min-width: 1350px;
+}

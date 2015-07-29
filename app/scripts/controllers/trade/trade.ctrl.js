@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('tradeCtrl', ['staticStorageSvc','$scope', '$state',
-		function(staticStorageSvc,$scope, $state) {
+	.controller('tradeCtrl', ['tradeQuoteViewSvc','staticStorageSvc','$scope', '$state',
+		function(tradeQuoteViewSvc,staticStorageSvc,$scope, $state) {
 			$scope.$on('$viewContentLoaded', function(event) {
 				$state.go('trade.order', {}, {
 					location: false
@@ -18,6 +18,7 @@ angular.module('portalDemoApp')
 			});
 
 			$scope.exit = function(){
+				tradeQuoteViewSvc.closeConnection();
 				staticStorageSvc.clear();
 				$state.go('login');
 			}

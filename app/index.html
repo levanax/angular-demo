@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="portalDemoApp" manifest="demo.manifest" class="no-js">
+<html ng-app="portalDemoApp" class="no-js">
   <head>
     <meta charset="utf-8">
     <title translate="INDEX_TITLE"></title>
@@ -25,7 +25,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container-fluid">
+    <div class="container-fluid containerWidth">
     <div ui-view=""></div>
     </div>
 
@@ -68,6 +68,18 @@
         <script src="scripts/commons/BigDecimal-all-last.min.js" ></script>
         <script src="scripts/utils/util.js" ></script>
 
+        <!-- cometed -->
+        <script src="scripts/commons/org/cometd.js" ></script>
+        <script src="scripts/commons/org/cometd/AckExtension.js" ></script>
+        <script src="scripts/commons/org/cometd/ReloadExtension.js" ></script>
+        <script src="scripts/commons/jquery.cometd.js" ></script>
+        <script src="scripts/commons/jquery.cometd-reload.js" ></script>
+        <script src="scripts/commons/client.js" ></script>
+
+        <!-- echart -->
+        <script src="scripts/commons/echarts-plain.js" ></script>
+        <script src="scripts/commons/echarts-client.js" ></script>
+
         <script src="scripts/app.js"></script>
         <script src="scripts/config/setting.js"></script>
         <script src="scripts/config/constants.js"></script>
@@ -100,9 +112,11 @@
         <script src="scripts/services/users/users.svc.js"></script>
         <script src="scripts/services/trade/trade.order.svc.js"></script>
         <script src="scripts/services/trade/trade.orderBook.svc.js"></script>
+        <script src="scripts/services/trade/trade.quote.svc.js"></script>
 
         <!--directives -->
         <script src="scripts/directives/app.dict.js"></script>
+        <script src="scripts/directives/panel.commons.dict.js"></script>
         <script src="scripts/directives/validator.dict.js"></script>
 
         <!--controllers -->
@@ -112,7 +126,8 @@
         <script src="scripts/controllers/trade/trade.ctrl.js"></script>
         <script src="scripts/controllers/trade/trade.order.ctrl.js"></script>
         <script src="scripts/controllers/trade/trade.orderBook.ctrl.js"></script>
-
+        <script src="scripts/controllers/trade/trade.quote.ctrl.js"></script>
+        <script src="scripts/controllers/trade/trade.chart.ctrl.js"></script>
 
         <script src="scripts/socket/client.js"></script>
         <!-- endbuild -->
