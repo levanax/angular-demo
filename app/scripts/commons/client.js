@@ -8,6 +8,7 @@ function PriceClient(state) {
     var _disconnecting;
     var _subscriptionIN;
     this._scope = null;
+    this._token = null;
     this._currentSubscription = null;
 
     this.connect = function() {
@@ -19,7 +20,7 @@ function PriceClient(state) {
         });
         $.cometd.websocketEnabled = false;
         $.cometd.handshake({
-            secret_token: tokenText
+            secret_token: this._token
         });
     };
 

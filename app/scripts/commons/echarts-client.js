@@ -340,7 +340,6 @@ var echartsClient = {};
 		}
 
 		_this.timeTicket = setInterval(function() {
-			console.log('update chart ...')
 			// 动态数据接口 addData
 			newDataPrice = seriesDataPrice[lastIndex];
 			if (newDataPrice > maxPrice) {

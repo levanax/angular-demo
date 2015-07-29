@@ -6,9 +6,10 @@ angular.module('portalDemoApp')
 		function($log) {
 			var service = {
 				scopePointer: null,
-				openConnection: function(scopePointer) {
+				openConnection: function(scopePointer,token) {
 					var client = new PriceClient();
 					client._scope = scopePointer;
+					client._token = token;
 					priceClient = client;
 					client.connect();
 				},

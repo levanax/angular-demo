@@ -124,6 +124,21 @@ angular.module('portalDemoApp')
 						return result.data.Account.OrdHist;
 					});
 					return result;
+				},
+				queryCometdToken: function(params) {
+					// sessionid
+					var result = null;
+					result = $http({
+						method: 'post',
+						url: server.urlPrefix + 'system/token',
+						data: params,
+						transformRequest: function(data) {
+							return $.param(data);
+						}
+					}).then(function(result) {
+						return result.data;
+					});
+					return result;
 				}
 			}
 			return service;

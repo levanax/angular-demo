@@ -1,11 +1,8 @@
 'use strict';
 
 angular.module('portalDemoApp')
-	.controller('marketQuoteCtrl', ['$filter', 'marketQuoteViewSvc', '$scope',
-		function($filter, marketQuoteViewSvc, $scope) {
-			//
-			var scopePointer = $scope;
-			marketQuoteViewSvc.openConnection(scopePointer);
+	.controller('marketQuoteCtrl', ['securityDaoSvc','constant','staticStorageSvc','$filter', 'marketQuoteViewSvc', '$scope',
+		function(securityDaoSvc,constant,staticStorageSvc,$filter, marketQuoteViewSvc, $scope) {
 
 			$scope.enterStockCode = function() {
 				//blur event
@@ -26,5 +23,18 @@ angular.module('portalDemoApp')
 				}
 				return result;
 			}
+
+			$scope.ini = function() {
+				var accountInfoTemp = staticStorageSvc.get(constant.userinfo);
+				var params = {
+					'sessId': accountInfoTemp.getSessionId()
+				}
+				var scopePointer = $scope;
+				securityDaoSvc.queryCometdToken(params).then(function(data) {
+					var token = data.token;
+					marketQuoteViewSvc.openConnection(scopePointer,token);
+				});
+			}
+			$scope.ini();
 		}
 	]);
