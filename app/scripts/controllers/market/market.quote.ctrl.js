@@ -6,6 +6,7 @@ angular.module('portalDemoApp')
 
 			$scope.enterStockCode = function() {
 				//blur event
+				var scopePointer = $scope;
 				marketQuoteViewSvc.subscribeStock(scopePointer);
 			}
 			$scope.isEmerge = function(field) {
