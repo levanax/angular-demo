@@ -49,6 +49,9 @@
           <tr  data-ng-repeat="ob in  ordHists track by ob.OrdID">
             <td>{{ob.LastExecTime}}</td>
           </tr>
+          <tr data-ng-if="noRecords">
+          <td class="orderBook-NorecordBorder">&nbsp;</td>
+          </tr>
         </table>
       </div>
       <div class="orderBook-Scroll">
@@ -72,7 +75,7 @@
             <td>&nbsp;</td>
           </tr>
           <tr data-ng-if="noRecords">
-              <td clospan="7">No records</td>
+              <td colspan="7" class="orderBook-Norecord"><span class="fixe">No records</span>&nbsp;</td>
           </tr>
         </table>
       </div>

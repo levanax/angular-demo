@@ -176,3 +176,15 @@
 .modalTop{
   padding-top: 60px;
 }
+
+.orderBook-NorecordBorder{
+  border-right: 1px solid #ffffff !important;
+}
+.orderBook-Norecord{
+  border-left:1px solid #ffffff !important;
+  color: #ff0000;
+}
+.orderBook-Norecord .fixe{
+  position: fixed;
+  padding-left: 20px;
+}
