@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-xs-8" translate="ORDER.SECURITY_CODE"></div>
                             <div class="col-xs-16">
-                                <input ng-keydown="securityKeyDown($event)" name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/" required>
+                                <input app-tab-next="#orderPrice" ng-keydown="securityKeyDown($event)" name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/" required>
                             </div>
                         </div>
                         <div class="row" data-ng-if="isEmerge(security.name)">
@@ -61,7 +61,7 @@
                             <div class="col-xs-16">
                                 <div class="form-group">
                                     <div class="input-group input-group-xl" >
-                                        <input name="price" ng-change="formatPrice(order.price)" data-ng-model="order.price" class="form-control" size="16" type="text" value="" data-app-pattern="/^\d+$|^\d+\.\d*$/"  required>
+                                        <input app-tab-next="#orderQty" id="orderPrice" name="price" ng-change="formatPrice(order.price)" data-ng-model="order.price" class="form-control" size="16" type="text" value="" data-app-pattern="/^\d+$|^\d+\.\d*$/"  required>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down" data-ng-click="priceDown()"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up" data-ng-click="priceUp()"></span></span>
                                     </div>
@@ -79,7 +79,7 @@
                             <div class="col-xs-16">
                                 <div class="form-group">
                                     <div class="input-group input-group-xl" >
-                                        <input name="qty" class="form-control" size="16" ng-change="formatQty(order.qty)" data-ng-model="order.qty" type="text" value="" data-app-pattern="/^\d+$/" required>
+                                        <input  app-tab-next="#confirmOrders" id="orderQty" name="qty" class="form-control" size="16" ng-change="formatQty(order.qty)" data-ng-model="order.qty" type="text" value="" data-app-pattern="/^\d+$/" required>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down" data-ng-click="qtyDown()"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up" data-ng-click="qtyUp()"></span></span>
                                         <span class="input-group-addon"><span style="margin-bottom: 8px;" class="glyphicon glyphicon-chevron-up"></span><span style="position: absolute; margin-top: 9px;margin-left: -12px;" class="glyphicon glyphicon-chevron-up" data-ng-click="qtyUpTop()"></span></span>
@@ -112,16 +112,16 @@
                         </div>
                         <div class="errorMessage">
                             <div data-ng-if="interacted(orderForm.securityId)" ng-messages="orderForm.securityId.$error" ng-messages-multiple>
-                                <div ng-message="required"> plz enter security id.</div>
-                                <div ng-message="pattern">security id formatting error.</div>
+                                <div ng-message="required">{{'ORDER.ERROR.Security_null' | translate}}</div>
+                                <div ng-message="pattern">{{'ORDER.ERROR.Security_formatting' | translate}}</div>
                             </div>
                             <div data-ng-if="interacted(orderForm.price)" ng-messages="orderForm.price.$error" ng-messages-multiple>
-                                <div ng-message="required"> plz enter price.</div>
-                                <div ng-message="pattern">price formatting error.</div>
+                                <div ng-message="required">{{'ORDER.ERROR.Price_null' | translate}}</div>
+                                <div ng-message="pattern">{{'ORDER.ERROR.Price_formatting' | translate}}</div>
                             </div>
                             <div data-ng-if="interacted(orderForm.qty)" ng-messages="orderForm.qty.$error" ng-messages-multiple>
-                                <div ng-message="required"> plz enter qty.</div>
-                                <div ng-message="pattern">qty  formatting error.</div>
+                                <div ng-message="required">{{'ORDER.ERROR.Qty_null' | translate}}</div>
+                                <div ng-message="pattern">{{'ORDER.ERROR.Qty_formatting' | translate}}</div>
                             </div>
                         </div>
                         <div class="row panel-button text-center">
@@ -141,7 +141,7 @@
 </div>
 </form>
 
-<div app-modal visible="showOrderStep1" class="modal fade model-top" id="newPopUp">
+<div data-app-modal="" data-visible="showOrderStep1" class="modal fade model-top" id="newPopUp">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -150,52 +150,52 @@
                 </div>
                 <div class="modal-body order-content">
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.MARKET"></div>
-                        <div class="col-md-16" data-ng-bind='order.marketView'></div>
+                        <div class="col-xs-8" translate="ORDER.MARKET"></div>
+                        <div class="col-xs-16" data-ng-bind='order.marketView'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ACCOUNT"></div>
-                        <div class="col-md-16" data-ng-bind='order.accNumView'></div>
+                        <div class="col-xs-8" translate="ORDER.ACCOUNT"></div>
+                        <div class="col-xs-16" data-ng-bind='order.accNumView'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.TIT"></div>
-                        <div class="col-md-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
+                        <div class="col-xs-8" translate="ORDER.TIT"></div>
+                        <div class="col-xs-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_CODE"></div>
-                        <div class="col-md-16" data-ng-bind='security.id'></div>
+                        <div class="col-xs-8" translate="ORDER.SECURITY_CODE"></div>
+                        <div class="col-xs-16" data-ng-bind='security.id'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_NAME"></div>
-                        <div class="col-md-16" data-ng-bind='security.name'></div>
+                        <div class="col-xs-8" translate="ORDER.SECURITY_NAME"></div>
+                        <div class="col-xs-16" data-ng-bind='security.name'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.PRICE"></div>
-                        <div class="col-md-16">
+                        <div class="col-xs-8" translate="ORDER.PRICE"></div>
+                        <div class="col-xs-16">
                             <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
                             <span data-ng-bind="order.priceView"></span>
                         </div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.QUANTITY"></div>
-                        <div class="col-md-16" data-ng-bind='order.qty'></div>
+                        <div class="col-xs-8" translate="ORDER.QUANTITY"></div>
+                        <div class="col-xs-16" data-ng-bind='order.qty'></div>
                     </div>
                     <!-- <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.TRANS_AMOUNT"></div>
-                        <div class="col-md-16" data-ng-bind="order.totalAmount"></div>
+                        <div class="col-xs-8" translate="ORDER.TRANS_AMOUNT"></div>
+                        <div class="col-xs-16" data-ng-bind="order.totalAmount"></div>
                     </div> -->
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8"  translate="ORDER.CHARGES"></div>
-                        <div class="col-md-16">{{order.currencyType}} $0.00
+                        <div class="col-xs-8"  translate="ORDER.CHARGES"></div>
+                        <div class="col-xs-16">{{order.currencyType}} $0.00
                             <a app-popover class="hiddenEle" tabindex="0" id="detailContent1"   role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
                             <div class='container order-HandlingCharge'>
                                <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>佣金</div>
-                                   <div class='col-md-14'>港币$0.00</div>
+                                   <div class='col-xs-10'>佣金</div>
+                                   <div class='col-xs-14'>港币$0.00</div>
                                </div>
                                <div class='row top-underline'>
-                                   <div class='col-md-10'>手续费</div>
-                                   <div class='col-md-14'><b class='twoUnderline'>港币$0.00</b></div>
+                                   <div class='col-xs-10'>手续费</div>
+                                   <div class='col-xs-14'><b class='twoUnderline'>港币$0.00</b></div>
                                </div>
                             </div>
                             ">
@@ -204,19 +204,19 @@
                         </div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ORDER_TYPE"></div>
-                        <div class="col-md-16" data-ng-bind="order.typeView"></div>
+                        <div class="col-xs-8" translate="ORDER.ORDER_TYPE"></div>
+                        <div class="col-xs-16" data-ng-bind="order.typeView"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-ng-click="signingOrderEvent()" class="btn btn-primary" translate="BUTTON.CONFIRM"></button>
+                    <button id="confirmOrders" type="button" data-ng-click="signingOrderEvent()" class="btn btn-primary" translate="BUTTON.CONFIRM"></button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" translate="BUTTON.CANCEL"></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div app-modal visible="showOrderStep2" class="modal fade model-top" id="resultPopUp">
+    <div data-app-modal="" data-visible="showOrderStep2" class="modal fade model-top" id="resultPopUp">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -225,56 +225,56 @@
                 </div>
                 <div class="modal-body order-content">
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SYSTEM_TIP"></div>
-                        <div class="col-md-16" data-ng-bind='systemMsg'></div>
+                        <div class="col-xs-8" translate="ORDER.SYSTEM_TIP"></div>
+                        <div class="col-xs-16" data-ng-bind='systemMsg'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.MARKET"></div>
-                        <div class="col-md-16" data-ng-bind='order.marketView'></div>
+                        <div class="col-xs-8" translate="ORDER.MARKET"></div>
+                        <div class="col-xs-16" data-ng-bind='order.marketView'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ACCOUNT"></div>
-                        <div class="col-md-16" data-ng-bind='order.accNumView'></div>
+                        <div class="col-xs-8" translate="ORDER.ACCOUNT"></div>
+                        <div class="col-xs-16" data-ng-bind='order.accNumView'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.TIT"></div>
-                        <div class="col-md-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
+                        <div class="col-xs-8" translate="ORDER.TIT"></div>
+                        <div class="col-xs-16" data-ng-bind="'ORDER.SIDE.'+order.side |translate"></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_CODE"></div>
-                        <div class="col-md-16" data-ng-bind='security.id'></div>
+                        <div class="col-xs-8" translate="ORDER.SECURITY_CODE"></div>
+                        <div class="col-xs-16" data-ng-bind='security.id'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.SECURITY_NAME"></div>
-                        <div class="col-md-16" data-ng-bind='security.name'></div>
+                        <div class="col-xs-8" translate="ORDER.SECURITY_NAME"></div>
+                        <div class="col-xs-16" data-ng-bind='security.name'></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.PRICE"></div>
-                        <div class="col-md-16">
+                        <div class="col-xs-8" translate="ORDER.PRICE"></div>
+                        <div class="col-xs-16">
                             <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
                             <span data-ng-colak>{{order.price | currency:$:3}}</span>
                         </div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.QUANTITY"></div>
-                        <div class="col-md-16" data-ng-bind='order.qty'></div>
+                        <div class="col-xs-8" translate="ORDER.QUANTITY"></div>
+                        <div class="col-xs-16" data-ng-bind='order.qty'></div>
                     </div>
                     <div class="row hiddenEle" name="spaceColor">
-                        <div class="col-md-8">交易金额</div>
-                        <div class="col-md-16" data-ng-bind="order.totalAmount"></div>
+                        <div class="col-xs-8">交易金额</div>
+                        <div class="col-xs-16" data-ng-bind="order.totalAmount"></div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8">手续费</div>
-                        <div class="col-md-16">{{order.currencyType}} $0.00
+                        <div class="col-xs-8">手续费</div>
+                        <div class="col-xs-16">{{order.currencyType}} $0.00
                             <a tabindex="0" id="detailContent1"  class="hiddenEle" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="手续费详细" data-html="true" data-content="
                             <div class='container order-HandlingCharge'>
                                <div class='row' name='spaceColor'>
-                                   <div class='col-md-10'>佣金</div>
-                                   <div class='col-md-14'>港币$0.00</div>
+                                   <div class='col-xs-10'>佣金</div>
+                                   <div class='col-xs-14'>港币$0.00</div>
                                </div>
                                <div class='row top-underline'>
-                                   <div class='col-md-10'>手续费</div>
-                                   <div class='col-md-14'><b class='twoUnderline'>港币$0.00</b></div>
+                                   <div class='col-xs-10'>手续费</div>
+                                   <div class='col-xs-14'><b class='twoUnderline'>港币$0.00</b></div>
                                </div>
                             </div>
                             ">
@@ -283,8 +283,8 @@
                         </div>
                     </div>
                     <div class="row" name="spaceColor">
-                        <div class="col-md-8" translate="ORDER.ORDER_TYPE"></div>
-                        <div class="col-md-16" data-ng-bind="order.typeView"></div>
+                        <div class="col-xs-8" translate="ORDER.ORDER_TYPE"></div>
+                        <div class="col-xs-16" data-ng-bind="order.typeView"></div>
                     </div>
                 </div>
                 <div class="modal-footer">

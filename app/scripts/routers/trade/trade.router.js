@@ -37,19 +37,8 @@ angular.module('portalDemoApp')
           ]
         }
       }
-      var tradeQuoteState = {
-        name: 'trade.quote',
-        url: '/trade/quote',
-        views: {
-          'quote@trade': {
-            templateUrl: 'views/trade/commons/quote.html',
-            controller: 'tradeQuoteCtrl'
-          }
-        }
-      }
       $stateProvider
         .state(tradeState)
-        .state(tradeOrderState)
-        .state(tradeQuoteState);
+        .state(tradeOrderState);
     }
   ]);

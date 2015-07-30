@@ -27,7 +27,6 @@ angular.module('portalDemoApp')
 					this.scopePointer = scopePointer;
 					var client = priceClient;
 					if (client.isConnected()) {
-						console.info(scopePointer.stockCode);
 						client.subscribe(scopePointer.stockCode, this.releaseData);
 					}
 				},

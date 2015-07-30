@@ -8,6 +8,12 @@ angular.module('portalDemoApp')
 				orderViewSvc.initialize(scopePointer, $stateParams);
 			});
 
+			$scope.$on('refreshOrder',function(){
+				$scope.resetFormEvent();
+				var scopePointer = $scope;
+				orderViewSvc.refreshBuyPower(scopePointer);
+			});
+
 			$scope.isEmerge = function(field) {
 				if (angular.isUndefined(field)) {
 					return false;
@@ -15,6 +21,19 @@ angular.module('portalDemoApp')
 					return true;
 				}
 			};
+
+			$scope.$on('order.set', function(event, params) {
+				if (angular.isObject(params)) {
+					if (params.stockCode !== $scope.security.id) {
+						$scope.resetFormEvent();
+						$scope.security.id = params.stockCode;
+						$timeout.cancel($scope.enterSecurityEvent);
+						$scope.enterSecurityId();
+						event.preventDefault();
+					}
+					$scope.order.price = params.price;
+				}
+			})
 
 			$scope.showOrderStep1 = false;
 			$scope.toggleModalOrderStep1 = function() {
@@ -24,6 +43,7 @@ angular.module('portalDemoApp')
 			$scope.toggleModalOrderStep2 = function() {
 				$scope.showOrderStep2 = !$scope.showOrderStep2;
 			};
+
 
 			$scope.submitted = false; // if reset form ,must set false
 			$scope.interacted = function(field) {
@@ -112,6 +132,8 @@ angular.module('portalDemoApp')
 			}
 			$scope.enterSecurityId = function() {
 				var scopePointer = $scope;
+				$scope.$emit('emit.quote', $scope.security.id);
+				$scope.$emit('emit.chart', $scope.security.id);
 				orderViewSvc.enterSecurity(scopePointer);
 			}
 

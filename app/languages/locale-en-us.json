@@ -89,7 +89,15 @@
 		"TRANS_AMOUNT": "Transaction Amount",
 		"CHARGES": "Charges",
 		"SYSTEM_TIP":"System msg",
-		"ORDER_SUCCESS":"Order success，order id："
+		"ORDER_SUCCESS":"Order success，order id：",
+		"ERROR": {
+			"Security_null": "Please enter a Securities code",
+			"Security_formatting": "Security code formatting error.",
+			"Price_null": "Plz enter price.",
+			"Qty_null": "Please enter a quantity",
+			"Price_formatting": "Not Price Invalid",
+			"Qty_formatting": "Quantity must be in board lot"
+		}
 	},
 
 

@@ -9,7 +9,6 @@ angular.module("portalDemoApp")
 				replace: false,
 				transclude: false,
 				restrict: 'A',
-				scope: true,
 				controller:'tradeQuoteCtrl'
 			};
 		}
@@ -22,7 +21,6 @@ angular.module("portalDemoApp")
 				replace: false,
 				transclude: false,
 				restrict: 'A',
-				scope: true,
 				controller:'tradeChartCtrl'
 			};
 		}

@@ -43,6 +43,17 @@ angular.module('portalDemoApp')
 						scopePointer.buyPower = $filter('currency')(data.getBuyPower(), '$', 2);
 					});
 				},
+				refreshBuyPower:function(scopePointer){
+					var accountInfoTemp = staticStorageSvc.get(constant.userinfo);
+					var qabParams = {
+						'sessId': accountInfoTemp.getSessionId(),
+						'accNum': scopePointer.order.accNum,
+						'cucyCode': scopePointer.accountCurrent.CucyCode
+					};
+					securityDaoSvc.queryAccCashBalance(qabParams).then(function(data) {
+						scopePointer.buyPower = $filter('currency')(data.getBuyPower(), '$', 2);
+					});
+				},
 				enterSecurity: function(scopePointer) {
 					var accountInfoTemp = staticStorageSvc.get(constant.userinfo);
 					var params = {

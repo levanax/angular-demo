@@ -168,5 +168,8 @@
     min-width: 900px;
 }
 .containerWidth{
-    min-width: 1350px;
+    min-width: 1250px;
+}
+.divHand{
+    cursor: hand !important;
 }

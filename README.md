@@ -73,3 +73,16 @@ $http({
 old version Opera browser 会存在闪（出现源码在页面，因渲染过慢）的问题
 
 
+- 
+指令必须以 data-app-modal="" 这种形式出现，否则压缩代码后可能出现问题
+[data-] 为html5 扩展属性定义形式
+案例：
+```html
+<div app-modal  visible="showOrderStep1"></div>
+```
+压缩后：
+```html
+<div app-modal  visible></div>
+```
+
+

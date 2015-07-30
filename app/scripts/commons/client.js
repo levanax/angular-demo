@@ -1,4 +1,4 @@
-var cometdURL = "";
+var cometdURL = "https://ps01.2go-app.com/cometd";
 var tokenText = "";
 var priceClient = null;
 
