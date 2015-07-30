@@ -40,7 +40,7 @@
         </div>
         <div class="row space-height">
           <div class="col-xs-18 col-xs-offset-3">
-            <input ng-keydown="securityKeyDown($event)" name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/"placeholder="{{'ORDER.SECURITY_CODE' | translate}}" required>
+            <input  data-app-enter-key="" ng-keydown="securityKeyDown($event)" name="securityId" type="text" class="form-control input-xl"   data-ng-model="security.id" data-ng-pattern="/^\d*$/"placeholder="{{'ORDER.SECURITY_CODE' | translate}}" required>
           </div>
         </div>
         <div class="col-xs-18 col-xs-offset-3 errorMessage">
@@ -80,7 +80,7 @@
           </div>
         <div class="row space-height">
           <div class="col-xs-18 col-xs-offset-3">
-            <input id="qtyInput" name="qty" class="form-control input-xl" size="16" ng-change="formatQty(order.qty)" data-ng-model="order.qty" type="text" value="" data-app-pattern="/^\d+$/" placeholder="{{'ORDER.QUANTITY' | translate}}" required>
+            <input data-app-enter-key="" ng-keydown="qtyEnterEvent($event)" id="qtyInput" name="qty" class="form-control input-xl" size="16" ng-change="formatQty(order.qty)" data-ng-model="order.qty" type="text" value="" data-app-pattern="/^\d+$/" placeholder="{{'ORDER.QUANTITY' | translate}}" required>
           </div>
         </div>
         <div class="row space-height securityName-font">
@@ -104,11 +104,117 @@
             <button ng-click="resetFormEvent()" class="btn btn-large btn-primary"  type="button" translate="BUTTON.CLEAR"></button>
           </div>
         </div>
-        <div class="row space-height">
-          <div class="col-xs-18 col-xs-offset-3 errorMessage">
-                <div data-ng-bind='systemMsg'></div>
-          </div>
-        </div>
-  
+
         </div>
   </form>
+
+  <div data-app-modal="" data-visible="comfigOrderPop" class="modal fade modalTop" id="surePopUp">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <p class="h4 modal-title text-center" translate="ORDER.CONFIRM_ING"></p>
+        </div>
+        <div class="modal-body order-content">
+          <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.MARKET"></div>
+                        <div class="col-xs-16" data-ng-bind='order.marketView'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.ACCOUNT"></div>
+                        <div class="col-xs-16" data-ng-bind='order.accNumView'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.TIT"></div>
+                        <div class="col-xs-16" data-ng-bind="'ORDER.SIDE.'+orderSide |translate"></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.SECURITY_CODE"></div>
+                        <div class="col-xs-16" data-ng-bind='security.id'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.SECURITY_NAME"></div>
+                        <div class="col-xs-16" data-ng-bind='security.name'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.PRICE"></div>
+                        <div class="col-xs-16">
+                            <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
+                            <span data-ng-bind="order.priceView"></span>
+                        </div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.QUANTITY"></div>
+                        <div class="col-xs-16" data-ng-bind='order.qty'></div>
+                    </div>
+                     <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.ORDER_TYPE"></div>
+                        <div class="col-xs-16" data-ng-bind="order.typeView"></div>
+                    </div>
+        </div>
+        <div class="modelFoter">
+          <div class="row">
+            <div data-ng-click="signingOrderEvent()" class="col-xs-12 modelFoter-borRight" translate="BUTTON.CONFIRM"></div>
+            <div class="col-xs-12" data-dismiss="modal" translate="BUTTON.CANCEL"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-app-modal="" data-visible="resultOrderPop" class="modal fade modalTop" id="surePopUp">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <p class="h4 modal-title text-center" translate="ORDER.COMPLETE"></p>
+        </div>
+        <div class="modal-body order-content">
+          <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.SYSTEM_TIP"></div>
+                        <div class="col-xs-16" data-ng-bind='systemMsg'></div>
+                    </div>
+          <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.MARKET"></div>
+                        <div class="col-xs-16" data-ng-bind='order.marketView'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.ACCOUNT"></div>
+                        <div class="col-xs-16" data-ng-bind='order.accNumView'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.TIT"></div>
+                        <div class="col-xs-16" data-ng-bind="'ORDER.SIDE.'+orderSide |translate"></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.SECURITY_CODE"></div>
+                        <div class="col-xs-16" data-ng-bind='security.id'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.SECURITY_NAME"></div>
+                        <div class="col-xs-16" data-ng-bind='security.name'></div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.PRICE"></div>
+                        <div class="col-xs-16">
+                            <span data-ng-colak>{{order.currencyType}}</span>&nbsp;
+                            <span data-ng-bind="order.priceView"></span>
+                        </div>
+                    </div>
+                    <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.QUANTITY"></div>
+                        <div class="col-xs-16" data-ng-bind='order.qty'></div>
+                    </div>
+                     <div class="row" name="spaceColor">
+                        <div class="col-xs-8" translate="ORDER.ORDER_TYPE"></div>
+                        <div class="col-xs-16" data-ng-bind="order.typeView"></div>
+                    </div>
+        </div>
+        <div class="modelFoter">
+          <div class="row">
+            <div data-ng-click="reinitializeOrderTicket()" class="col-xs-24 modelFoter-borRight" translate="BUTTON.BACK"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

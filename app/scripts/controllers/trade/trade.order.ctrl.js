@@ -16,13 +16,13 @@ angular.module('portalDemoApp')
 				}
 			};
 
-			$scope.showOrderStep1 = false;
+			$scope.comfigOrderPop = false;
 			$scope.toggleModalOrderStep1 = function() {
-				$scope.showOrderStep1 = !$scope.showOrderStep1;
+				$scope.comfigOrderPop = !$scope.comfigOrderPop;
 			};
-			$scope.showOrderStep2 = false;
+			$scope.resultOrderPop = false;
 			$scope.toggleModalOrderStep2 = function() {
-				$scope.showOrderStep2 = !$scope.showOrderStep2;
+				$scope.resultOrderPop = !$scope.resultOrderPop;
 			};
 
 			$scope.submitted = false; // if reset form ,must set false
@@ -192,12 +192,16 @@ angular.module('portalDemoApp')
 				$scope.order.qty = $filter('figure')(qty);
 			}
 
+			$scope.qtyEnterEvent = function(event){
+				if(event.keyCode === 13){
+					$scope.submit();
+				}
+			}
+
 			$scope.submit = function() {
 				$scope.submitted = true;
 				if ($scope.orderForm.$valid) {
-					var scopePointer = $scope;
-					orderViewSvc.signingOrder(scopePointer);
-					//$scope.toggleModalOrderStep1();
+					$scope.toggleModalOrderStep1();
 				}
 			}
 			$scope.resetFormEvent = function() {
@@ -208,6 +212,13 @@ angular.module('portalDemoApp')
 			$scope.signingOrderEvent = function() {
 				var scopePointer = $scope;
 				orderViewSvc.signingOrder(scopePointer);
+			}
+
+			$scope.reinitializeOrderTicket = function(){
+				$scope.toggleModalOrderStep2();
+				$scope.resetFormEvent();
+				var scopePointer = $scope;
+				orderViewSvc.refreshBuyPower(scopePointer);
 			}
 
 			$scope.reloadPanel = function() {

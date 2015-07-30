@@ -1,4 +1,4 @@
-var cometdURL = "";
+var cometdURL = "https://xxxxxxxxxx.com/cometd";
 var tokenText = "";
 var priceClient = null;
 

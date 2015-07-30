@@ -107,7 +107,7 @@ angular.module("portalDemoApp")
 			return directive;
 		}
 	])
-	.directive('appStockInput', [
+	.directive('appEnterKey', [
 
 		function() {
 			/**
