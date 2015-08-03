@@ -13,12 +13,12 @@
 }
 .buyPowerAndqty{
   background: hsla(224, 100%, 89%, 0.50);
-  height: 40px;
+  max-height: 100px;
   font-size: 1em;
   text-align: center;
 }
 .buyPowerAndqty div{
-   padding-top: 10px;
+  padding: 8px;
 }
 .input-xl{
   border-radius: 4px 4px 4px 4px;
