@@ -1,5 +1,4 @@
-var cometdURL = "https://xxxxxxxxxx.com/cometd";
-var tokenText = "";
+var cometdURL = "https://127.0.0.1:8888/cometd";
 var priceClient = null;
 
 function PriceClient(state) {

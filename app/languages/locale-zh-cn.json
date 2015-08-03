@@ -141,7 +141,8 @@
 			"Filled": "成交",
 			"ORDER": "下单",
 			"ACTION": "指令"
-		}
+		},
+		"NoRecords":"没有记录"
 	},
 
 	"QUOTE": {

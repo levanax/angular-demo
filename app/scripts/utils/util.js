@@ -46,10 +46,10 @@ var util = {};
 		}
 		return result;
 	},
-	_this.isNull = function(args){
+	_this.isNull = function(args) {
 		return args === null;
 	},
-	_this.isNotNull = function(args){
+	_this.isNotNull = function(args) {
 		return args !== null;
 	},
 	_this.isEmpty = function(args) {
@@ -143,3 +143,18 @@ var timeFactory = {};
 		return execTime;
 	};
 })(timeFactory);
+
+(function() {
+	/* use Media Query listener */
+	var mql = window.matchMedia("(orientation: portrait)");
+	mql.addListener(handleOrientationChange);
+	handleOrientationChange(mql);
+
+	function handleOrientationChange(mql) {
+		if (mql.matches) {
+			console.warn('The device is currently in portrait orientation ')
+		} else {
+			console.warn('The device is currently in landscape orientation')
+		}
+	}
+})()

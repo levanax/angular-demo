@@ -142,7 +142,8 @@
 			"Filled": "Filled",
 			"ORDER": "Order",
 			"ACTION": "Action"
-		}
+		},
+		"NoRecords":"No records"
 	},
 	"QUOTE": {
 		"TITLE": "Quotes",
