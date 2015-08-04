@@ -420,8 +420,4 @@ var echartsClient = {};
 			clearInterval(echartsClient.timeTicket);
 		}
 	}
-	window.onresize = function() {
-		myChart.resize();
-		myChart2.resize();
-	};
 })(echartsClient);
