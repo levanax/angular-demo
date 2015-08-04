@@ -95,6 +95,11 @@
                             </div>
           </div>
           <br/>
+        <div class="row space-height">
+          <div class="col-xs-18 col-xs-offset-3 errorMessage">
+                <div data-ng-bind='systemMsg'></div>
+          </div>
+        </div>
         <div class="row space-height" ng-class="{'red-background':isSell}">
           <div class="col-xs-9 col-xs-offset-3">
             <button class="btn btn-large btn-primary" type="submit" data-toggle="modal"  translate="BUTTON.SUBMIT"></button>
@@ -102,11 +107,6 @@
           </div>
           <div class="col-xs-9 text-right">
             <button ng-click="resetFormEvent()" class="btn btn-large btn-primary"  type="button" translate="BUTTON.CLEAR"></button>
-          </div>
-        </div>
-        <div class="row space-height">
-          <div class="col-xs-18 col-xs-offset-3 errorMessage">
-                <div data-ng-bind='systemMsg'></div>
           </div>
         </div>
   
