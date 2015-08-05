@@ -6,6 +6,15 @@ angular.module('portalDemoApp')
 			$scope.$on('refreshOrderBook', function() {
 				$scope.REFRESH_ORDER_BOOK();
 			});
+
+			/*$scope.$watch('obStockInput',function(newInput,input,event){
+				//test
+				console.log(newInput)
+			})*/
+			
+			/*var childScope = $scope.$new();
+			console.log(childScope);*/
+
 			$scope.initializeView = function() {
 				var scopePointer = $scope;
 				orderBookViewSvc.initialize(scopePointer);

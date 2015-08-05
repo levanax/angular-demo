@@ -65,7 +65,8 @@
                             <div class="form-group">
                                 <div class="input-group input-group-xl" >
                                     <span class="input-group-addon" translate="ORDERBOOK.SECURITY"></span>
-                                    <input ng-keydown="enterSecurityEvent($event)" type="text" class="form-control input-xl" value="">
+                                    <!-- <input ng-model="$parent.obStockInput" ng-keydown="enterSecurityEvent($event)" type="text" class="form-control input-xl" value=""> -->
+                                    <input ng-model="obStockInput" ng-keydown="enterSecurityEvent($event)" type="text" class="form-control input-xl" value="">
                                 </div>
                             </div>
                         </div>
